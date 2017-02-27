@@ -19,7 +19,7 @@ namespace MES_application.Modules.CommunicationModule
         public int Data { get; set; }
         public int ErrorNumber { get; set; }
         public DateTime TimeStamp { get; set; } = DateTime.Now;
-        public string IdPLC { get; set; }
+        public string IdPLC { get; set; } // nebude potreba, dle 
         public string IdComObj { get; set; }
 
         /// <summary>Returns a string that represents the current object.</summary>

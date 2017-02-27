@@ -51,35 +51,31 @@ namespace MES_application.Modules.CommunicationModule
         public void Add()
         {
         }
-
-        public void Delete(ComObject p_entity)
-        {
-            var item = ComObjectList.FindIndex(x => x.ObjectConfigure.Id == p_entity.ObjectConfigure.Id);
-            ComObjectList.RemoveAt(item);
-        }
-
-
         public ComObject Add(ComObjectConfigure p_configure)
         {
             ComObject objTemp = new ComObject(p_configure);
             ComObjectList.Add(objTemp);
             return objTemp;
         }
-
-        public void Delete(ComObject p_entity, int p_id)
+        public void Delete(ComObject p_entity)
         {
-// var temp = ComObjectList.Where(x=> x.Id == p_id).FirstOrDefault();
-
-// temp.
+            var item = ComObjectList.FindIndex(x => x.ObjectConfigure.Id == p_entity.ObjectConfigure.Id);
+            ComObjectList.RemoveAt(item);
         }
 
+        public void Delete(int p_id)
+        {
+            ComObjectList.RemoveAt(p_id);
+        }
         public void DeleteAll(ComObject p_entity)
         {
             ComObjectList.Clear();
         }
 
+        // edit na zaklade ID? nebo reference?
         public void Edit(ComObject p_entity)
         {
+
         }
 
         public bool Save(ComObject p_entity)

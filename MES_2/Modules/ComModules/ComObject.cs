@@ -23,7 +23,7 @@ namespace MES_application.Modules.CommunicationModule
         #region Values and Property
         private const string _VERSION = "0.0.1";
         public byte[] BufferData { get; set; }
-        public byte[] WriteBufferData { get; set; }
+        public int WriteData { get; set; }
         public DateTime NextRequestAt { get; set; }
         public ComObjectConfigure ObjectConfigure { get; set; }
         public int CountErrors { get; set; }
@@ -131,9 +131,9 @@ namespace MES_application.Modules.CommunicationModule
         {
             if (WriteSuccessful == false)
             {
-                
+                SetValueOfTypeToPlc();
                 var  iResult = p_objClient.WriteArea(ObjectConfigure.AreaOfMemory, ObjectConfigure.DbNumber,
-                    ObjectConfigure.StartOffset, 1, ObjectConfigure.WorldLen, WriteBufferData );
+                    ObjectConfigure.StartOffset, 1, ObjectConfigure.WorldLen, BufferData);
 
                 if (iResult == 0)
                 {
@@ -163,6 +163,33 @@ namespace MES_application.Modules.CommunicationModule
                     return 0;
             }
         }
+
+        private void SetValueOfTypeToPlc()
+        {
+            var bufferData = BufferData;
+            switch (ObjectConfigure.WorldLen)
+            {
+                
+                case S7Consts.S7WLBit:
+                    S7.SetBitAt(ref bufferData, 0,0,Convert.ToBoolean(WriteData));
+                    break;
+                case S7Consts.S7WLByte:
+                case S7Consts.S7WLChar:
+                    S7.SetByteAt(BufferData, 0, Convert.ToByte(WriteData));
+                    break;
+                case S7Consts.S7WLWord:
+                case S7Consts.S7WLInt:
+                    S7.SetIntAt(BufferData, 0, Convert.ToByte(WriteData));
+                    break;
+                case S7Consts.S7WLDWord:
+                case S7Consts.S7WLReal:
+                    S7.SetRealAt(BufferData, 0, Convert.ToByte(WriteData));
+                    break;
+                default:
+                    break;
+            }
+        }
+
 
         #endregion
 
@@ -200,9 +227,10 @@ namespace MES_application.Modules.CommunicationModule
             {
                 var args = new ModuleStateChangedEventArgs()
                 {
+
                     EStateNOW = BaseModuleEState.Stopped,
-                    EStatePrev = BaseModuleEState.Stopped,
-                    StateDescription = "AKTIVNI"
+                    EStatePrev = EModuleState,
+                    StateDescription = "Změna stavu"
                 };
                 StateChanged(this, args);
             }

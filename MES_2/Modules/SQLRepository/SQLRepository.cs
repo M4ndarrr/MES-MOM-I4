@@ -15,6 +15,14 @@ namespace MES_application.Modules.SQLRepository
 {
     public class SQLRepository
     {
-        
+//                            using (var db = new TestDatabaseEntities())
+//                    {
+//                        db.Table1.Add(new Table1
+//                        {
+//                           ComDevice = tempComObj.ObjectConfigure.Id,
+//                           Value = temp.Data
+//                        });
+//                        db.SaveChanges();
+//                    }
     }
 }
