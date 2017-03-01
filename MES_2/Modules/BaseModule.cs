@@ -32,11 +32,8 @@ namespace MES_application.Modules
         //public Guid Id { get; set; }
         public BaseModuleEState EModuleState { get; set; }
 
-
-        public virtual void Configure(string p_sIp, int p_iRack, int p_iSlot)
-        {
-        }
-
+        public string Id { get; set; } = Guid.NewGuid().ToString();
+            
         public void Configure()
         {
         }

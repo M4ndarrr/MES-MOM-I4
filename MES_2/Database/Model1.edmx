@@ -5,6 +5,48 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="TestDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ComObjecTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="char" MaxLength="36" Nullable="false" />
+          <Property Name="IDPLC" Type="char" MaxLength="36" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="ReadWrite" Type="int" Nullable="false" />
+          <Property Name="AreaMemory" Type="int" Nullable="false" />
+          <Property Name="StartOffSet" Type="int" Nullable="false" />
+          <Property Name="WorldLen" Type="int" Nullable="false" />
+          <Property Name="DBnumber" Type="int" Nullable="false" />
+          <Property Name="Period" Type="int" Nullable="false" />
+          <Property Name="P_Created" Type="varchar" MaxLength="32" />
+          <Property Name="P_Modified" Type="varchar" MaxLength="32" />
+          <Property Name="TimeCreated" Type="datetime" />
+          <Property Name="TimeModified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PLCTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="char" MaxLength="36" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="IP" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Port" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Slot" Type="int" Nullable="false" />
+          <Property Name="Rack" Type="int" Nullable="false" />
+          <Property Name="P_Created" Type="varchar" MaxLength="32" />
+          <Property Name="P_Modified" Type="varchar" MaxLength="32" />
+          <Property Name="TimeCreated" Type="datetime" />
+          <Property Name="TimeModified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ResultTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PLCStamp" Type="datetime" Nullable="false" />
+          <Property Name="IDComObject" Type="char" MaxLength="36" Nullable="false" />
+          <Property Name="ResultData" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Table1">
           <Key>
             <PropertyRef Name="ID" />
@@ -14,6 +56,9 @@
           <Property Name="Value" Type="int" />
         </EntityType>
         <EntityContainer Name="TestDatabaseModelStoreContainer">
+          <EntitySet Name="ComObjecTable" EntityType="Self.ComObjecTable" Schema="db_owner" store:Type="Tables" />
+          <EntitySet Name="PLCTable" EntityType="Self.PLCTable" Schema="db_owner" store:Type="Tables" />
+          <EntitySet Name="ResultTable" EntityType="Self.ResultTable" Schema="db_owner" store:Type="Tables" />
           <EntitySet Name="Table1" EntityType="Self.Table1" Schema="db_owner" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -22,6 +67,9 @@
       <Schema Namespace="TestDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="TestDatabaseEntities" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="Table1" EntityType="TestDatabaseModel.Table1" />
+          <EntitySet Name="ComObjecTable" EntityType="TestDatabaseModel.ComObjecTable" />
+          <EntitySet Name="PLCTable" EntityType="TestDatabaseModel.PLCTable" />
+          <EntitySet Name="ResultTable" EntityType="TestDatabaseModel.ResultTable" />
         </EntityContainer>
         <EntityType Name="Table1">
           <Key>
@@ -30,6 +78,48 @@
           <Property Name="Value" Type="Int32" />
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="ComDevice" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ComObjecTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="true" Unicode="false" />
+          <Property Name="IDPLC" Type="String" Nullable="false" MaxLength="36" FixedLength="true" Unicode="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="ReadWrite" Type="Int32" Nullable="false" />
+          <Property Name="AreaMemory" Type="Int32" Nullable="false" />
+          <Property Name="Period" Type="Int32" Nullable="false" />
+          <Property Name="P_Created" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="P_Modified" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="TimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="TimeModified" Type="DateTime" Precision="3" />
+          <Property Name="StartOffSet" Type="Int32" Nullable="false" />
+          <Property Name="WorldLen" Type="Int32" Nullable="false" />
+          <Property Name="DBnumber" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PLCTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="true" Unicode="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="IP" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Port" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Slot" Type="Int32" Nullable="false" />
+          <Property Name="Rack" Type="Int32" Nullable="false" />
+          <Property Name="P_Created" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="P_Modified" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="TimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="TimeModified" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ResultTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PLCStamp" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="IDComObject" Type="String" MaxLength="36" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ResultData" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -44,6 +134,51 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComObjecTable">
+            <EntityTypeMapping TypeName="TestDatabaseModel.ComObjecTable">
+              <MappingFragment StoreEntitySet="ComObjecTable">
+                <ScalarProperty Name="DBnumber" ColumnName="DBnumber" />
+                <ScalarProperty Name="WorldLen" ColumnName="WorldLen" />
+                <ScalarProperty Name="StartOffSet" ColumnName="StartOffSet" />
+                <ScalarProperty Name="TimeModified" ColumnName="TimeModified" />
+                <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
+                <ScalarProperty Name="P_Modified" ColumnName="P_Modified" />
+                <ScalarProperty Name="P_Created" ColumnName="P_Created" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="AreaMemory" ColumnName="AreaMemory" />
+                <ScalarProperty Name="ReadWrite" ColumnName="ReadWrite" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IDPLC" ColumnName="IDPLC" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLCTable">
+            <EntityTypeMapping TypeName="TestDatabaseModel.PLCTable">
+              <MappingFragment StoreEntitySet="PLCTable">
+                <ScalarProperty Name="TimeModified" ColumnName="TimeModified" />
+                <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
+                <ScalarProperty Name="P_Modified" ColumnName="P_Modified" />
+                <ScalarProperty Name="P_Created" ColumnName="P_Created" />
+                <ScalarProperty Name="Rack" ColumnName="Rack" />
+                <ScalarProperty Name="Slot" ColumnName="Slot" />
+                <ScalarProperty Name="Port" ColumnName="Port" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultTable">
+            <EntityTypeMapping TypeName="TestDatabaseModel.ResultTable">
+              <MappingFragment StoreEntitySet="ResultTable">
+                <ScalarProperty Name="ResultData" ColumnName="ResultData" />
+                <ScalarProperty Name="IDComObject" ColumnName="IDComObject" />
+                <ScalarProperty Name="PLCStamp" ColumnName="PLCStamp" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
         </EntityContainerMapping>

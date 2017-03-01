@@ -12,41 +12,41 @@
 // 
 // ==================================
 
-using System.Collections.Generic;
-
-namespace MES_application.Modules
-{
-    public class Repository <T> : IRepository<T> where T : BaseModule
-    {
-        public T Retrieve(int p_id)
-        {
-            return null;
-        }
-
-        public IEnumerable<T> Retrieve()
-        {
-            yield break;
-        }
-
-        public void Add()
-        {
-        }
-
-        public void Add(T p_entity)
-        {
-        }
-
-        public void Delete(T p_entity)
-        {
-        }
-
-        public void Edit(T p_entity)
-        {
-        }
-
-        public bool Save(T p_entity)
-        {
-            return false;
-        }
-    }
-}
+//using System.Collections.Generic;
+//
+//namespace MES_application.Modules
+//{
+//    public class Repository <T> : IRepository<T,Y> where T : BaseModule
+//    {
+//        public T Retrieve(int p_id)
+//        {
+//            return null;
+//        }
+//
+//        public IEnumerable<T> Retrieve()
+//        {
+//            yield break;
+//        }
+//
+//        public void Add()
+//        {
+//        }
+//
+//        public void Add(T p_entity)
+//        {
+//        }
+//
+//        public void Delete(T p_entity)
+//        {
+//        }
+//
+//        public void Edit(T p_entity)
+//        {
+//        }
+//
+//        public bool Save(T p_entity)
+//        {
+//            return false;
+//        }
+//    }
+//}

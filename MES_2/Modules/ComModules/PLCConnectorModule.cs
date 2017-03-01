@@ -38,6 +38,7 @@ namespace MES_application.Modules.CommunicationModule
             Connecting,
             Online
         }
+
         public enum EStateDiagram
         {
             Init,
@@ -57,21 +58,25 @@ namespace MES_application.Modules.CommunicationModule
         public int AlarmCounter { get; private set; }
         public PLCConnectorModuleConfigure PlcModuleConfigure { get; set; }
         public int MinPeriod { get; set; }
-        
+        public SQLRepository.SQLRepository databaze { get; set; }
 
         public EConnectionState EStateConnection { get; private set; }
         public EStateDiagram EStateDiagramState { get; private set; }
+
         #endregion
 
         #region Setup object
 
         public PlcConnectorModule(PLCConnectorModuleConfigure p_PlcModuleConfigure)
         {
+            databaze = SQLRepository.SQLRepository.Instance;
+
+
             objClient = new S7Client();
             CommunicationObjects = new List<ComObject>();
             t = new Thread(new ThreadStart(StateDiagram)); // zde bude cela smyčka pro čtení
             PlcModuleConfigure = p_PlcModuleConfigure;
-            t.Name = "PLCCommunication" + PlcModuleConfigure.Id;
+            t.Name = "PLCCommunication" + Id;
             t.Start();
             Configure();
         }
@@ -80,14 +85,8 @@ namespace MES_application.Modules.CommunicationModule
         {
             if (Connection() == 0)
             {
-                if (t.ThreadState != ThreadState.Running)
-                {
-                    t.Start();
-                }
-                
                 EModuleState = BaseModuleEState.Running;
             }
-
         }
 
         public override void Restart()
@@ -100,7 +99,7 @@ namespace MES_application.Modules.CommunicationModule
         public override void Stop()
         {
             Disconnect();
-            t.Interrupt();
+
             EModuleState = BaseModuleEState.Stopped;
         }
 
@@ -114,12 +113,12 @@ namespace MES_application.Modules.CommunicationModule
                 // objClient = null;
                 LoggingService.Log(this, "asd");
                 Stop();
-                //throw new ArgumentException(error.ToString());
+
+// throw new ArgumentException(error.ToString());
                 return 1;
             }
             else
             {
-                
                 EStateConnection = EConnectionState.Online;
                 return 0;
             }
@@ -129,7 +128,6 @@ namespace MES_application.Modules.CommunicationModule
         {
             EStateConnection = EConnectionState.Offline;
             objClient.Disconnect();
-            
         }
 
         public void Configure()
@@ -167,6 +165,28 @@ namespace MES_application.Modules.CommunicationModule
             var instance = ComObjectRepository.Instance.Add(tempConfiguration);
             CommunicationObjects.Add(instance);
             instance.StateChanged += OnChangeState;
+
+            using (var db = new TestDatabaseEntities())
+            {
+                db.ComObjecTable.Add(new ComObjecTable()
+                {
+                    ID = instance.Id,
+                    Status = (int)instance.EModuleState,
+                    AreaMemory = instance.ObjectConfigure.AreaOfMemory,
+                    StartOffSet = instance.ObjectConfigure.StartOffset,
+                    Period = instance.ObjectConfigure.PeriodOfCheck,
+                    ReadWrite = instance.ObjectConfigure.ERW,
+                    DBnumber = instance.ObjectConfigure.DbNumber,
+                    WorldLen = instance.ObjectConfigure.WorldLen,
+                    IDPLC = Id
+                });
+                db.SaveChanges();
+            }
+
+
+
+
+
             GetMinPeriod();
             return 0;
         }
@@ -179,37 +199,48 @@ namespace MES_application.Modules.CommunicationModule
         public void ReadComObjects()
         {
             ReceivedResult temp;
+
             foreach (var tempComObj in CommunicationObjects)
             {
                 temp = tempComObj?.ReadWriteCycle(objClient);
                 if (temp != null)
                 {
-                    //zasilni dat databazy 
+                    // zasilni dat databazy 
                     Console.WriteLine(temp.Data);
+                    databaze.ListReceivedResult.Add(new ResultTable()
+                        {
+                            ResultData = temp.Data,
+                            IDComObject = temp.IdComObj,
+                            PLCStamp = temp.TimeStamp
+
+                        }
+                    );
                 }
             }
         }
 
         public void WriteComObjects()
         {
-
         }
 
         public void StateDiagram()
         {
-            while (this.EModuleState != BaseModuleEState.Stopped)
+            while (true)
             {
-                // komunikace je sledována na nejnižšší úrovniC
-                if (this.EModuleState == BaseModuleEState.Starting)
-                    Run();
-
-                if (this.EModuleState == BaseModuleEState.Running)
+                while (this.EModuleState != BaseModuleEState.Stopped)
                 {
-                    StateDiagramRunPhase();
-                }
-            }
+                    // komunikace je sledována na nejnižšší úrovniC
+                    if (this.EModuleState == BaseModuleEState.Starting)
+                        Run();
 
-            Thread.Sleep(10000);
+                    if (this.EModuleState == BaseModuleEState.Running)
+                    {
+                        StateDiagramRunPhase();
+                    }
+                }
+
+                Thread.Sleep(5000);
+            }
         }
 
         private void StateDiagramRunPhase()
@@ -257,8 +288,9 @@ namespace MES_application.Modules.CommunicationModule
             lock (Lock)
             {
                 WriteComObjects();
-                Thread.Sleep(MinPeriod);
             }
+
+            Thread.Sleep(MinPeriod);
             EStateDiagramState = EStateDiagram.Read;
         }
 
@@ -281,7 +313,7 @@ namespace MES_application.Modules.CommunicationModule
         public void GetMinPeriod()
         {
             var item = CommunicationObjects
-                .OrderByDescending(x => x.ObjectConfigure.PeriodOfCheck)
+                .OrderBy(x => x.ObjectConfigure.PeriodOfCheck)
                 .First();
             MinPeriod = item.ObjectConfigure.PeriodOfCheck;
         }
@@ -296,10 +328,12 @@ namespace MES_application.Modules.CommunicationModule
         {
             Console.WriteLine($"{p_args.EStateNOW} a {p_args.EStatePrev}");
         }
+
         public override bool Validate()
         {
             return false;
         }
+
         public string Log()
         {
             return null;

@@ -17,12 +17,12 @@ namespace MES_application.Modules
     /// </summary>
     public interface IModule
     {
-        //Guid Id { get; set; }
-//        void Configure();
-//        void Run();
-//        void Stop();
-//        void Restart();
-//        string Version();
+        string Id { get; set; }
+        void Configure();
+        void Run();
+        void Stop();
+        void Restart();
+        string Version();
 
     }
 }

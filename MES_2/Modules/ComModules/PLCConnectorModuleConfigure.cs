@@ -14,7 +14,7 @@ namespace MES_application.Modules.CommunicationModule
 {
     public class PLCConnectorModuleConfigure
     {
-        public string Id { get; private set; } = Utils.Utils.generateID();
+        //public string Id { get; private set; } = Utils.Utils.generateID();
         public int Rack { get; set; }
         public int Slot { get; set; }
         public string IpString { get; set; }

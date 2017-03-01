@@ -43,11 +43,11 @@ namespace MES_2
             );
 
             index = jednicka.AddComobject(S7Consts.S7AreaDB, S7Consts.S7WLInt, 0, 1000, 10,2);
-//            index = jednicka.AddComobject(S7Consts.S7AreaDB, S7Consts.S7WLInt, 2, 100, 10,2);
-//            index = jednicka.AddComobject(S7Consts.S7AreaDB, S7Consts.S7WLReal, 4, 1000, 10,2);
-//            index = jednicka.AddComobject(S7Consts.S7AreaDB, S7Consts.S7WLBit, 64, 10000, 10,2);
-//            index = jednicka.AddComobject(S7Consts.S7AreaDB, S7Consts.S7WLBit, 65, 100000, 10,2);
-//            index = jednicka.AddComobject(S7Consts.S7AreaDB, S7Consts.S7WLReal, 8, 100000, 10,2);
+            index = jednicka.AddComobject(S7Consts.S7AreaDB, S7Consts.S7WLInt, 2, 100, 10,2);
+            index = jednicka.AddComobject(S7Consts.S7AreaDB, S7Consts.S7WLReal, 4, 1000, 10,2);
+            index = jednicka.AddComobject(S7Consts.S7AreaDB, S7Consts.S7WLBit, 64, 10000, 10,2);
+            index = jednicka.AddComobject(S7Consts.S7AreaDB, S7Consts.S7WLBit, 65, 100000, 10,2);
+            index = jednicka.AddComobject(S7Consts.S7AreaDB, S7Consts.S7WLReal, 8, 100000, 10,2);
 
 
 
@@ -55,8 +55,8 @@ namespace MES_2
             
            // jednicka.CommunicationObjects[0].WriteBufferData = new byte[];
 
-            jednicka.CommunicationObjects[0].WriteData = 43;
-            jednicka.CommunicationObjects[0].WriteSuccessful = false;
+//            jednicka.CommunicationObjects[0].WriteData = 80;
+//            jednicka.CommunicationObjects[0].WriteSuccessful = false;
 //                PlcConnectorModule dvojka = PlcConnectorModuleRepository.Instance.Add
 //                (
 //                new PLCConnectorModuleConfigure()
@@ -75,8 +75,11 @@ namespace MES_2
 //            index = dvojka.AddComobject(S7Consts.S7AreaDB, S7Consts.S7WLBit, 65, 100000, 10);
 //            index = dvojka.AddComobject(S7Consts.S7AreaDB, S7Consts.S7WLReal, 8, 100000, 10);
 
-            while (true) ;
-            Thread.Sleep(100);
+            while (true)
+            {
+               Thread.Sleep(Timeout.Infinite); 
+            }
+
             
 
         }

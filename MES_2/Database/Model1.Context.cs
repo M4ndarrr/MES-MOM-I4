@@ -26,5 +26,8 @@ namespace MES_2.Database
         }
     
         public virtual DbSet<Table1> Table1 { get; set; }
+        public virtual DbSet<ComObjecTable> ComObjecTable { get; set; }
+        public virtual DbSet<PLCTable> PLCTable { get; set; }
+        public virtual DbSet<ResultTable> ResultTable { get; set; }
     }
 }

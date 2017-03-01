@@ -18,13 +18,15 @@ using System.Linq.Expressions;
 
 namespace MES_application.Modules
 {
-    public interface IRepository<T>
+    public interface IRepository<T,Y>
     {
         T Retrieve(int p_id);
         IEnumerable<T> Retrieve();
-        void Add();
+        T Add(Y p_entity);
         void Delete(T p_entity);
+        void Delete(int p_id);
         void Edit(T p_entity);
+        void Edit(Y p_entity);
         bool Save(T p_entity);
     }
 }

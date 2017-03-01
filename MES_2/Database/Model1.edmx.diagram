@@ -6,6 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="eed2d7e42e2d47d3a35336cc4b6aae82" Name="Diagram1" >
         <EntityTypeShape EntityType="TestDatabaseModel.Table1" Width="1.5" PointX="2.25" PointY="2.75" />
+        <EntityTypeShape EntityType="TestDatabaseModel.ComObjecTable" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TestDatabaseModel.PLCTable" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="TestDatabaseModel.ResultTable" Width="1.5" PointX="6.75" PointY="3.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

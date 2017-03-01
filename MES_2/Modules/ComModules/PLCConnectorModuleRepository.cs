@@ -13,10 +13,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MES_2.Database;
 
 namespace MES_application.Modules.CommunicationModule
 {
-    public class PlcConnectorModuleRepository
+    public class PlcConnectorModuleRepository : IRepository<PlcConnectorModule, PLCConnectorModuleConfigure>
     {
 // : IRepository<PlcConnectorModule>
         public List<PlcConnectorModule> PlcConnectorModulesList { get; set; }
@@ -67,6 +68,23 @@ namespace MES_application.Modules.CommunicationModule
         {
             PlcConnectorModule objTemp = new PlcConnectorModule(p_configure);
             PlcConnectorModulesList.Add(objTemp);
+
+
+            using (var db = new TestDatabaseEntities())
+            {
+                db.PLCTable.Add(new PLCTable()
+                {
+                    ID = objTemp.Id,
+                    Status = (int)objTemp.EModuleState,
+                    IP = objTemp.PlcModuleConfigure.IpString,
+                    Port = objTemp.PlcModuleConfigure.PortString,
+                    Rack = objTemp.PlcModuleConfigure.Rack,
+                    Slot = objTemp.PlcModuleConfigure.Slot,
+                });
+                db.SaveChanges();
+            }
+
+
             return objTemp;
         }
 
@@ -77,7 +95,15 @@ namespace MES_application.Modules.CommunicationModule
             Instance.PlcConnectorModulesList.RemoveAt(0);
         }
 
+        public void Delete(int p_id)
+        {
+        }
+
         public void Edit(PlcConnectorModule p_entity)
+        {
+        }
+
+        public void Edit(PLCConnectorModuleConfigure p_entity)
         {
         }
 

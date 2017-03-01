@@ -44,7 +44,7 @@ namespace MES_application.Modules.CommunicationModule
             BufferData = new byte[4];
 
             Configure();
-
+            
             Run();
         }
 
@@ -117,7 +117,7 @@ namespace MES_application.Modules.CommunicationModule
                 {
                     NextRequestAt = NextRequestAt.AddMilliseconds(ObjectConfigure.PeriodOfCheck);
                     Result.Data = GetValueOfTypeFromPlc();
-                    Result.IdComObj = ObjectConfigure.Id;
+                    Result.IdComObj = Id;
                     return Result;
                 }
 
@@ -200,6 +200,7 @@ namespace MES_application.Modules.CommunicationModule
             CountErrors--; // pocetchyb
             EModuleState = BaseModuleEState.Problem;
             LastError = p_nowError;
+            Stop();
 
             if (CountErrors == 0)
                 ReportProblem();
@@ -207,7 +208,6 @@ namespace MES_application.Modules.CommunicationModule
 
         private void ReportProblem()
         {
-            EModuleState = BaseModuleEState.Stopped;
             StateChangeEvent();
         }
 
