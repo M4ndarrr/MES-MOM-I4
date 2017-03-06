@@ -23,7 +23,7 @@ namespace MES_application.Modules
         Running,
         Stopped,
         Quit,
-        Busy,
+        Bussy,
         Problem
     }
 

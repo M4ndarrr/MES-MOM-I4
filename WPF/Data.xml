@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Folders>
+  
+  <MailBox Name="Mail">
+    <Item Name="Personal Folders" />
+    <Item Name="Deleted Items" />
+    <Item Name="Inbox" />
+    <Item Name="Sent Items" />
+    <Item Name="Outbox" />
+    <Item Name="Search Folders" />
+  </MailBox>
+  <Cotnacts Name="Contacts">
+    <Item Name="My Contacts" />
+    <Item Name="Address Cards" />
+    <Item Name="Phone List" />
+    <Item Name="Shared Contacts" />
+  </Cotnacts>
+  <Tasks Name="Tasks">
+    <Item Name="My Tasks" />
+    <Item Name="Shared Tasks" />
+    <Item Name="Active Tasks" />
+    <Item Name="Completed Tasks" />
+  </Tasks>
+  
+  <Notes Name="Notes">
+    <Item Name="My Notes" />
+    <Item Name="Notes List" />
+    <Item Name="Shared Notes" />
+    <Item Name="Archive" />
+  </Notes>
+  <FolderList Name="Folders List">
+    <Item Name="My Client.Net" />
+    <Item Name="My Profile" />
+    <Item Name="My Support Tickets" />
+    <Item Name="My Licenses" />
+  </FolderList>
+  
+</Folders>

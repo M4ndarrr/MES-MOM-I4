@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="SQLClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MES_2\MES_2.BL.csproj">

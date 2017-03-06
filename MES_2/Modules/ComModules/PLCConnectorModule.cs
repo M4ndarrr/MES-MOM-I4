@@ -166,6 +166,7 @@ namespace MES_application.Modules.CommunicationModule
             CommunicationObjects.Add(instance);
             instance.StateChanged += OnChangeState;
 
+            //tohle musí být mimo v tom prostředí
             using (var db = new TestDatabaseEntities())
             {
                 db.ComObjecTable.Add(new ComObjecTable()
@@ -182,11 +183,6 @@ namespace MES_application.Modules.CommunicationModule
                 });
                 db.SaveChanges();
             }
-
-
-
-
-
             GetMinPeriod();
             return 0;
         }

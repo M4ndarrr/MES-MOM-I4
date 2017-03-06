@@ -1,0 +1,5 @@
+Telerik.Windows.Controls.RadLegend, Telerik.Windows.Controls, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7
+Telerik.Windows.Controls.RadTimeline, Telerik.Windows.Controls.DataVisualization, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7
+Telerik.Windows.Controls.RadButton, Telerik.Windows.Controls, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7
+Telerik.Windows.Controls.RadTimeBar, Telerik.Windows.Controls.DataVisualization, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7
+Telerik.Windows.Controls.RadCartesianChart, Telerik.Windows.Controls.Chart, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7
