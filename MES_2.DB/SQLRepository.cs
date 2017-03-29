@@ -10,12 +10,12 @@
 //  Revision History : 2017-02-26
 //  Change History: 
 // ==================================
+
 using System.Collections.Generic;
 using System.Threading;
-using MES_2.Database;
-using MES_application.Modules.CommunicationModule;
+using MES_2.DB.Database;
 
-namespace MES_application.Modules.SQLRepository
+namespace MES_2.DB
 {
     public class SQLRepository
     {
@@ -41,42 +41,42 @@ namespace MES_application.Modules.SQLRepository
         // musí se zadávat hodnoty do tabulky kterou zrovna chci 
         // sql třída pouze pro 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public SQLRepository()
-        {
-            ListReceivedResult = new List<ResultTable>();
-            t = new Thread(StateDiagram);
-            t.Name = "SQL thread";
-            t.Start();
-        }
+//        public SQLRepository()
+//        {
+//            ListReceivedResult = new List<ResultTable>();
+//            t = new Thread(StateDiagram);
+//            t.Name = "SQL thread";
+//            t.Start();
+//        }
+//
+//        public void Run()
+//        {
+//            
+//        }
+//
+//        public void Stop()
+//        {
+//            
+//        }
+//        
 
-        public void Run()
-        {
-            
-        }
 
-        public void Stop()
-        {
-            
-        }
-        
-
-
-        public void StateDiagram()
-        {
-            while(true) { 
-            lock (Lock)
-            {
-                using (var db = new TestDatabaseEntities())
-                {
-                    db.ResultTable.AddRange(ListReceivedResult);
-                    db.SaveChanges();
-                }
-                ListReceivedResult.Clear();
-            }
-
-            Thread.Sleep(5000);
-            }
-        }
+//        public void StateDiagram()
+//        {
+//            while(true) { 
+//            lock (Lock)
+//            {
+//                using (var db = new TestDatabaseEntities())
+//                {
+//                    db.ResultTable.AddRange(ListReceivedResult);
+//                    db.SaveChanges();
+//                }
+//                ListReceivedResult.Clear();
+//            }
+//
+//            Thread.Sleep(5000);
+//            }
+//        }
 
 
         // list 

@@ -12,10 +12,9 @@
 // ==================================
 
 using System;
-using System.Xml.Schema;
-using MES_application.Utils;
+using MES_2.Modules.Interfaces;
 
-namespace MES_application.Modules
+namespace MES_2.Modules
 {
     public enum BaseModuleEState
     {

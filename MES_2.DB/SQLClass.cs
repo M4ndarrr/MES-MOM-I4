@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MES_application.Modules.CommunicationModule;
 
 namespace MES_2.DB
 {

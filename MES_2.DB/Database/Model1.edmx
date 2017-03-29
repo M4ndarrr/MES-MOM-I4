@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TestDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ComObjecTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="char" MaxLength="36" Nullable="false" />
+          <Property Name="IDPLC" Type="char" MaxLength="36" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="ReadWrite" Type="int" Nullable="false" />
+          <Property Name="AreaMemory" Type="int" Nullable="false" />
+          <Property Name="StartOffSet" Type="int" Nullable="false" />
+          <Property Name="WorldLen" Type="int" Nullable="false" />
+          <Property Name="DBnumber" Type="int" Nullable="false" />
+          <Property Name="Period" Type="int" Nullable="false" />
+          <Property Name="P_Created" Type="varchar" MaxLength="32" />
+          <Property Name="P_Modified" Type="varchar" MaxLength="32" />
+          <Property Name="TimeCreated" Type="datetime" />
+          <Property Name="TimeModified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PLCTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="char" MaxLength="36" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="IP" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Port" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Slot" Type="int" Nullable="false" />
+          <Property Name="Rack" Type="int" Nullable="false" />
+          <Property Name="P_Created" Type="varchar" MaxLength="32" />
+          <Property Name="P_Modified" Type="varchar" MaxLength="32" />
+          <Property Name="TimeCreated" Type="datetime" />
+          <Property Name="TimeModified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ResultTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PLCStamp" Type="datetime" Nullable="false" />
+          <Property Name="IDComObject" Type="char" MaxLength="36" Nullable="false" />
+          <Property Name="ResultData" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Table1">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComDevice" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="Value" Type="int" />
+        </EntityType>
+        <EntityType Name="USR_UserList">
+          <Key>
+            <PropertyRef Name="ID_USR" />
+          </Key>
+          <Property Name="ID_USR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_STA" Type="int" Nullable="false" />
+          <Property Name="LOGIN" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Title_before" Type="nchar" MaxLength="20" />
+          <Property Name="First_Name" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title_after" Type="nchar" MaxLength="20" />
+          <Property Name="Company" Type="nchar" MaxLength="255" />
+          <Property Name="Email" Type="nchar" MaxLength="255" />
+          <Property Name="Phone" Type="nchar" MaxLength="255" />
+          <Property Name="Mobile" Type="nchar" MaxLength="255" />
+          <Property Name="P_Created" Type="int" />
+          <Property Name="P_Modified" Type="int" />
+          <Property Name="TimeCreated" Type="datetime" />
+          <Property Name="TimeModified" Type="datetime" />
+          <Property Name="PASSWORD_reset_token" Type="nchar" MaxLength="255" />
+          <Property Name="PASSWORD_reset_sent" Type="datetime" />
+          <Property Name="Count_SignIN" Type="int" />
+          <Property Name="Current_SignIN" Type="datetime" />
+          <Property Name="Last_SignIN" Type="datetime" />
+          <Property Name="Current_SignIN_IP" Type="varchar" MaxLength="15" />
+          <Property Name="Last_SignIN_IP" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="ENT_Entity">
+          <Key>
+            <PropertyRef Name="ID_ENT" />
+          </Key>
+          <Property Name="ID_ENT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME_ENT" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="State" Type="int" />
+          <Property Name="VALID" Type="bit" />
+        </EntityType>
+        <EntityType Name="STA_StateList">
+          <Key>
+            <PropertyRef Name="ID_STA" />
+          </Key>
+          <Property Name="ID_STA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Entity" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="State" Type="int" />
+          <Property Name="Purpous" Type="varchar" MaxLength="60" />
+          <Property Name="L_START_STATE" Type="bit" />
+          <Property Name="L_END_STATE" Type="bit" />
+          <Property Name="L_VALID" Type="bit" />
+          <Property Name="Comments" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TRA_TranslationState">
+          <Key>
+            <PropertyRef Name="ID_TRA" />
+          </Key>
+          <Property Name="ID_TRA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME_ENT" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ID_STA_FROM" Type="int" Nullable="false" />
+          <Property Name="ID_STA_TO" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="L_BLOCK" Type="bit" Nullable="false" />
+          <Property Name="L_VALID" Type="bit" />
+        </EntityType>
+        <EntityType Name="TRA_TranslationStateList">
+          <Key>
+            <PropertyRef Name="ID_TRA_LIST" />
+          </Key>
+          <Property Name="ID_TRA_LIST" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_TRA" Type="int" Nullable="false" />
+          <Property Name="VALID" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="TestDatabaseModelStoreContainer">
+          <EntitySet Name="ComObjecTable" EntityType="Self.ComObjecTable" Schema="db_owner" store:Type="Tables" />
+          <EntitySet Name="PLCTable" EntityType="Self.PLCTable" Schema="db_owner" store:Type="Tables" />
+          <EntitySet Name="ResultTable" EntityType="Self.ResultTable" Schema="db_owner" store:Type="Tables" />
+          <EntitySet Name="Table1" EntityType="Self.Table1" Schema="db_owner" store:Type="Tables" />
+          <EntitySet Name="USR_UserList" EntityType="Self.USR_UserList" Schema="db_owner" store:Type="Tables" />
+          <EntitySet Name="ENT_Entity" EntityType="Self.ENT_Entity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STA_StateList" EntityType="Self.STA_StateList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRA_TranslationState" EntityType="Self.TRA_TranslationState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRA_TranslationStateList" EntityType="Self.TRA_TranslationStateList" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ComObjecTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="36" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IDPLC" Type="String" MaxLength="36" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="ReadWrite" Type="Int32" Nullable="false" />
+          <Property Name="AreaMemory" Type="Int32" Nullable="false" />
+          <Property Name="StartOffSet" Type="Int32" Nullable="false" />
+          <Property Name="WorldLen" Type="Int32" Nullable="false" />
+          <Property Name="DBnumber" Type="Int32" Nullable="false" />
+          <Property Name="Period" Type="Int32" Nullable="false" />
+          <Property Name="P_Created" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="P_Modified" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="TimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="TimeModified" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="PLCTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="36" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="IP" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Port" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Slot" Type="Int32" Nullable="false" />
+          <Property Name="Rack" Type="Int32" Nullable="false" />
+          <Property Name="P_Created" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="P_Modified" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="TimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="TimeModified" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ResultTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PLCStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IDComObject" Type="String" MaxLength="36" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ResultData" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Table1">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComDevice" Type="String" MaxLength="32" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Value" Type="Int32" />
+        </EntityType>
+        <EntityType Name="USR_UserList">
+          <Key>
+            <PropertyRef Name="ID_USR" />
+          </Key>
+          <Property Name="ID_USR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_STA" Type="Int32" Nullable="false" />
+          <Property Name="LOGIN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Title_before" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Title_after" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Company" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="P_Created" Type="Int32" />
+          <Property Name="P_Modified" Type="Int32" />
+          <Property Name="TimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="TimeModified" Type="DateTime" Precision="3" />
+          <Property Name="PASSWORD_reset_token" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="PASSWORD_reset_sent" Type="DateTime" Precision="3" />
+          <Property Name="Count_SignIN" Type="Int32" />
+          <Property Name="Current_SignIN" Type="DateTime" Precision="3" />
+          <Property Name="Last_SignIN" Type="DateTime" Precision="3" />
+          <Property Name="Current_SignIN_IP" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Last_SignIN_IP" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ENT_Entity">
+          <Key>
+            <PropertyRef Name="ID_ENT" />
+          </Key>
+          <Property Name="ID_ENT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME_ENT" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="VALID" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="STA_StateList">
+          <Key>
+            <PropertyRef Name="ID_STA" />
+          </Key>
+          <Property Name="ID_STA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Entity" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="Purpous" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="L_START_STATE" Type="Boolean" />
+          <Property Name="L_END_STATE" Type="Boolean" />
+          <Property Name="L_VALID" Type="Boolean" />
+          <Property Name="Comments" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TRA_TranslationState">
+          <Key>
+            <PropertyRef Name="ID_TRA" />
+          </Key>
+          <Property Name="ID_TRA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME_ENT" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_STA_FROM" Type="Int32" Nullable="false" />
+          <Property Name="ID_STA_TO" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="L_BLOCK" Type="Boolean" Nullable="false" />
+          <Property Name="L_VALID" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="TRA_TranslationStateList">
+          <Key>
+            <PropertyRef Name="ID_TRA_LIST" />
+          </Key>
+          <Property Name="ID_TRA_LIST" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_TRA" Type="Int32" Nullable="false" />
+          <Property Name="VALID" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="TestDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ComObjecTable" EntityType="Self.ComObjecTable" />
+          <EntitySet Name="PLCTable" EntityType="Self.PLCTable" />
+          <EntitySet Name="ResultTable" EntityType="Self.ResultTable" />
+          <EntitySet Name="Table1" EntityType="Self.Table1" />
+          <EntitySet Name="USR_UserList" EntityType="Self.USR_UserList" />
+          <EntitySet Name="ENT_Entity" EntityType="Self.ENT_Entity" />
+          <EntitySet Name="STA_StateList" EntityType="Self.STA_StateList" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TRA_TranslationState" EntityType="Self.TRA_TranslationState" />
+          <EntitySet Name="TRA_TranslationStateList" EntityType="Self.TRA_TranslationStateList" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestDatabaseModelStoreContainer" CdmEntityContainer="TestDatabaseEntities">
+          <EntitySetMapping Name="ComObjecTable">
+            <EntityTypeMapping TypeName="TestDatabaseModel.ComObjecTable">
+              <MappingFragment StoreEntitySet="ComObjecTable">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDPLC" ColumnName="IDPLC" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ReadWrite" ColumnName="ReadWrite" />
+                <ScalarProperty Name="AreaMemory" ColumnName="AreaMemory" />
+                <ScalarProperty Name="StartOffSet" ColumnName="StartOffSet" />
+                <ScalarProperty Name="WorldLen" ColumnName="WorldLen" />
+                <ScalarProperty Name="DBnumber" ColumnName="DBnumber" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="P_Created" ColumnName="P_Created" />
+                <ScalarProperty Name="P_Modified" ColumnName="P_Modified" />
+                <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
+                <ScalarProperty Name="TimeModified" ColumnName="TimeModified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLCTable">
+            <EntityTypeMapping TypeName="TestDatabaseModel.PLCTable">
+              <MappingFragment StoreEntitySet="PLCTable">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="Port" ColumnName="Port" />
+                <ScalarProperty Name="Slot" ColumnName="Slot" />
+                <ScalarProperty Name="Rack" ColumnName="Rack" />
+                <ScalarProperty Name="P_Created" ColumnName="P_Created" />
+                <ScalarProperty Name="P_Modified" ColumnName="P_Modified" />
+                <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
+                <ScalarProperty Name="TimeModified" ColumnName="TimeModified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultTable">
+            <EntityTypeMapping TypeName="TestDatabaseModel.ResultTable">
+              <MappingFragment StoreEntitySet="ResultTable">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PLCStamp" ColumnName="PLCStamp" />
+                <ScalarProperty Name="IDComObject" ColumnName="IDComObject" />
+                <ScalarProperty Name="ResultData" ColumnName="ResultData" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table1">
+            <EntityTypeMapping TypeName="TestDatabaseModel.Table1">
+              <MappingFragment StoreEntitySet="Table1">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ComDevice" ColumnName="ComDevice" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USR_UserList">
+            <EntityTypeMapping TypeName="TestDatabaseModel.USR_UserList">
+              <MappingFragment StoreEntitySet="USR_UserList">
+                <ScalarProperty Name="ID_USR" ColumnName="ID_USR" />
+                <ScalarProperty Name="ID_STA" ColumnName="ID_STA" />
+                <ScalarProperty Name="LOGIN" ColumnName="LOGIN" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="Title_before" ColumnName="Title_before" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Title_after" ColumnName="Title_after" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="P_Created" ColumnName="P_Created" />
+                <ScalarProperty Name="P_Modified" ColumnName="P_Modified" />
+                <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
+                <ScalarProperty Name="TimeModified" ColumnName="TimeModified" />
+                <ScalarProperty Name="PASSWORD_reset_token" ColumnName="PASSWORD_reset_token" />
+                <ScalarProperty Name="PASSWORD_reset_sent" ColumnName="PASSWORD_reset_sent" />
+                <ScalarProperty Name="Count_SignIN" ColumnName="Count_SignIN" />
+                <ScalarProperty Name="Current_SignIN" ColumnName="Current_SignIN" />
+                <ScalarProperty Name="Last_SignIN" ColumnName="Last_SignIN" />
+                <ScalarProperty Name="Current_SignIN_IP" ColumnName="Current_SignIN_IP" />
+                <ScalarProperty Name="Last_SignIN_IP" ColumnName="Last_SignIN_IP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ENT_Entity">
+            <EntityTypeMapping TypeName="TestDatabaseModel.ENT_Entity">
+              <MappingFragment StoreEntitySet="ENT_Entity">
+                <ScalarProperty Name="ID_ENT" ColumnName="ID_ENT" />
+                <ScalarProperty Name="NAME_ENT" ColumnName="NAME_ENT" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="VALID" ColumnName="VALID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STA_StateList">
+            <EntityTypeMapping TypeName="TestDatabaseModel.STA_StateList">
+              <MappingFragment StoreEntitySet="STA_StateList">
+                <ScalarProperty Name="ID_STA" ColumnName="ID_STA" />
+                <ScalarProperty Name="Name_Entity" ColumnName="Name_Entity" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Purpous" ColumnName="Purpous" />
+                <ScalarProperty Name="L_START_STATE" ColumnName="L_START_STATE" />
+                <ScalarProperty Name="L_END_STATE" ColumnName="L_END_STATE" />
+                <ScalarProperty Name="L_VALID" ColumnName="L_VALID" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TestDatabaseModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRA_TranslationState">
+            <EntityTypeMapping TypeName="TestDatabaseModel.TRA_TranslationState">
+              <MappingFragment StoreEntitySet="TRA_TranslationState">
+                <ScalarProperty Name="ID_TRA" ColumnName="ID_TRA" />
+                <ScalarProperty Name="NAME_ENT" ColumnName="NAME_ENT" />
+                <ScalarProperty Name="ID_STA_FROM" ColumnName="ID_STA_FROM" />
+                <ScalarProperty Name="ID_STA_TO" ColumnName="ID_STA_TO" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="L_BLOCK" ColumnName="L_BLOCK" />
+                <ScalarProperty Name="L_VALID" ColumnName="L_VALID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRA_TranslationStateList">
+            <EntityTypeMapping TypeName="TestDatabaseModel.TRA_TranslationStateList">
+              <MappingFragment StoreEntitySet="TRA_TranslationStateList">
+                <ScalarProperty Name="ID_TRA_LIST" ColumnName="ID_TRA_LIST" />
+                <ScalarProperty Name="ID_TRA" ColumnName="ID_TRA" />
+                <ScalarProperty Name="VALID" ColumnName="VALID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="WPF.Modules.SystemModule.State.StateEntitiesView"
+             
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:valueConventers="clr-namespace:WPF.ValueConventers"
+    Width="Auto"
+    Height="Auto"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <valueConventers:NegatableBooleanToVisiblityConverter x:Key="VisConverter" />
+        <valueConventers:NegatableBooleanToVisiblityConverter x:Key="NegVisConverter" Negate="True" />
+    </UserControl.Resources>
+
+
+    <Grid Margin="0,20,0,0" Background="{StaticResource BackgroundVeryLightBrush}">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+
+            <StackPanel>
+                <!--  Login header  -->
+                <Grid Margin="5,10" Background="{StaticResource ForegroundVeryDarkBrush}">
+                    <TextBlock
+                        Padding="5,10"
+                        FontFamily="{StaticResource LatoRegular}"
+                        FontSize="{StaticResource FontSizeLarge}"
+                        Foreground="{StaticResource ForegroundLightBrush}"
+                        Text="States List" />
+                </Grid>
+                <Grid>
+                    <telerik:RadGridView
+                        AutoGenerateColumns="False"
+                        CanUserDeleteRows="False"
+                        GroupRenderMode="Flat"
+                        ItemsSource="{Binding States}">
+
+                        <telerik:RadGridView.Columns>
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding ID_STA}" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Name_Entity}" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding State}" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Purpous}" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding L_START_STATE}" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding L_END_STATE}" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding L_VALID}" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Comments}" />
+
+                            <telerik:GridViewColumn Width="90">
+                                <telerik:GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <telerik:RadButton
+                                            Command="{Binding DataContext.EditUserCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                            CommandParameter="{Binding}"
+                                            Content="Delete" />
+                                    </DataTemplate>
+                                </telerik:GridViewColumn.CellTemplate>
+                            </telerik:GridViewColumn>
+                        </telerik:RadGridView.Columns>
+
+
+
+                        <!--            <DataTemplate>-->
+                        <!--  <telerik:RadButton Content="Edit"  -->
+                        <!--  Command="{Binding EditCustomerCommand}"  -->
+                        <!--  CommandParameter="{Binding}"/>  -->
+                        <!--            </DataTemplate>-->
+
+
+
+
+                    </telerik:RadGridView>
+
+
+
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
+

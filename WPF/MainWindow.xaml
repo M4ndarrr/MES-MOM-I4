@@ -6,44 +6,370 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     xmlns:wpf="clr-namespace:WPF"
+    xmlns:viewModel="clr-namespace:WPF.ViewModel"
+    xmlns:view="clr-namespace:WPF.View"
+    xmlns:helpers="clr-namespace:WPF.Helpers"
+    xmlns:valueConventers="clr-namespace:WPF.ValueConventers"
+    xmlns:historian="clr-namespace:WPF.Modules.Historian"
+    xmlns:login="clr-namespace:WPF.Modules.SystemModule.Login"
+    xmlns:authentication="clr-namespace:WPF.Modules.SystemModule.Authentication"
+    xmlns:state="clr-namespace:WPF.Modules.SystemModule.State"
+    xmlns:userManagement="clr-namespace:WPF.Modules.UserManagement"
+    xmlns:entity="clr-namespace:WPF.Modules.SystemModule.Entity"
     Title="MES/MOM Industry 4.0 #JanTichy2017"
     Width="1280"
     Height="820"
+    Icon="Images/Logo/logo-small.png"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+
+
+
+    <!--    <Window.DataContext>-->
+    <!--        <viewModel:WindowViewModel />-->
+    <!--    </Window.DataContext>-->
+
     <Window.Resources>
-        <wpf:LinqToXml x:Key="dsEntity" />
+        <Style TargetType="{x:Type wpf:MainWindow}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <!--  Outer border with the dropshadow margin  -->
+                        <Border Padding="{Binding OuterMarginSizeThickness, FallbackValue=10}">
+
+                            <!--  Main window outline  -->
+                            <Grid>
+
+                                <!--  Opacity mask for corners on grid  -->
+                                <Border x:Name="Container" Background="{StaticResource WordVeryDarkBrush}" />
+
+                                <!--  Window border and dropshadown  -->
+                                <Border Background="{Binding WordVeryDarkBrush}">
+                                    <Border.Effect>
+                                        <DropShadowEffect Opacity="0.2" ShadowDepth="0" />
+                                    </Border.Effect>
+                                </Border>
+
+                                <!--  The main window content  -->
+                                <Grid>
+
+                                    <!--  Corner clipping  -->
+                                    <Grid.OpacityMask>
+                                        <VisualBrush Visual="{Binding ElementName=Container}" />
+                                    </Grid.OpacityMask>
+
+                                    <Grid.RowDefinitions>
+
+                                        <!--  Title Bar  -->
+                                        <RowDefinition Height="{Binding TitleHeightGridLength, FallbackValue=42}" />
+
+                                        <!--  Window Content  -->
+                                        <RowDefinition Height="*" />
+
+                                    </Grid.RowDefinitions>
+
+                                    <!--  Title Bar  -->
+                                    <Grid Grid.Column="0" Panel.ZIndex="1">
+
+                                        <Grid.ColumnDefinitions>
+                                            <!--  Icon  -->
+                                            <ColumnDefinition Width="Auto" />
+                                            <!--  Title  -->
+                                            <ColumnDefinition Width="*" />
+                                            <!--  Windows Button  -->
+                                            <ColumnDefinition Width="Auto" />
+
+                                        </Grid.ColumnDefinitions>
+
+                                        <!--  Icon  -->
+                                        <Button Command="{Binding MenuCommand}" Style="{StaticResource SystemIconButton}">
+                                            <Image Source="/Images/Logo/logo-small.png" />
+                                        </Button>
+
+                                        <!--  Title  -->
+                                        <Viewbox
+                                            Grid.Column="0"
+                                            Grid.ColumnSpan="3"
+                                            Margin="5">
+                                            <StackPanel>
+                                                <TextBlock
+                                                    Margin="0,0,0,-5"
+                                                    FontFamily="{StaticResource LatoBold}"
+                                                    FontSize="{StaticResource FontSizeRegular}">
+                                                    <Run Foreground="{StaticResource BackgroundVeryLightBrush}" Text="MES/MOM Industry 4.0" />
+                                                    /&gt;</TextBlock>
+                                                <TextBlock
+                                                    Foreground="{StaticResource ForegroundDarkBrush}"
+                                                    Text="Jan Tichy # 2017"
+                                                    TextAlignment="Center" />
+                                            </StackPanel>
+                                        </Viewbox>
+
+                                        <!--  Window Buttons  -->
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                            <Button
+                                                Command="{Binding MinimizeCommand}"
+                                                Content="_"
+                                                Style="{StaticResource WindowControlButton}" />
+                                            <Button
+                                                Command="{Binding MaximizeCommand}"
+                                                Content="[ ]"
+                                                Style="{StaticResource WindowControlButton}" />
+                                            <Button
+                                                Command="{Binding CloseCommand}"
+                                                Content="X"
+                                                Style="{StaticResource WindowCloseButton}" />
+                                        </StackPanel>
+
+                                    </Grid>
+
+                                    <!--  Page Content  -->
+                                    <Border Grid.Row="1" Padding="{Binding InnerContentPadding}">
+                                        <ContentPresenter Content="{TemplateBinding Content}" />
+                                    </Border>
+
+                                </Grid>
+
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <DataTemplate DataType="{x:Type login:LoginControlViewModel}">
+            <login:LoginControl/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type authentication:AuthenticationViewModel}" />
+
+        <DataTemplate DataType="{x:Type viewModel:CommunicationPageViewModel}">
+            <view:CommunicationPage />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type historian:HistorianPageViewModel}">
+            <historian:HistorianPage />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type userManagement:ProfileUserViewModel}">
+            <userManagement:ProfileUser />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type userManagement:UserManagementViewModel}">
+            <userManagement:UserManagementView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type entity:EntitiesViewModel}">
+            <entity:EntitiesView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type state:StateEntitiesViewModel}">
+            <state:StateEntitiesView />
+        </DataTemplate>
+
+        <helpers:LinqToXml x:Key="dsEntity" />
         <HierarchicalDataTemplate x:Key="Entity" ItemsSource="{Binding Items}">
-            <TextBlock Margin="5,4,5,6" Text="{Binding Name}" />
+            <Button Margin="5,4,5,6" Content="{Binding Name}" />
         </HierarchicalDataTemplate>
+
+        <valueConventers:NegatableBooleanToVisiblityConverter x:Key="VisConverter" />
+        <valueConventers:NegatableBooleanToVisiblityConverter x:Key="NegVisConverter" Negate="True" />
     </Window.Resources>
 
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            CaptionHeight="{Binding TitleHeight}"
+            CornerRadius="0"
+            GlassFrameThickness="0"
+            ResizeBorderThickness="{Binding ResizeBorderThickness}" />
+    </WindowChrome.WindowChrome>
 
-    <DockPanel Background="White" LastChildFill="True">
-        <telerik:RadPanelBar
-            Margin="10"
-            BorderBrush="#9098a3"
-            BorderThickness="1,1,0,1"
-            ExpandMode="Multiple"
-            ItemTemplate="{StaticResource Entity}"
-            ItemsSource="{StaticResource dsEntity}" />
+    <!--    <DockPanel LastChildFill="True">-->
+    <!--        <Grid DockPanel.Dock="Top">-->
+    <!--            <Grid.ColumnDefinitions>-->
+    <!--                <ColumnDefinition Width="Auto" />-->
+    <!--                <ColumnDefinition Width="*" />-->
+    <!--            </Grid.ColumnDefinitions>-->
+    <!--    -->
+    <!--  <telerik:RadMenu  -->
+    <!--  Grid.Column="0"  -->
+    <!--  HorizontalAlignment="Stretch"  -->
+    <!--  VerticalAlignment="Top">  -->
+    <!--                <telerik:RadMenuItem Header="Item 1">-->
+    <!--                    <telerik:RadMenuItem Header="Sub Item 1" />-->
+    <!--                    <telerik:RadMenuItem Header="Sub Item 2" />-->
+    <!--                </telerik:RadMenuItem>-->
+    <!--                <telerik:RadMenuItem Header="Item 2">-->
+    <!--                    <telerik:RadMenuItem Header="Sub Item 3" />-->
+    <!--                    <telerik:RadMenuItem Header="Sub Item 4" />-->
+    <!--                    <telerik:RadMenuItem Header="Sub Item 5" />-->
+    <!--                </telerik:RadMenuItem>-->
+    <!--            </telerik:RadMenu>-->
+    <!--    -->
+    <!--    -->
+    <!--  <telerik:RadButton  -->
+    <!--  x:Name="radButton"  -->
+    <!--  Grid.Column="1"  -->
+    <!--  Width="Auto"  -->
+    <!--  Height="24"  -->
+    <!--  VerticalAlignment="Top"  -->
+    <!--  Click="radButton_Click"  -->
+    <!--  Content="Log in" />  -->
+    <!--        </Grid>-->
 
-        <Button Content="Dock=Bottom" DockPanel.Dock="Bottom" />
-        <Button
-            d:IsHidden="True"
-            Content="Dock=Left"
-            DockPanel.Dock="Right" />
+    <Grid Background="{StaticResource BackgroundVeryLightBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-        <telerik:RadLinearSparkline
-            x:Name="myLinearSparkline"
-            Width="568"
-            Height="303"
-            VerticalAlignment="Bottom"
-            ShowAxis="True"
-            ShowHighPointIndicators="True"
-            ShowLowPointIndicators="True"
-            XValuePath="PLCStamp"
-            YValuePath="ResultData" />
-    </DockPanel>
+
+        <!--  LEFT MENU  -->
+        <StackPanel Grid.Column="0"
+                    Visibility="{Binding AuthVM.IsAuthenticated, Converter={StaticResource VisConverter}}"
+                    Background="{StaticResource ForegroundMainBrush}"
+                    >
+            <TextBlock
+                Text="Navigation menu"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Padding="10 10 10 10"
+                Foreground="{StaticResource ForegroundLightBrush}"
+                FontSize="{StaticResource FontSizeRegular}"
+                Background ="{StaticResource ForegroundMainBrush}"
+                
+                >
+            </TextBlock>
+            <telerik:RadPanelBar
+                Foreground="{StaticResource ForegroundMainBrush}"
+                BorderBrush="#9098a3"
+                BorderThickness="1,1,0,1"
+                ExpandMode="Multiple" Background="{DynamicResource ForegroundMainBrush}"
+                
+                >
+
+
+                <telerik:RadPanelBarItem Header="User">
+                    <Button
+                        Command="{Binding NavCommand}"
+                        CommandParameter="ProfileView"
+                        Content="Profile"
+                        Style="{StaticResource MenuButton}" />
+                    <Button
+                        Command="{Binding NavCommand}"
+                        CommandParameter=""
+                        Content="Log Out"
+                        Style="{StaticResource MenuButton}" />
+                </telerik:RadPanelBarItem>
+
+                <telerik:RadPanelBarItem Header="Modules">
+                    <Button
+                        Command="{Binding NavCommand}"
+                        CommandParameter="CommucationView"
+                        Content="Communication"
+                        Style="{StaticResource MenuButton}" />
+                    <Button
+                        Command="{Binding NavCommand}"
+                        CommandParameter="Historian"
+                        Content="Historian"
+                        Style="{StaticResource MenuButton}" />
+                </telerik:RadPanelBarItem>
+
+                <telerik:RadPanelBarItem Header="Admin Module">
+                    <Button
+                        Command="{Binding NavCommand}"
+                        Content="Users"
+                        Style="{StaticResource MenuButton}" />
+                    <Button
+                        Command="{Binding NavCommand}"
+                        Content="Roles"
+                        Style="{StaticResource MenuButton}" />
+                    <Button
+                        Command="{Binding NavCommand}"
+                        CommandParameter="UserManagementView"
+                        Content="User Management"
+                        Style="{StaticResource MenuButton}" />
+                </telerik:RadPanelBarItem>
+            </telerik:RadPanelBar>
+        </StackPanel>
+        <!--  MAIN FRAME  -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+
+            <!--  Top LoginBar  -->
+            <DockPanel Grid.Row="0" Background="{StaticResource ForegroundMainBrush}">
+                <Button
+                    DockPanel.Dock="Right"
+                    Margin="10"
+                    Content="| Log OUT"
+                    Style="{StaticResource TextButton}"
+                    Visibility="{Binding AuthVM.IsAuthenticated, Converter={StaticResource VisConverter}}" />
+                
+                
+                <TextBlock
+                    DockPanel.Dock="Right"
+                    Margin="10"
+                    VerticalAlignment="Center"
+                    FontFamily="{StaticResource LatoThin}"
+                    FontSize="{StaticResource FontSizeSmall}"
+                    Foreground="{StaticResource WordVeryDarkBrush}"
+                    Text="{Binding AuthVM.CurrentUser.UserName}"
+                    Visibility="{Binding AuthVM.IsAuthenticated, Converter={StaticResource VisConverter}}" />
+            </DockPanel>
+
+            <!--  FRAMe  -->
+            <Grid Grid.Row="1" Margin="0,0,0,0">
+
+                <!--  <Frame  -->
+                <!--  x:Name="MainFrame"  -->
+                <!--  HorizontalAlignment="Stretch"  -->
+                <!--  VerticalAlignment="Stretch"  -->
+                <!--  HorizontalContentAlignment="Stretch"  -->
+                <!--  VerticalContentAlignment="Stretch"  -->
+                <!--  Content="{Binding CurrentPage, Converter={local:ApplicationPageValueConverter}}" />  -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+
+                    <Grid Grid.Row="0" Background="{StaticResource BackgroundVeryLightBrush}">
+                        <Border BorderThickness="0 0 0 10">
+                        <TextBlock
+                            Margin="20,20,0,0"
+
+                            FontFamily="{StaticResource LatoBold}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            Foreground="{StaticResource WordVeryDarkBrush}"
+                            Text="{Binding CurrentPageName}" />
+                        </Border>
+                    </Grid>
+                    <ContentControl Grid.Row="1" Content="{Binding CurrentPage}" Foreground="{x:Null}"/>
+                </Grid>
+            </Grid>
+
+            <!--  Status bar  -->
+            <Grid Grid.Row="1" />
+        </Grid>
+    </Grid>
+
+    <!--  <telerik:RadLinearSparkline  -->
+    <!--  x:Name="myLinearSparkline"  -->
+    <!--  Width="568"  -->
+    <!--  Height="303"  -->
+    <!--  VerticalAlignment="Bottom"  -->
+    <!--  ShowAxis="True"  -->
+    <!--  ShowHighPointIndicators="True"  -->
+    <!--  ShowLowPointIndicators="True"  -->
+    <!--  XValuePath="PLCStamp"  -->
+    <!--  YValuePath="ResultData" />  -->
 
 
 </Window>

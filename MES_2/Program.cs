@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using MES_application.Modules.CommunicationModule;
-using Sharp7;
+using MES_2.Modules.PLCConnectorModule;
 
 namespace MES_2
 {

@@ -13,10 +13,9 @@
 // ==================================
 
 using System;
-using MES_application.Modules;
-using MES_application.Modules.CommunicationModule;
+using MES_2.Modules;
 
-namespace MES_application.Utils
+namespace MES_2.Utils
 {
     //public delegate void ModuleStateChangedDelegat(object sender, ModuleStateChangedEventHandler args);
     public class ModuleStateChangedEventArgs : EventArgs

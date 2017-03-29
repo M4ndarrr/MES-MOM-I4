@@ -23,24 +23,26 @@
 |  copy of Lesser GNU General Public License along with Sharp7.                |
 |  If not, see  http://www.gnu.org/licenses/                                   |
 |=============================================================================*/
-using System;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
+
 //------------------------------------------------------------------------------
 // If you are compiling for UWP verify that WINDOWS_UWP or NETFX_CORE are 
 // defined into Project Properties->Build->Conditional compilation symbols
 //------------------------------------------------------------------------------
+using System;
+using System.Net.Sockets;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
 #if WINDOWS_UWP || NETFX_CORE
 using System.Threading.Tasks;
 using Windows.Networking;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 #else // <-- Including MONO
-using System.Net.Sockets;
+
 #endif
 
-namespace Sharp7
+namespace MES_2
 {
 
     #region [Async Sockets UWP(W10,IoT,Phone)/Windows 8/Windows 8 Phone]

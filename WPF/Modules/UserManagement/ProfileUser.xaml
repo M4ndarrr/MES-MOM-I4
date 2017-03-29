@@ -1,0 +1,92 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    x:Class="WPF.Modules.UserManagement.ProfileUser"
+    Width="Auto"
+    Height="Auto"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,20,0,0" Background="{StaticResource BackgroundVeryLightBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <StackPanel
+                    Margin="20,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Background="{StaticResource ForegroundLightBrush}"
+                    >
+                <Grid Background="{StaticResource WordVeryDarkBrush}" Margin="0 5 0 15">
+                    <TextBlock
+                            Grid.Column="0"
+                            FontFamily="{StaticResource LatoBold}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            Foreground="{StaticResource ForegroundLightBrush}"
+                            Text="First Name" 
+                            Padding="5 10 5 10"/>
+
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                            Grid.Column="0"
+                            FontFamily="{StaticResource LatoThin}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            Foreground="Black"
+                            Text="First Name" />
+                    <TextBlock
+                            Grid.Column="1"
+                            FontFamily="{StaticResource LatoThin}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            Foreground="Black"
+                            Text="{Binding UserInformation.First_Name}" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                            Grid.Column="0"
+                            FontFamily="{StaticResource LatoThin}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            Foreground="Black"
+                            Text="Last Name" />
+                    <TextBlock
+                            Grid.Column="1"
+                            FontFamily="{StaticResource LatoThin}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            Foreground="Black"
+                            Text="{Binding UserInformation.Last_Name}" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <telerik:RadButton Grid.Column="0" CommandParameter="USR_UserList"  Content="Entity States" Margin="2 5 2 5"/>
+                    <telerik:RadButton Grid.Column="1" Content="Entity States" Margin="2 5 2 5"/>
+                    <telerik:RadButton Grid.Column="2" Content="Entity States" Margin="2 5 2 5"/>
+
+
+
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+
+</UserControl>

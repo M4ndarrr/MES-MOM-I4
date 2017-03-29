@@ -11,13 +11,11 @@
 //  Change History: 
 // 
 // ==================================
+
 using System;
-using System.Collections.Generic;
 using System.Text;
-using Sharp7;
 
-
-namespace MES_application.Utils
+namespace MES_2.Utils
 {
 
     public static class Utils
