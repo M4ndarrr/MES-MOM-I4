@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MES_2.DB.Database;
+using MES_2.DB.Tables;
 using MES_2.Modules.Interfaces;
 
 namespace MES_2.Modules.PLCConnectorModule
@@ -72,7 +73,7 @@ namespace MES_2.Modules.PLCConnectorModule
             PlcConnectorModulesList.Add(objTemp);
 
 
-            using (var db = new TestDatabaseEntities())
+            using (var db = new MES_DATABASE())
             {
                 db.PLCTable.Add(new PLCTable()
                 {

@@ -28,14 +28,34 @@
                         FontFamily="{StaticResource LatoRegular}"
                         FontSize="{StaticResource FontSizeLarge}"
                         Foreground="{StaticResource ForegroundLightBrush}"
-                        Text="States List" />
+                        Text="Translation List" />
                 </Grid>
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button
+                            Grid.Column="0"
+                            Margin="5,5"
+                            HorizontalAlignment="Left"
+                            Command="{Binding AddTranslationCommand}"
+                            Content="Add Entity" />
+                    </Grid>
+
+
                     <telerik:RadGridView
+                        Grid.Row="1"
                         AutoGenerateColumns="False"
                         CanUserDeleteRows="False"
                         GroupRenderMode="Flat"
-                        ItemsSource="{Binding States}">
+                        ItemsSource="{Binding Translations}">
 
                         <telerik:RadGridView.Columns>
                             <telerik:GridViewDataColumn DataMemberBinding="{Binding ID_TRA}" />
@@ -48,26 +68,22 @@
                             <telerik:GridViewColumn Width="90">
                                 <telerik:GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <telerik:RadButton
-                                            Command="{Binding DataContext.EditUserCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                            CommandParameter="{Binding}"
-                                            Content="Delete" />
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <telerik:RadButton
+                                                Grid.Column="0"
+                                                Command="{Binding DataContext.EditTranslationCommand, RelativeSource={RelativeSource AncestorType={x:Type telerik:RadGridView}}}"
+                                                CommandParameter="{Binding}"
+                                                Content="Edit" />
+                                        </Grid>
                                     </DataTemplate>
                                 </telerik:GridViewColumn.CellTemplate>
                             </telerik:GridViewColumn>
                         </telerik:RadGridView.Columns>
-
-
-
-                        <!--            <DataTemplate>-->
-                        <!--  <telerik:RadButton Content="Edit"  -->
-                        <!--  Command="{Binding EditCustomerCommand}"  -->
-                        <!--  CommandParameter="{Binding}"/>  -->
-                        <!--            </DataTemplate>-->
-
-
-
-
                     </telerik:RadGridView>
 
 

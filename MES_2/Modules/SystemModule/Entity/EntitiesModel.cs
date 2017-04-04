@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using MES_2.DB.Database;
 using MES_2.Modules.Interfaces;
@@ -7,12 +8,23 @@ namespace MES_2.Modules.SystemModule.Entity
 {
     public class EntitiesModel : IRepository<Entity, object>
     {
+        
+        // singleton - lazy learning
+        private static EntitiesModel instance;
 
+        public static EntitiesModel Instance
+        {
+            get
+            {
+                if (instance == null) instance = new EntitiesModel();
+                return instance;
+            }
+        }
         public IEnumerable<Entity> Retrive()
         {
             List<Entity> Temp = new List<Entity>();
 
-            using (var db = new TestDatabaseEntities())
+            using (var db = new MES_DATABASE())
             {
                 Temp = db.ENT_Entity
                     .Select(MapperEntity.MapENTToMapperEntity)
@@ -37,14 +49,10 @@ namespace MES_2.Modules.SystemModule.Entity
         }
 
         public void Add(Entity p_entity)
-        {
-            using (var db = new TestDatabaseEntities())
+        { //musi se vytvořit také základní translation a state
+            using (var db = new MES_DATABASE())
             {
-                db.ENT_Entity.Add(MapperEntity.MapEntityToENT(new Entity()
-                {
-                    NAME_ENT = "USR_UserList",
-
-                }));
+                db.ENT_Entity.Add(MapperEntity.MapEntityToENT(p_entity));
                 db.SaveChanges();
             }
         }
@@ -59,10 +67,22 @@ namespace MES_2.Modules.SystemModule.Entity
 
         public void Edit(Entity p_entity)
         {
+            var Temp = MapperEntity.MapEntityToENT(p_entity);
+            using (var db = new MES_DATABASE())
+            {
+                if (!db.ENT_Entity.Local.Any(c => c.ID_ENT == p_entity.ID_ENT))
+                {
+                    db.ENT_Entity.Attach(Temp);
+                    db.Entry(Temp).State = EntityState.Modified;
+
+                }
+                db.SaveChanges();
+            }
         }
 
         public void Edit(object p_entity)
         {
+
         }
 
         public bool Save()

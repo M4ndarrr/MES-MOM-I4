@@ -18,6 +18,7 @@ using System.Threading;
 using MES_2.Common;
 using MES_2.DB;
 using MES_2.DB.Database;
+using MES_2.DB.Tables;
 using MES_2.Modules.ComModule;
 using MES_2.Utils;
 
@@ -68,7 +69,7 @@ namespace MES_2.Modules.PLCConnectorModule
 
         public PlcConnectorModule(PLCConnectorModuleConfigure p_PlcModuleConfigure)
         {
-            databaze = SQLRepository.Instance;
+           databaze = SQLRepository.Instance;
 
 
             objClient = new S7Client();
@@ -166,9 +167,9 @@ namespace MES_2.Modules.PLCConnectorModule
             instance.StateChanged += OnChangeState;
 
             //tohle musí být mimo v tom prostředí
-            using (var db = new TestDatabaseEntities())
+            using (var db = new MES_DATABASE())
             {
-                db.ComObjecTable.Add(new ComObjecTable()
+                db.ComObjecTable.Add(new ComObjectTable()
                 {
                     ID = instance.Id,
                     Status = (int)instance.EModuleState,

@@ -1,4 +1,6 @@
-﻿namespace MES_2.Modules.UserManagement
+﻿using MES_2.Modules.SystemModule.State;
+
+namespace MES_2.Modules.UserManagement
 {
     public class UserFull
     {
@@ -13,6 +15,8 @@
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Mobile { get; set; }
+        public string PASSWORD { get; set; }
+
 
 
     }

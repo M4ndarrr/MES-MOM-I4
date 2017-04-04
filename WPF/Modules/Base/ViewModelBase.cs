@@ -38,12 +38,12 @@ namespace WPF.Modules.Base
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
 
-        private bool _RightsMode = false;
+        private bool _isRightsMode = false;
 
-        public bool RightsMode
+        public bool IsRightsMode
         {
-            get { return _RightsMode; }
-            set { SetProperty(ref _RightsMode, value); }
+            get { return _isRightsMode; }
+            set { SetProperty(ref _isRightsMode, value); }
 
         }
     }

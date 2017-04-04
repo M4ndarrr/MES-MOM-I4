@@ -8,10 +8,11 @@ namespace WPF.Modules.UserManagement
 {
     public class ProfileUserViewModel : ViewModelBase
     {
-        public event Action<string> StateViewRequest = delegate { };
-        public event Action EditViewRequest = delegate { };
+        public event Action<string> StateViewRequested = delegate { };
+        public event Action<UserFull> AddEditUserRequested = delegate { };
 
-        public RelayCommand<string> OnStateViewCommand { get; set; }
+        public RelayCommand OnStateViewCommand { get; set; }
+        public RelayCommand OnEditCommand { get; set; }
 
         private UserFull _UserInformation = new UserFull();
 
@@ -25,17 +26,27 @@ namespace WPF.Modules.UserManagement
 
         public ProfileUserViewModel()
         {
-            OnStateViewCommand = new RelayCommand<string>(DoStatesView);
-                
-            if (ProfileModel.GetInformation(AuthenticationViewModel.Instance.CurrentUser.ID))
+            OnStateViewCommand = new RelayCommand(DoStatesViewRequested);
+            OnEditCommand = new RelayCommand(DoEditRequested);
+
+
+
+            if (ProfileModel.Instance.GetInformation(AuthenticationViewModel.Instance.CurrentUser.ID))
             {
-                UserInformation = ProfileModel.ProfileFull;
+                UserInformation = ProfileModel.Instance.ProfileFull;
             }
         }
-        public void DoStatesView (string p_text)
+        public void DoStatesViewRequested ()
         {
-            StateViewRequest(p_text);
+            StateViewRequested("USR_UserList");
 
+        }
+
+        public void DoEditRequested()
+        {
+            //tady se zobrazí dialog napárování commandů SAVE/CANCEL
+
+            AddEditUserRequested(UserInformation);
         }
 
         public bool EditMode

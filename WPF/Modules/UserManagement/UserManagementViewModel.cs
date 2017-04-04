@@ -15,8 +15,8 @@ namespace WPF.Modules.UserManagement
 
         public UserManagementViewModel()
         {
-            AddCustomerCommand = new RelayCommand(OnAddCustomer);
-            EditCustomerCommand = new RelayCommand<UserFull>(OnEditUser);
+            AddUserCommand = new RelayCommand(OnAddUser);
+            EditUserCommand = new RelayCommand<UserFull>(OnEditUser);
             ClearSearchCommand = new RelayCommand(OnClearSearch);
             _allUsers = _repo.Retrieve().ToList();
             Users = new ObservableCollection<UserFull>(_allUsers);
@@ -52,24 +52,24 @@ namespace WPF.Modules.UserManagement
              //   Users = new ObservableCollection<USR_UserList>(_allUsers.Where(c => c.FullName.ToLower().Contains(searchInput.ToLower())));
             }
         }
-
-        public RelayCommand<UserFull> PlaceOrderCommand { get; private set; }
-        public RelayCommand AddCustomerCommand { get; private set; }
-        public RelayCommand<UserFull> EditCustomerCommand { get; private set; }
+        public RelayCommand AddUserCommand { get; private set; }
+        public RelayCommand<UserFull> EditUserCommand { get; private set; }
         public RelayCommand ClearSearchCommand { get; private set; }
 
-        public event Action<Guid> PlaceOrderRequested = delegate { };
-        public event Action<UserFull> AddUserRequested = delegate { };
-        public event Action<UserFull> EditUserRequested = delegate { };
-        private void OnAddCustomer()
-        {
-            AddUserRequested(new UserFull());
+        public event Action<UserFull> AddEditUserRequested = delegate { };
 
-        }
         private void OnEditUser(UserFull user)
         {
-            EditUserRequested(user);
+
+            AddEditUserRequested(user);
         }
+
+        private void OnAddUser()
+        {
+
+            AddEditUserRequested(null);
+        }
+
 
         private void OnClearSearch()
         {

@@ -1,4 +1,5 @@
 ﻿using MES_2.DB.Database;
+using MES_2.DB.Tables;
 
 namespace MES_2.Modules.SystemModule.Entity
 {

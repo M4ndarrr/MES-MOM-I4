@@ -62,13 +62,30 @@
       <HintPath>..\lib\RCWPF\2016.3.1024.45.NoXaml\Telerik.Windows.Controls.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Telerik.Windows.Controls.Chart, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.Windows.Controls.Charting, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.Windows.Controls.DataVisualization, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.Windows.Controls.GridView, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.Windows.Controls.Input, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.Windows.Controls.Navigation, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.Windows.Data, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Chart, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2016.3.1024.45.NoXaml\Telerik.Windows.Controls.Chart.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.DataVisualization, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2016.3.1024.45.NoXaml\Telerik.Windows.Controls.DataVisualization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GridView, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2016.3.1024.45.NoXaml\Telerik.Windows.Controls.GridView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Input, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2016.3.1024.45.NoXaml\Telerik.Windows.Controls.Input.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Navigation, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2016.3.1024.45.NoXaml\Telerik.Windows.Controls.Navigation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Data, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2016.3.1024.45.NoXaml\Telerik.Windows.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Telerik.Windows.Themes.Windows8">
       <HintPath>..\lib\RCWPF\2016.3.1024.45.NoXaml\Telerik.Windows.Themes.Windows8.dll</HintPath>
     </Reference>
@@ -89,7 +106,27 @@
     <Compile Include="Helpers\Entitypokus.cs" />
     <Compile Include="Helpers\BindableBase.cs" />
     <Compile Include="Modules\Interfaces\IModelDialog.cs" />
+    <Compile Include="Modules\SystemModule\Entity\AddEditEntitiesView.xaml.cs">
+      <DependentUpon>AddEditEntitiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SystemModule\Entity\AddEditEntitiesViewModel.cs" />
+    <Compile Include="Modules\SystemModule\Entity\EntityFullEditable.cs" />
+    <Compile Include="Modules\SystemModule\State\AddEditStateView.xaml.cs">
+      <DependentUpon>AddEditStateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SystemModule\State\AddEditStateViewModel.cs" />
+    <Compile Include="Modules\SystemModule\State\StateFullEditable.cs" />
+    <Compile Include="Modules\SystemModule\Translation\AddEditTranslationView.xaml.cs">
+      <DependentUpon>AddEditTranslationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SystemModule\Translation\AddEditTranslationViewModel.cs" />
+    <Compile Include="Modules\SystemModule\Translation\TranslationFullEditable.cs" />
     <Compile Include="Modules\SystemModule\Translation\TranslationStateViewModel.cs" />
+    <Compile Include="Modules\UserManagement\AddEditUserManagementView.xaml.cs">
+      <DependentUpon>AddEditUserManagementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\UserManagement\AddEditUserManagementViewModel.cs" />
+    <Compile Include="Modules\UserManagement\UserFullEditable.cs" />
     <Compile Include="ValueConventers\NegatableBooleanToVisiblityConverter.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Model\ApplicationPage.cs" />
@@ -156,6 +193,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Modules\SystemModule\Entity\AddEditEntitiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\SystemModule\State\AddEditStateView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SystemModule\Translation\AddEditTranslationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\UserManagement\AddEditUserManagementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Buttons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

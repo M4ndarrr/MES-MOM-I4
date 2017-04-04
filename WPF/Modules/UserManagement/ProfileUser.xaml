@@ -27,7 +27,7 @@
                             FontFamily="{StaticResource LatoBold}"
                             FontSize="{StaticResource FontSizeRegular}"
                             Foreground="{StaticResource ForegroundLightBrush}"
-                            Text="First Name" 
+                            Text="Profile" 
                             Padding="5 10 5 10"/>
 
                 </Grid>
@@ -78,9 +78,8 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <telerik:RadButton Grid.Column="0" CommandParameter="USR_UserList"  Content="Entity States" Margin="2 5 2 5"/>
-                    <telerik:RadButton Grid.Column="1" Content="Entity States" Margin="2 5 2 5"/>
-                    <telerik:RadButton Grid.Column="2" Content="Entity States" Margin="2 5 2 5"/>
+                    <telerik:RadButton Grid.Column="0" Command="{Binding OnEditCommand}"  Content="Edit" Margin="2 5 2 5"/>
+
 
 
 

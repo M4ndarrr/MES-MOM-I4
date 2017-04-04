@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using MES_2.DB.Database;
 using MES_2.Modules.SystemModule.Entity;
+using MES_2.Modules.SystemModule.State;
 using WPF.Helpers;
 using WPF.Modules.Base;
 
@@ -16,10 +17,11 @@ namespace WPF.Modules.SystemModule.Entity
 
         public EntitiesViewModel()
         {
-            //            AddCustomerCommand = new RelayCommand(OnAddCustomer);
-            //            EditCustomerCommand = new RelayCommand<MES_2.Modules.SystemModule.Entity.Entity>(OnEditUser);
-            //            ClearSearchCommand = new RelayCommand(OnClearSearch);
-            _repo.Add(null);
+            AddEntityCommand = new RelayCommand(OnAddEntity);
+            EditEntityCommand = new RelayCommand<MES_2.Modules.SystemModule.Entity.Entity>(OnEditEntity);
+            StatesEntityCommand = new RelayCommand<MES_2.Modules.SystemModule.Entity.Entity>(OnStatesEntity);
+            TranslationEntityCommand = new RelayCommand<MES_2.Modules.SystemModule.Entity.Entity>(OnTranslationEntity);
+
             _allEntities = _repo.Retrive().ToList();
             Entities = new ObservableCollection<MES_2.Modules.SystemModule.Entity.Entity>(_allEntities);
 
@@ -32,29 +34,46 @@ namespace WPF.Modules.SystemModule.Entity
             set { SetProperty(ref _entities, value); }
         }
 
-//        private void FilterUsers(string searchInput)
-//        {
-//            if (string.IsNullOrWhiteSpace(searchInput))
-//            {
-//                Entities = new ObservableCollection<MES_2.Modules.SystemModule.Entity.Entity>(_allEntities);
-//                return;
-//            }
-//            else
-//            {
-//                //   Users = new ObservableCollection<USR_UserList>(_allUsers.Where(c => c.FullName.ToLower().Contains(searchInput.ToLower())));
-//            }
-//        }
+        public RelayCommand<MES_2.Modules.SystemModule.Entity.Entity> EditEntityCommand { get; private set; }
+        public RelayCommand AddEntityCommand { get; private set; }
+        public RelayCommand<MES_2.Modules.SystemModule.Entity.Entity> StatesEntityCommand { get; private set; }
+        public RelayCommand<MES_2.Modules.SystemModule.Entity.Entity> TranslationEntityCommand { get; private set; }
 
-        public RelayCommand<MES_2.Modules.SystemModule.Entity.Entity> StatesOfItemCommand { get; private set; }
-        public RelayCommand AddCustomerCommand { get; private set; }
+        public event Action<MES_2.Modules.SystemModule.Entity.Entity> AddEditEntityRequested = delegate { };
+        public event Action<string> StatesEntityRequested = delegate { };
+        public event Action<string> TranslationEntityRequested = delegate { };
 
-        public event Action<int> StatesOfSelectRequested = delegate { };
 
-        public void OnStateOfItem(MES_2.Modules.SystemModule.Entity.Entity p_item)
+        private void OnAddEntity()
         {
-            //Users = new ObservableCollection<USR_UserList>(_allUsers.Where(c => c.FullName.ToLower().Contains(searchInput.ToLower())));
-            //StatesOfSelectRequested();
+            AddEditEntityRequested(null);
         }
+
+        private void OnEditEntity(MES_2.Modules.SystemModule.Entity.Entity p_entity)
+        {
+            AddEditEntityRequested(p_entity);
+        }
+
+        private void OnStatesEntity(MES_2.Modules.SystemModule.Entity.Entity p_entity)
+        {
+            StatesEntityRequested(p_entity.NAME_ENT);
+        }
+
+        private void OnTranslationEntity(MES_2.Modules.SystemModule.Entity.Entity p_entity)
+        {
+            TranslationEntityRequested(p_entity.NAME_ENT);
+        }
+
+
+
+
+
+
+
+
+
+
+
 
     }
 }

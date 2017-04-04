@@ -19,8 +19,7 @@ namespace MES_2.Modules.SystemModule.State
     public class State
     {
         public int ID_STA { get; set; }
-        public string Name_Entity { get; set; }
-        public int? ID_State { get; set; }
+        public string NAME_ENT { get; set; }
         public string Purpous { get; set; }
         public bool? L_START_STATE { get; set; }
         public bool? L_END_STATE { get; set; }

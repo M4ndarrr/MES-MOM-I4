@@ -1,8 +1,8 @@
-﻿<UserControl x:Class="WPF.Modules.SystemModule.State.StateEntitiesView"
-             
-   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<UserControl
+    x:Class="WPF.Modules.SystemModule.State.StateEntitiesView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     xmlns:valueConventers="clr-namespace:WPF.ValueConventers"
@@ -31,7 +31,27 @@
                         Text="States List" />
                 </Grid>
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button
+                            Grid.Column="0"
+                            Margin="5,5"
+                            HorizontalAlignment="Left"
+                            Command="{Binding AddStateCommand}"
+                            Content="Add Entity" />
+                    </Grid>
+
+
                     <telerik:RadGridView
+                        Grid.Row="1"
                         AutoGenerateColumns="False"
                         CanUserDeleteRows="False"
                         GroupRenderMode="Flat"
@@ -50,26 +70,30 @@
                             <telerik:GridViewColumn Width="90">
                                 <telerik:GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <telerik:RadButton
-                                            Command="{Binding DataContext.EditUserCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                            CommandParameter="{Binding}"
-                                            Content="Delete" />
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <telerik:RadButton
+                                                Grid.Column="0"
+                                                Command="{Binding DataContext.EditStateCommand, RelativeSource={RelativeSource AncestorType={x:Type telerik:RadGridView}}}"
+                                                CommandParameter="{Binding}"
+                                                Content="Edit" />
+
+                                            <Label Grid.Column="1">|</Label>
+
+                                            <telerik:RadButton
+                                                Grid.Column="2"
+                                                Command="{Binding DataContext.TranslationCommand, RelativeSource={RelativeSource AncestorType={x:Type telerik:RadGridView}}}"
+                                                CommandParameter="{Binding}"
+                                                Content="States" />
+                                        </Grid>
                                     </DataTemplate>
                                 </telerik:GridViewColumn.CellTemplate>
                             </telerik:GridViewColumn>
                         </telerik:RadGridView.Columns>
-
-
-
-                        <!--            <DataTemplate>-->
-                        <!--  <telerik:RadButton Content="Edit"  -->
-                        <!--  Command="{Binding EditCustomerCommand}"  -->
-                        <!--  CommandParameter="{Binding}"/>  -->
-                        <!--            </DataTemplate>-->
-
-
-
-
                     </telerik:RadGridView>
 
 

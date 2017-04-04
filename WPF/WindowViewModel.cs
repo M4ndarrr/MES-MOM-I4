@@ -1,5 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using MES_2.Modules.SystemModule.Entity;
+using MES_2.Modules.SystemModule.State;
+using MES_2.Modules.SystemModule.Translation;
+using MES_2.Modules.UserManagement;
 using WPF.Helpers;
 using WPF.Modules.Base;
 using WPF.Modules.Historian;
@@ -7,6 +11,7 @@ using WPF.Modules.SystemModule.Authentication;
 using WPF.Modules.SystemModule.Entity;
 using WPF.Modules.SystemModule.Login;
 using WPF.Modules.SystemModule.State;
+using WPF.Modules.SystemModule.Translation;
 using WPF.Modules.UserManagement;
 using WPF.ViewModel;
 using WPF.Window;
@@ -72,8 +77,6 @@ namespace WPF
                 WindowResized();
             };
 
-           // NavToStateEntiti();
-
         }
 
         #region Navigation
@@ -94,7 +97,15 @@ namespace WPF
                 case "UserManagementView":
                     NavToUserManagement();
                     break;
-
+                case "EntitiesView":
+                    NavToEntity();
+                    break;
+                case "StatesEntitiesView":
+                    NavToState(null);
+                    break;
+                case "TranslationView":
+                    NavToTranslation(null);
+                    break;
                 default:
                     break;
             }
@@ -102,7 +113,9 @@ namespace WPF
         }
         private void NavToUserManagement()
         {
-            CurrentPage = new UserManagementViewModel();
+            UserManagementViewModel Temp = new UserManagementViewModel();
+            Temp.AddEditUserRequested += NavToAddEditUser;
+            CurrentPage = Temp;
             CurrentPageName = "User Management";
         }
 
@@ -111,16 +124,22 @@ namespace WPF
             // jeste zjistit jestli na to ma uzivatel prava
             ProfileUserViewModel Temp = new ProfileUserViewModel();
             //Temp.EditViewRequest+= 
-            Temp.StateViewRequest += NavToStateEntiti;
+            //Temp.StateViewRequested += NavToStateEntiti;
+            Temp.AddEditUserRequested += NavToAddEditUser;
             CurrentPage = Temp;
             CurrentPageName = "Profile";
-            CurrentPage.RightsMode = true; //volani permission modulu
+            CurrentPage.IsRightsMode = true; //volani permission modulu
 
         }
-
-        private void NavToProfileUserEdit()
+        private void NavToAddEditUser(UserFull p_user)
         {
-            
+            // jeste zjistit jestli na to ma uzivatel prava
+            AddEditUserManagementViewModel Temp = new AddEditUserManagementViewModel(p_user);
+
+            Temp.Done += NavToProfileUser;
+            CurrentPage = Temp;
+            CurrentPageName = "Add/Edit Page";
+            CurrentPage.IsRightsMode = true; //volani permission modulu
         }
 
         private void NavToCommucation()
@@ -135,40 +154,69 @@ namespace WPF
             CurrentPage = new HistorianPageViewModel();
             CurrentPageName = "Historian";
         }
-        private void NavToStateEntiti()
-        {
-            // jeste zjistit jestli na to ma uzivatel prava
-            StateEntitiesViewModel Temp = new StateEntitiesViewModel();
-            //Temp.EditViewRequest+= 
-            CurrentPage = Temp;
-            CurrentPageName = "States";
-            CurrentPage.RightsMode = true; //volani permission modulu
 
-        }
-
-        private void NavToStateEntiti(string filter)
-        {            
-            
-            // jeste zjistit jestli na to ma uzivatel prava
-            StateEntitiesViewModel Temp = new StateEntitiesViewModel();
-            //Temp.EditViewRequest+= 
-            CurrentPage = Temp;
-            CurrentPageName = "States";
-            CurrentPage.RightsMode = true; //volani permission modulu
-
-        }
-
-        private void NavToEnititi()
+        private void NavToEntity()
         {
             // jeste zjistit jestli na to ma uzivatel prava
             EntitiesViewModel Temp = new EntitiesViewModel();
-            //Temp.EditViewRequest+= 
+            Temp.AddEditEntityRequested += NavToAddEditEntity;
+            Temp.StatesEntityRequested += NavToState;
             CurrentPage = Temp;
             CurrentPageName = "Entities";
-            CurrentPage.RightsMode = true; //volani permission modulu
+            CurrentPage.IsRightsMode = true; //volani permission modulu
 
         }
-        
+
+        private void NavToAddEditEntity(Entity p_entity)
+        {
+            // jeste zjistit jestli na to ma uzivatel prava
+            AddEditEntitiesViewModel Temp = new AddEditEntitiesViewModel(p_entity);
+            Temp.Done += NavToEntity;
+            CurrentPage = Temp;
+            CurrentPageName = "Add/Edit Page";
+            CurrentPage.IsRightsMode = true; //volani permission modulu
+        }
+
+        private void NavToState(string p_entityName) // musi vstupovat string ne objekt
+        {
+            // jeste zjistit jestli na to ma uzivatel prava
+            StateEntitiesViewModel Temp = new StateEntitiesViewModel(p_entityName);
+            Temp.AddEditStateRequested += NavToAddEditState;
+            Temp.TranslationRequested += NavToTranslation;
+            CurrentPage = Temp;
+            CurrentPageName = "States";
+            CurrentPage.IsRightsMode = true; //volani permission modulu
+        }
+
+        private void NavToAddEditState(State p_state)
+        {
+            AddEditStateViewModel Temp = new AddEditStateViewModel(p_state);
+            Temp.Done += NavToState;
+            CurrentPage = Temp;
+            CurrentPageName = "States";
+            CurrentPage.IsRightsMode = true; //volani permission modulu
+        }
+
+
+        private void NavToTranslation(string p_entityName) // ID stavu bude vstupovat ze ktereho chci vyjít
+        {
+            // jeste zjistit jestli na to ma uzivatel prava
+            TranslationStateViewModel Temp = new TranslationStateViewModel(p_entityName);
+            Temp.AddEditTranslationRequested += NavToAddEditTranslation;
+            CurrentPage = Temp;
+            CurrentPageName = "States";
+            CurrentPage.IsRightsMode = true; //volani permission modulu
+        }
+
+        private void NavToAddEditTranslation(Translation p_translation)
+        {
+            AddEditTranslationViewModel Temp = new AddEditTranslationViewModel(p_translation);
+            Temp.Done += NavToTranslation;
+            CurrentPage = Temp;
+            CurrentPageName = "States";
+            CurrentPage.IsRightsMode = true; //volani permission modulu
+        }
+
 
         #endregion
 

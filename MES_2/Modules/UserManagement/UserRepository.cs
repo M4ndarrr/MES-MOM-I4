@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using MES_2.DB.Database;
 using MES_2.Modules.Interfaces;
@@ -26,10 +27,10 @@ namespace MES_2.Modules.UserManagement
         {
             UserFull Temp = new UserFull();
 
-            using (var db = new TestDatabaseEntities())
+            using (var db = new MES_DATABASE())
             {
                 Temp = db.USR_UserList.Where(x => x.ID_USR == p_id)
-                        .Select(Mapper.MapUSREntityToUserFull)
+                        .Select(MapperUserFull.MapUSREntityToUserFull)
                         .FirstOrDefault();
             }
             return Temp;
@@ -39,10 +40,10 @@ namespace MES_2.Modules.UserManagement
         {
             List<UserFull> Temp = new List<UserFull>();
 
-            using (var db = new TestDatabaseEntities())
+            using (var db = new MES_DATABASE())
             {
                 Temp = db.USR_UserList
-                    .Select(Mapper.MapUSREntityToUserFull)
+                    .Select(MapperUserFull.MapUSREntityToUserFull)
                     .ToList();
 
             }
@@ -50,17 +51,17 @@ namespace MES_2.Modules.UserManagement
         }
 
 
-        public void Add(UserFull p_entity)
+        public void Add(UserFull p_userFull)
         {
-            var Temp = Mapper.MapUserFullToUSREntity(p_entity);
-            using (var db = new TestDatabaseEntities())
+            var Temp = MapperUserFull.MapUserFullToUSREntity(p_userFull);
+            using (var db = new MES_DATABASE())
             {
                 db.USR_UserList.Add(Temp);
                 db.SaveChanges();
             }
         }
 
-        public void Delete(UserFull p_entity)
+        public void Delete(UserFull p_userFull)
         {
             // nesmí se smazat pouze se změní jeho stav na smazany
         }
@@ -69,14 +70,16 @@ namespace MES_2.Modules.UserManagement
         {
         }
 
-        public void Edit(UserFull p_entity)
+        public void Edit(UserFull p_userFull)
         {
-            var Temp = Mapper.MapUserFullToUSREntity(p_entity);
-            using (var db = new TestDatabaseEntities())
+            var Temp = MapperUserFull.MapUserFullToUSREntity(p_userFull);
+            using (var db = new MES_DATABASE())
             {
-                if (!db.USR_UserList.Local.Any(c => c.ID_USR == p_entity.ID_USR))
+                if (!db.USR_UserList.Local.Any(c => c.ID_USR == p_userFull.ID_USR))
                 {
                     db.USR_UserList.Attach(Temp);
+                    db.Entry(Temp).State = EntityState.Modified;
+                    
                 }
                 db.SaveChanges();
             }

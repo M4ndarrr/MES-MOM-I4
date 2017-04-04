@@ -35,5 +35,8 @@ namespace MES_2.DB.Database
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TRA_TranslationState> TRA_TranslationState { get; set; }
         public virtual DbSet<TRA_TranslationStateList> TRA_TranslationStateList { get; set; }
+        public virtual DbSet<ENTITY> ENTITY { get; set; }
+        public virtual DbSet<PRECHOD> PRECHOD { get; set; }
+        public virtual DbSet<STAV> STAV { get; set; }
     }
 }

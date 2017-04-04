@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TestDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TestDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ComObjecTable">
           <Key>
             <PropertyRef Name="ID" />
@@ -92,6 +92,24 @@
           <Property Name="State" Type="int" />
           <Property Name="VALID" Type="bit" />
         </EntityType>
+        <EntityType Name="ENTITY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="NAZEV_ENTITY" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRECHOD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="NAZEV_ENTITY" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ZE_STAVU" Type="int" Nullable="false" />
+          <Property Name="DO_STAVU" Type="int" Nullable="false" />
+          <Property Name="POPIS_PRECHODU" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="L_BLOK" Type="tinyint" Nullable="false" />
+        </EntityType>
         <EntityType Name="STA_StateList">
           <Key>
             <PropertyRef Name="ID_STA" />
@@ -104,6 +122,19 @@
           <Property Name="L_END_STATE" Type="bit" />
           <Property Name="L_VALID" Type="bit" />
           <Property Name="Comments" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="STAV">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="NAZEV_ENTITY" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="STAV" Type="int" Nullable="false" />
+          <Property Name="VYZNAM" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="L_POC_STAV" Type="tinyint" Nullable="false" />
+          <Property Name="L_KON_STAV" Type="tinyint" Nullable="false" />
+          <Property Name="L_PLATNY" Type="tinyint" Nullable="false" />
+          <Property Name="POZNAMKA" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -135,6 +166,15 @@
           <Property Name="ID_TRA" Type="int" Nullable="false" />
           <Property Name="VALID" Type="bit" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__PRECHOD__41EDCAC5' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__PRECHOD__41EDCAC5" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__PRECHOD__42E1EEFE' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__PRECHOD__42E1EEFE" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__STAV__NAZEV_ENTI__43D61337' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__STAV__NAZEV_ENTI__43D61337" />-->
         <EntityContainer Name="TestDatabaseModelStoreContainer">
           <EntitySet Name="ComObjecTable" EntityType="Self.ComObjecTable" Schema="db_owner" store:Type="Tables" />
           <EntitySet Name="PLCTable" EntityType="Self.PLCTable" Schema="db_owner" store:Type="Tables" />
@@ -142,13 +182,15 @@
           <EntitySet Name="Table1" EntityType="Self.Table1" Schema="db_owner" store:Type="Tables" />
           <EntitySet Name="USR_UserList" EntityType="Self.USR_UserList" Schema="db_owner" store:Type="Tables" />
           <EntitySet Name="ENT_Entity" EntityType="Self.ENT_Entity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ENTITY" EntityType="Self.ENTITY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRECHOD" EntityType="Self.PRECHOD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STA_StateList" EntityType="Self.STA_StateList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STAV" EntityType="Self.STAV" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRA_TranslationState" EntityType="Self.TRA_TranslationState" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRA_TranslationStateList" EntityType="Self.TRA_TranslationStateList" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TestDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -293,7 +335,41 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TRA_TranslationState" EntityType="Self.TRA_TranslationState" />
           <EntitySet Name="TRA_TranslationStateList" EntityType="Self.TRA_TranslationStateList" />
+          <EntitySet Name="ENTITY" EntityType="TestDatabaseModel.ENTITY" />
+          <EntitySet Name="PRECHOD" EntityType="TestDatabaseModel.PRECHOD" />
+          <EntitySet Name="STAV" EntityType="TestDatabaseModel.STAV" />
         </EntityContainer>
+        <EntityType Name="ENTITY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="NAZEV_ENTITY" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PRECHOD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="NAZEV_ENTITY" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ZE_STAVU" Type="Int32" Nullable="false" />
+          <Property Name="DO_STAVU" Type="Int32" Nullable="false" />
+          <Property Name="POPIS_PRECHODU" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="L_BLOK" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="STAV">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="NAZEV_ENTITY" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="STAV1" Type="Int32" Nullable="false" />
+          <Property Name="VYZNAM" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="L_POC_STAV" Type="Byte" Nullable="false" />
+          <Property Name="L_KON_STAV" Type="Byte" Nullable="false" />
+          <Property Name="L_PLATNY" Type="Byte" Nullable="false" />
+          <Property Name="POZNAMKA" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -437,6 +513,40 @@
                 <ScalarProperty Name="ID_TRA_LIST" ColumnName="ID_TRA_LIST" />
                 <ScalarProperty Name="ID_TRA" ColumnName="ID_TRA" />
                 <ScalarProperty Name="VALID" ColumnName="VALID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ENTITY">
+            <EntityTypeMapping TypeName="TestDatabaseModel.ENTITY">
+              <MappingFragment StoreEntitySet="ENTITY">
+                <ScalarProperty Name="NAZEV_ENTITY" ColumnName="NAZEV_ENTITY" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRECHOD">
+            <EntityTypeMapping TypeName="TestDatabaseModel.PRECHOD">
+              <MappingFragment StoreEntitySet="PRECHOD">
+                <ScalarProperty Name="L_BLOK" ColumnName="L_BLOK" />
+                <ScalarProperty Name="POPIS_PRECHODU" ColumnName="POPIS_PRECHODU" />
+                <ScalarProperty Name="DO_STAVU" ColumnName="DO_STAVU" />
+                <ScalarProperty Name="ZE_STAVU" ColumnName="ZE_STAVU" />
+                <ScalarProperty Name="NAZEV_ENTITY" ColumnName="NAZEV_ENTITY" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STAV">
+            <EntityTypeMapping TypeName="TestDatabaseModel.STAV">
+              <MappingFragment StoreEntitySet="STAV">
+                <ScalarProperty Name="POZNAMKA" ColumnName="POZNAMKA" />
+                <ScalarProperty Name="L_PLATNY" ColumnName="L_PLATNY" />
+                <ScalarProperty Name="L_KON_STAV" ColumnName="L_KON_STAV" />
+                <ScalarProperty Name="L_POC_STAV" ColumnName="L_POC_STAV" />
+                <ScalarProperty Name="VYZNAM" ColumnName="VYZNAM" />
+                <ScalarProperty Name="STAV1" ColumnName="STAV" />
+                <ScalarProperty Name="NAZEV_ENTITY" ColumnName="NAZEV_ENTITY" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

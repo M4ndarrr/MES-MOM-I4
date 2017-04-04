@@ -25,48 +25,51 @@ namespace WPF.Modules.SystemModule.Translation
     public class TranslationStateViewModel : ViewModelBase
     {
         private TranslationModel _repo = new TranslationModel();
-        private List<MES_2.Modules.SystemModule.Translation.Translation> _allStates;
+        private List<MES_2.Modules.SystemModule.Translation.Translation> _allTranslation;
 
-        public TranslationStateViewModel()
+        public TranslationStateViewModel(string p_entityName)
         {
-            //            AddCustomerCommand = new RelayCommand(OnAddCustomer);
-            //            EditCustomerCommand = new RelayCommand<ENT_Entity>(OnEditUser);
-            //            ClearSearchCommand = new RelayCommand(OnClearSearch);
-            _repo.Add(null);
-            _allStates = _repo.Retrieve().ToList();
-            States = new ObservableCollection<MES_2.Modules.SystemModule.Translation.Translation>(_allStates);
+            if (p_entityName != null)
+            {
+                _allTranslation = _repo.RetrieveByEntityName(p_entityName).ToList();
+            }
+            else
+            {
+                _allTranslation = _repo.Retrieve().ToList();
+            }
+
+            AddTranslationCommand = new RelayCommand(OnAddTranslation);
+            EditTranslationCommand = new RelayCommand<MES_2.Modules.SystemModule.Translation.Translation>(OnEditTranslation);
+
+            Translations = new ObservableCollection<MES_2.Modules.SystemModule.Translation.Translation>(_allTranslation);
 
         }
 
-        private ObservableCollection<MES_2.Modules.SystemModule.Translation.Translation> _states;
-        public ObservableCollection<MES_2.Modules.SystemModule.Translation.Translation> States
+        private ObservableCollection<MES_2.Modules.SystemModule.Translation.Translation> _translations;
+        public ObservableCollection<MES_2.Modules.SystemModule.Translation.Translation> Translations
         {
-            get { return _states; }
-            set { SetProperty(ref _states, value); }
+            get { return _translations; }
+            set { SetProperty(ref _translations, value); }
         }
 
-        //        private void FilterUsers(string searchInput)
-        //        {
-        //            if (string.IsNullOrWhiteSpace(searchInput))
-        //            {
-        //                Entities = new ObservableCollection<ENT_Entity>(_allEntities);
-        //                return;
-        //            }
-        //            else
-        //            {
-        //                //   Users = new ObservableCollection<USR_UserList>(_allUsers.Where(c => c.FullName.ToLower().Contains(searchInput.ToLower())));
-        //            }
-        //        }
+        public RelayCommand AddTranslationCommand { get; private set; }
+        public RelayCommand<MES_2.Modules.SystemModule.Translation.Translation> EditTranslationCommand { get; private set; }
 
-        public RelayCommand<MES_2.Modules.SystemModule.Translation.Translation> StatesOfItemCommand { get; private set; }
-        public RelayCommand AddCustomerCommand { get; private set; }
 
-        public event Action<int> StatesOfSelectRequested = delegate { };
+        public event Action<MES_2.Modules.SystemModule.Translation.Translation> AddEditTranslationRequested = delegate { };
 
-        public void OnStateOfItem(MES_2.Modules.SystemModule.Translation.Translation p_item)
+
+        private void OnAddTranslation()
         {
-            //Users = new ObservableCollection<USR_UserList>(_allUsers.Where(c => c.FullName.ToLower().Contains(searchInput.ToLower())));
-            //StatesOfSelectRequested();
+            AddEditTranslationRequested(null);
         }
+
+        private void OnEditTranslation(MES_2.Modules.SystemModule.Translation.Translation p_translation)
+        {
+            AddEditTranslationRequested(p_translation);
+        }
+
+
+
     }
 }

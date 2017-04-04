@@ -14,6 +14,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using MES_2.DB.Database;
+using MES_2.DB.Tables;
 
 namespace MES_2.DB
 {

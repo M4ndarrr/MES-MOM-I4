@@ -26,7 +26,7 @@ namespace MES_2.Modules.Authetication
             bool result = false;
 
             //Přihlášení -> komunikace s entity frameworkem -> přihlášení do systému
-            using (var db = new TestDatabaseEntities())
+            using (var db = new MES_DATABASE())
             {
                 var getUser = db.USR_UserList.Where(x => x.LOGIN == p_user.UserName).FirstOrDefault();
                 

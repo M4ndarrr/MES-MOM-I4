@@ -47,9 +47,6 @@ namespace WPF.Modules.SystemModule.Login
             }
             else
             {
-                CurrentUser.UserName = "";
-                CurrentUser.Password = "";
-                CurrentUser.ID = 0;
                 isNotLoginSuccesFull = true;
                 // pokud ne  změna pole username or password je špatně - musi vyskočit hláška
             }

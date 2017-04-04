@@ -1,0 +1,210 @@
+﻿<UserControl
+    x:Class="WPF.Modules.SystemModule.Translation.AddEditTranslationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:valueConventers="clr-namespace:WPF.ValueConventers"
+    Width="Auto"
+    Height="Auto"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <valueConventers:NegatableBooleanToVisiblityConverter x:Key="VisConverter" />
+        <valueConventers:NegatableBooleanToVisiblityConverter x:Key="NegVisConverter" />
+    </UserControl.Resources>
+
+
+    <Grid Margin="0,20,0,0" Background="{StaticResource BackgroundVeryLightBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <StackPanel
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="{StaticResource ForegroundLightBrush}">
+                
+                <Grid Background="{StaticResource WordVeryDarkBrush}" Margin="0 5 0 15">
+                    <TextBlock
+                            Grid.Column="0"
+                            FontFamily="{StaticResource LatoBold}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            Foreground="{StaticResource ForegroundLightBrush}"
+                            Text="Add/Edit profile" 
+                            Padding="5 10 5 10"/>
+
+                </Grid>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+
+                    <Grid
+                        x:Name="grid1"
+                        Margin="10,10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        DataContext="{Binding Translation}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+<!--                        <Label-->
+<!--                            Grid.Row="0"-->
+<!--                            Grid.Column="0"-->
+<!--                            Margin="3"-->
+<!--                            HorizontalAlignment="Left"-->
+<!--                            VerticalAlignment="Center"-->
+<!--                            Content="Login:" />-->
+<!--                        <TextBox-->
+<!--                            Grid.Row="0"-->
+<!--                            Grid.Column="1"-->
+<!--                            Width="120"-->
+<!--                            Height="23"-->
+<!--                            Margin="3"-->
+<!--                            HorizontalAlignment="Left"-->
+<!--                            VerticalAlignment="Center"-->
+<!--                            Text="{Binding LOGIN, ValidatesOnNotifyDataErrors=True}" />-->
+
+
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="From State: "/>
+                            
+                        <TextBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Width="120"
+                            Height="23"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding PASSWORD, ValidatesOnNotifyDataErrors=True}" />
+
+
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="To State: " />
+                        <TextBox
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Width="120"
+                            Height="23"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding First_Name, ValidatesOnNotifyDataErrors=True}" />
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="Description:" />
+                        <TextBox
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Width="120"
+                            Height="23"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding Last_Name, ValidatesOnNotifyDataErrors=True}" />
+
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="Valid:" />
+                        <TextBox
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Width="120"
+                            Height="23"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding Company, ValidatesOnNotifyDataErrors=True}" />
+
+                        <Label
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="Block:" />
+                        <TextBox
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            Width="120"
+                            Height="23"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding Email, ValidatesOnNotifyDataErrors=True}" />
+                    </Grid>
+                    <Grid Grid.Row="1">
+
+                        <Button
+                            Width="75"
+                            Margin="25,5,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding SaveCommand}"
+                            Content="Add"
+                            Visibility="{Binding isEditMode}" />
+                        <Button
+                            Width="75"
+                            Margin="25,5,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding SaveCommand}"
+                            Content="Save"
+                            Visibility="{Binding isEditMode, Converter={StaticResource VisConverter}}" />
+                        
+                        <Button
+                            Width="75"
+                            Margin="150,5,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding CancelCommand}"
+                            Content="Cancel" />
+                    </Grid>
+
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+
+</UserControl>

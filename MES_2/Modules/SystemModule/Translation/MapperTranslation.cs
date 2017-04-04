@@ -1,4 +1,7 @@
 ﻿using MES_2.DB.Database;
+using MES_2.DB.Tables;
+using MES_2.Modules.SystemModule.Entity;
+using MES_2.Modules.SystemModule.State;
 
 namespace MES_2.Modules.SystemModule.Translation
 {
@@ -8,11 +11,11 @@ namespace MES_2.Modules.SystemModule.Translation
         {
             return new Translation()
             {
-               NAME_ENT = entity.NAME_ENT.Trim(),
-               Description = entity.Description.Trim(),
-               ID_STA_FROM = entity.ID_STA_FROM,
-               ID_STA_TO = entity.ID_STA_TO,
-               ID_TRA = entity.ID_TRA,
+                ID_TRA = entity.ID_TRA,
+                NAME_ENT = entity.NAME_ENT,
+                ID_STA_PICA_FROM = entity.ID_STA_PICA_FROM,
+                ID_STA_PICA_TO = entity.ID_STA_PICA_TO,
+                Description = entity.Description.Trim(),
                L_VALID = entity.L_VALID,
                L_BLOCK = entity.L_BLOCK
             
@@ -23,11 +26,11 @@ namespace MES_2.Modules.SystemModule.Translation
         {
             return new TRA_TranslationState()
             {
-                NAME_ENT = entity.NAME_ENT.Trim(),
-                Description = entity.Description.Trim(),
-                ID_STA_FROM = entity.ID_STA_FROM,
-                ID_STA_TO = entity.ID_STA_TO,
                 ID_TRA = entity.ID_TRA,
+                NAME_ENT = entity.NAME_ENT,
+                ID_STA_PICA_FROM = entity.ID_STA_PICA_FROM,
+                ID_STA_PICA_TO = entity.ID_STA_PICA_TO,
+                Description = entity.Description.Trim(),
                 L_VALID = entity.L_VALID,
                 L_BLOCK = entity.L_BLOCK
             };
