@@ -16,8 +16,5 @@ namespace MES_2.Modules.UserManagement
         public string Phone { get; set; }
         public string Mobile { get; set; }
         public string PASSWORD { get; set; }
-
-
-
     }
 }

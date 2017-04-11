@@ -3,7 +3,7 @@
 //  CREATE DATE     : 2017-03-29
 //  ===============================
 //  Namespace        : MES_2.BL
-//  Class                   : TranslationModel.cs
+//  Class                   : Entity.cs
 //  Description         :
 //  ===============================
 //  Version               :
@@ -13,104 +13,30 @@
 // ==================================
 
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using MES_2.DB.Database;
-using MES_2.Modules.Interfaces;
+using MES_2.DB.Tables;
 
 namespace MES_2.Modules.SystemModule.Translation
 {
-    public class TranslationModel : IRepository<Translation, object>
+    public class TranslationModel
     {
-
-        // singleton - lazy learning
-        private static TranslationModel instance;
-
-        public static TranslationModel Instance
-        {
-            get
-            {
-                if (instance == null) instance = new TranslationModel();
-                return instance;
-            }
-        }
-
-        public Translation Retrieve(int p_id)
-        {
-            return null;
-        }
-
-        public IEnumerable<Translation> Retrieve()
-        {
-            List<Translation> Temp = new List<Translation>();
-
-            using (var db = new MES_DATABASE())
-            {
-                Temp = db.TRA_TranslationState
-                    .Select(MapperTranslation.MapTraToTranslation)
-                    .ToList();
-            }
-            return Temp;
-        }
-        public IEnumerable<Translation> RetrieveByEntityName(string p_EntityName)
-        {
-            List<Translation> Temp = new List<Translation>();
-
-            using (var db = new MES_DATABASE())
-            {
-                Temp = db.TRA_TranslationState
-                    .Where(x => x.NAME_ENT == p_EntityName)
-                    .Select(MapperTranslation.MapTraToTranslation)
-                    .ToList();
-            }
-            return Temp;
-        }
+        public int ID_TRA { get; set; }
+        public int ID_ENT { get; set; }
+        //public string NAME_ENT { get; set; }
+        public int ID_STA_PICA_FROM { get; set; }
+        public int ID_STA_PICA_TO { get; set; }
+        public string Description { get; set; }
+        public bool? L_BLOCK { get; set; }
+        public bool? L_VALID { get; set; }
 
 
-        public Translation Add(object p_entity)
-        {
-            return null;
-        }
+    }
 
-        public void Add(Translation p_entity)
-        {
-            using (var db = new MES_DATABASE())
-            {
-                db.TRA_TranslationState.Add(MapperTranslation.MapTranslationToTra(p_entity));
-                db.SaveChanges();
-            }
-        }
+    public class TranslationDetailModel : TranslationModel
+    {
+        public virtual ENT_Entity ENT_Entity { get; set; }
+        public virtual STA_StateList STATE_FROM { get; set; }
+        public virtual STA_StateList STATE_TO { get; set; }
 
-        public void Delete(Translation p_entity)
-        {
-        }
 
-        public void Delete(int p_id)
-        {
-        }
-
-        public void Edit(Translation p_entity)
-        {
-            var Temp = MapperTranslation.MapTranslationToTra(p_entity);
-            using (var db = new MES_DATABASE())
-            {
-                if (!db.TRA_TranslationState.Local.Any(c => c.ID_TRA == p_entity.ID_TRA))
-                {
-                    db.TRA_TranslationState.Attach(Temp);
-                    db.Entry(Temp).State = EntityState.Modified;
-
-                }
-                db.SaveChanges();
-            }
-        }
-
-        public void Edit(object p_entity)
-        {
-        }
-
-        public bool Save()
-        {
-            return false;
-        }
     }
 }

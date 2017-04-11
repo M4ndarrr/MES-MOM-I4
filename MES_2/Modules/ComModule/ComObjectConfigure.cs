@@ -10,6 +10,9 @@
 //  Revision History : 2017-02-22
 //  Change History: 
 // ==================================
+
+using System;
+
 namespace MES_2.Modules.ComModule
 {
     public class ComObjectConfigure
@@ -21,7 +24,7 @@ namespace MES_2.Modules.ComModule
             ReadWrite
         }
 
-        //public string Id { get; set; } = Utils.Utils.generateID();
+        public Guid Id { get; set; } = Utils.Utils.generateID();
         public int AreaOfMemory { get; set; }
         public int WorldLen { get; set; }
         public int StartOffset { get; set; }

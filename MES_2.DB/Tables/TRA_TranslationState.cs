@@ -28,7 +28,7 @@ namespace MES_2.DB.Tables
 
         [Key]
         public int ID_TRA { get; set; }
-        public string NAME_ENT { get; set; }
+        public int ID_ENT { get; set; }
         public int ID_STA_PICA_FROM { get; set; }
         public int ID_STA_PICA_TO { get; set; }
 
@@ -36,6 +36,7 @@ namespace MES_2.DB.Tables
         public bool? L_BLOCK { get; set; }
         public bool? L_VALID { get; set; }
 
+        public virtual ENT_Entity ENT_Entity { get; set; }
         public virtual STA_StateList STATE_FROM { get; set; }
         public virtual STA_StateList STATE_TO { get; set; }
     }

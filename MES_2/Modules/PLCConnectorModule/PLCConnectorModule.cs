@@ -166,12 +166,14 @@ namespace MES_2.Modules.PLCConnectorModule
             CommunicationObjects.Add(instance);
             instance.StateChanged += OnChangeState;
 
+
+
             //tohle musí být mimo v tom prostředí
             using (var db = new MES_DATABASE())
             {
-                db.ComObjecTable.Add(new ComObjectTable()
+                db.ComObjecTable.Add(new COM_ComObject()
                 {
-                    ID = instance.Id,
+                    ID_COM = instance.Id,
                     Status = (int)instance.EModuleState,
                     AreaMemory = instance.ObjectConfigure.AreaOfMemory,
                     StartOffSet = instance.ObjectConfigure.StartOffset,
@@ -179,7 +181,7 @@ namespace MES_2.Modules.PLCConnectorModule
                     ReadWrite = instance.ObjectConfigure.ERW,
                     DBnumber = instance.ObjectConfigure.DbNumber,
                     WorldLen = instance.ObjectConfigure.WorldLen,
-                    IDPLC = Id
+                    ID_PLC = Id
                 });
                 db.SaveChanges();
             }
@@ -203,12 +205,11 @@ namespace MES_2.Modules.PLCConnectorModule
                 {
                     // zasilni dat databazy 
                     Console.WriteLine(temp.Data);
-                    databaze.ListReceivedResult.Add(new ResultTable()
+                    databaze.ListReceivedResult.Add(new RES_ResultTable()
                         {
                             ResultData = temp.Data,
-                            IDComObject = temp.IdComObj,
+                            ID_COM = temp.IdComObj,
                             PLCStamp = temp.TimeStamp
-
                         }
                     );
                 }

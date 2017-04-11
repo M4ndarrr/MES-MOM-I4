@@ -11,13 +11,18 @@
 //  Change History: 
 // 
 // ==================================
+
+using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace MES_2.DB.Tables
 {
-    public class ResultTable
+    public class RES_ResultTable
     {
-        public long ID { get; set; }
+        [Key]
+        public int ID_RES { get; set; }
         public System.DateTime PLCStamp { get; set; }
-        public string IDComObject { get; set; }
+        public Guid ID_COM { get; set; }
         public int ResultData { get; set; }
     }
 }

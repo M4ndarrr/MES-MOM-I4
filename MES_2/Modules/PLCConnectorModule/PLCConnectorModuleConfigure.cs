@@ -10,11 +10,14 @@
 //  Revision History : 2017-02-24
 //  Change History: 
 // ==================================
+
+using System;
+
 namespace MES_2.Modules.PLCConnectorModule
 {
     public class PLCConnectorModuleConfigure
     {
-        //public string Id { get; private set; } = Utils.Utils.generateID();
+        public Guid Id { get; private set; } = Utils.Utils.generateID();
         public int Rack { get; set; }
         public int Slot { get; set; }
         public string IpString { get; set; }

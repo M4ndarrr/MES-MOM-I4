@@ -21,9 +21,9 @@ namespace MES_2.Utils
     public static class Utils
     {
 
-        public static string generateID()
+        public static Guid generateID()
         {
-            return Guid.NewGuid().ToString("N");
+            return Guid.NewGuid();
         }
 
         /// <summary>

@@ -75,9 +75,9 @@ namespace MES_2.Modules.PLCConnectorModule
 
             using (var db = new MES_DATABASE())
             {
-                db.PLCTable.Add(new PLCTable()
+                db.PLC_PLCConnectorable.Add(new PLC_PLCConnector()
                 {
-                    ID = objTemp.Id,
+                    ID_PLC = objTemp.Id,
                     Status = (int)objTemp.EModuleState,
                     IP = objTemp.PlcModuleConfigure.IpString,
                     Port = objTemp.PlcModuleConfigure.PortString,
@@ -113,6 +113,17 @@ namespace MES_2.Modules.PLCConnectorModule
         public void Edit(PLCConnectorModuleConfigure p_entity)
         {
         }
+
+        public void LoadStartUp()
+        {
+            if (PlcConnectorModulesList.Count != 0)
+            {
+                //load vsech zarizeni z databaze - all actived
+
+                
+            }
+        }
+
 
         public bool Save()
         {

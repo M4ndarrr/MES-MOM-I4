@@ -13,10 +13,50 @@
     <UserControl.Resources>
         <valueConventers:NegatableBooleanToVisiblityConverter x:Key="VisConverter" />
         <valueConventers:NegatableBooleanToVisiblityConverter x:Key="NegVisConverter" />
+
+        <DataTemplate x:Key="ComboBoxCustomTemplate">
+            <Grid Margin="0,3">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel  Orientation="Horizontal">
+                    <TextBlock Text="ID: " />
+                    <TextBlock Text="{Binding ID_ENT}" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Text="Name of Entity: " />
+                    <TextBlock Foreground="#003366" Text="{Binding NAME_ENT}" />
+
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ComboBoxSimpleTemplate">
+            <Grid Margin="0,3">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel  Orientation="Horizontal">
+                    <TextBlock Text="ID: " />
+                    <TextBlock Text="{Binding ID_ENT}" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Text="Name of Entity: " />
+                    <TextBlock Foreground="#003366" Text="{Binding NAME_ENT}" />
+
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
     </UserControl.Resources>
 
 
-    <Grid Margin="0,20,0,0" Background="{StaticResource BackgroundVeryLightBrush}">
+    <Grid
+        x:Name="MainGrid"
+        Margin="0,20,0,0"
+        Background="{StaticResource BackgroundVeryLightBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
@@ -27,16 +67,15 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Background="{StaticResource ForegroundLightBrush}">
-                
-                <Grid Background="{StaticResource WordVeryDarkBrush}" Margin="0 5 0 15">
-                    <TextBlock
-                            Grid.Column="0"
-                            FontFamily="{StaticResource LatoBold}"
-                            FontSize="{StaticResource FontSizeRegular}"
-                            Foreground="{StaticResource ForegroundLightBrush}"
-                            Text="Add/Edit profile" 
-                            Padding="5 10 5 10"/>
 
+                <Grid Margin="0,5,0,15" Background="{StaticResource WordVeryDarkBrush}">
+                    <TextBlock
+                        Grid.Column="0"
+                        Padding="5,10,5,10"
+                        FontFamily="{StaticResource LatoBold}"
+                        FontSize="{StaticResource FontSizeRegular}"
+                        Foreground="{StaticResource ForegroundLightBrush}"
+                        Text="Add/Edit State" />
                 </Grid>
 
                 <Grid>
@@ -68,23 +107,51 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-<!--                        <Label-->
-<!--                            Grid.Row="0"-->
-<!--                            Grid.Column="0"-->
-<!--                            Margin="3"-->
-<!--                            HorizontalAlignment="Left"-->
-<!--                            VerticalAlignment="Center"-->
-<!--                            Content="Login:" />-->
-<!--                        <TextBox-->
-<!--                            Grid.Row="0"-->
-<!--                            Grid.Column="1"-->
-<!--                            Width="120"-->
-<!--                            Height="23"-->
-<!--                            Margin="3"-->
-<!--                            HorizontalAlignment="Left"-->
-<!--                            VerticalAlignment="Center"-->
-<!--                            Text="{Binding LOGIN, ValidatesOnNotifyDataErrors=True}" />-->
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="Entita:" />
 
+                        <telerik:RadComboBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Width="120"
+                            Height="40"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            ItemTemplate="{StaticResource ComboBoxCustomTemplate}"
+                            ItemsSource="{Binding ElementName=MainGrid, Path=DataContext.EntityAll}"
+                            SelectedItem="{Binding ElementName=MainGrid, Path=DataContext.Entity}"
+                            SelectionBoxTemplate="{StaticResource ComboBoxSimpleTemplate}" />
+                        <TextBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Width="120"
+                            Height="40"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            IsReadOnly="True"
+                            Text="{Binding ElementName=MainGrid, Path=DataContext.Entity.NAME_ENT}"
+                            Visibility="{Binding ElementName=MainGrid, Path=DataContext.isEditMode, Converter={StaticResource VisConverter}}" />
+
+
+                        <!--  ItemTemplate="{StaticResource ComboBoxCustomTemplate}"  -->
+
+                        <!--  SelectionBoxTemplate="{StaticResource ComboBoxSimpleTemplate}"  -->
+                        <!--  <TextBox  -->
+                        <!--  Grid.Row="0"  -->
+                        <!--  Grid.Column="1"  -->
+                        <!--  Width="120"  -->
+                        <!--  Height="23"  -->
+                        <!--  Margin="3"  -->
+                        <!--  HorizontalAlignment="Left"  -->
+                        <!--  VerticalAlignment="Center"  -->
+                        <!--  Text="{Binding ID_ENT, ValidatesOnNotifyDataErrors=True}" />  -->
 
 
                         <Label
@@ -93,8 +160,8 @@
                             Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Content="Purpous: "/>
-                            
+                            Content="Purpous: " />
+
                         <TextBox
                             Grid.Row="1"
                             Grid.Column="1"
@@ -106,132 +173,100 @@
                             Text="{Binding Purpous, ValidatesOnNotifyDataErrors=True}" />
 
 
-<!--                        <Label-->
-<!--                            Grid.Row="2"-->
-<!--                            Grid.Column="0"-->
-<!--                            Margin="3"-->
-<!--                            HorizontalAlignment="Left"-->
-<!--                            VerticalAlignment="Center"-->
-<!--                            Content="First Name: " />-->
-<!--                        <TextBox-->
-<!--                            Grid.Row="2"-->
-<!--                            Grid.Column="1"-->
-<!--                            Width="120"-->
-<!--                            Height="23"-->
-<!--                            Margin="3"-->
-<!--                            HorizontalAlignment="Left"-->
-<!--                            VerticalAlignment="Center"-->
-<!--                            Text="{Binding First_Name, ValidatesOnNotifyDataErrors=True}" />-->
-<!--                        <Label-->
-<!--                            Grid.Row="3"-->
-<!--                            Grid.Column="0"-->
-<!--                            Margin="3"-->
-<!--                            HorizontalAlignment="Left"-->
-<!--                            VerticalAlignment="Center"-->
-<!--                            Content="Last Name:" />-->
-<!--                        <TextBox-->
-<!--                            Grid.Row="3"-->
-<!--                            Grid.Column="1"-->
-<!--                            Width="120"-->
-<!--                            Height="23"-->
-<!--                            Margin="3"-->
-<!--                            HorizontalAlignment="Left"-->
-<!--                            VerticalAlignment="Center"-->
-<!--                            Text="{Binding Last_Name, ValidatesOnNotifyDataErrors=True}" />-->
-<!---->
-<!--                        <Label-->
-<!--                            Grid.Row="4"-->
-<!--                            Grid.Column="0"-->
-<!--                            Margin="3"-->
-<!--                            HorizontalAlignment="Left"-->
-<!--                            VerticalAlignment="Center"-->
-<!--                            Content="Company:" />-->
-<!--                        <TextBox-->
-<!--                            Grid.Row="4"-->
-<!--                            Grid.Column="1"-->
-<!--                            Width="120"-->
-<!--                            Height="23"-->
-<!--                            Margin="3"-->
-<!--                            HorizontalAlignment="Left"-->
-<!--                            VerticalAlignment="Center"-->
-<!--                            Text="{Binding Company, ValidatesOnNotifyDataErrors=True}" />-->
-<!---->
-<!--                        <Label-->
-<!--                            Grid.Row="5"-->
-<!--                            Grid.Column="0"-->
-<!--                            Margin="3"-->
-<!--                            HorizontalAlignment="Left"-->
-<!--                            VerticalAlignment="Center"-->
-<!--                            Content="Email:" />-->
-<!--                        <TextBox-->
-<!--                            Grid.Row="5"-->
-<!--                            Grid.Column="1"-->
-<!--                            Width="120"-->
-<!--                            Height="23"-->
-<!--                            Margin="3"-->
-<!--                            HorizontalAlignment="Left"-->
-<!--                            VerticalAlignment="Center"-->
-<!--                            Text="{Binding Email, ValidatesOnNotifyDataErrors=True}" />-->
-<!---->
-<!--                        <Label-->
-<!--                            Grid.Row="6"-->
-<!--                            Grid.Column="0"-->
-<!--                            Margin="3"-->
-<!--                            HorizontalAlignment="Left"-->
-<!--                            VerticalAlignment="Center"-->
-<!--                            Content="Phone:" />-->
-<!--                        <TextBox-->
-<!--                            Grid.Row="6"-->
-<!--                            Grid.Column="1"-->
-<!--                            Width="120"-->
-<!--                            Height="23"-->
-<!--                            Margin="3"-->
-<!--                            HorizontalAlignment="Left"-->
-<!--                            VerticalAlignment="Center"-->
-<!--                            Text="{Binding Phone, ValidatesOnNotifyDataErrors=True}" />-->
-<!---->
-<!--                        <Label-->
-<!--                            Grid.Row="7"-->
-<!--                            Grid.Column="0"-->
-<!--                            Margin="3"-->
-<!--                            HorizontalAlignment="Left"-->
-<!--                            VerticalAlignment="Center"-->
-<!--                            Content="Mobile:" />-->
-<!--                        <TextBox-->
-<!--                            Grid.Row="7"-->
-<!--                            Grid.Column="1"-->
-<!--                            Width="120"-->
-<!--                            Height="23"-->
-<!--                            Margin="3"-->
-<!--                            HorizontalAlignment="Left"-->
-<!--                            VerticalAlignment="Center"-->
-<!--                            Text="{Binding Mobile, ValidatesOnNotifyDataErrors=True}" />-->
-                    </Grid>
-                    <Grid Grid.Row="1">
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="Start State: " />
+                        <CheckBox
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Width="23"
+                            Height="40"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            IsChecked="{Binding L_START_STATE, ValidatesOnNotifyDataErrors=True}" />
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="Finish State:" />
+                        <CheckBox
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Width="23"
+                            Height="40"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            IsChecked="{Binding L_END_STATE, ValidatesOnNotifyDataErrors=True}" />
 
-                        <Button
-                            Width="75"
-                            Margin="25,5,0,0"
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Margin="3"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Command="{Binding SaveCommand}"
-                            Content="Add"
-                            Visibility="{Binding isEditMode}" />
-                        <Button
-                            Width="75"
-                            Margin="25,5,0,0"
+                            VerticalAlignment="Center"
+                            Content="Valid: " />
+                        <CheckBox
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Width="23"
+                            Height="23"
+                            Margin="3"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Command="{Binding SaveCommand}"
-                            Content="Save"
-                            Visibility="{Binding isEditMode, Converter={StaticResource VisConverter}}" />
+                            VerticalAlignment="Center"
+                            IsChecked="{Binding L_VALID, ValidatesOnNotifyDataErrors=True}" />
+
+                        <Label
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="Comments:" />
+                        <TextBox
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            Width="120"
+                            Height="23"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding Comments, ValidatesOnNotifyDataErrors=True}" />
                         
                         <Button
+                            Grid.Row="6"
                             Width="75"
-                            Margin="150,5,0,0"
+                            Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            Command="{Binding CancelCommand}"
+                            Command="{Binding ElementName=MainGrid, Path=DataContext.SaveCommand}"
+                            Content="Add"
+                            Visibility="{Binding ElementName=MainGrid, Path=DataContext.isEditMode}" />
+                        <Button
+                            Grid.Row="6"
+                            Width="75"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding ElementName=MainGrid, Path=DataContext.SaveCommand}"
+                            Content="Save"
+                            Visibility="{Binding ElementName=MainGrid, Path=DataContext.isEditMode, Converter={StaticResource VisConverter}}" />
+
+                        <Button
+                            Grid.Row="6"
+                            Grid.Column="1"
+                            Width="75"
+                            Margin="3"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Command="{Binding ElementName=MainGrid, Path=DataContext.CancelCommand}"
                             Content="Cancel" />
                     </Grid>
 

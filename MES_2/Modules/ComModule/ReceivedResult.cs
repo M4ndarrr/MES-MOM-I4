@@ -20,7 +20,7 @@ namespace MES_2.Modules.ComModule
         public int Data { get; set; }
         public int ErrorNumber { get; set; }
         public DateTime TimeStamp { get; set; } = DateTime.Now;
-        public string IdComObj { get; set; }
+        public Guid IdComObj { get; set; }
 
         /// <summary>Returns a string that represents the current object.</summary>
         /// <returns>A string that represents the current object.</returns>

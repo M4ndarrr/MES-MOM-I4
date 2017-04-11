@@ -24,7 +24,7 @@ namespace MES_2.DB
         private const string _VERSION = "0.0.1"; // verze modulů
         private static readonly object Lock = new object();
 
-        public List<ResultTable> ListReceivedResult { get; set; }
+        public List<RES_ResultTable> ListReceivedResult { get; set; }
 
 
         private static SQLRepository instance;

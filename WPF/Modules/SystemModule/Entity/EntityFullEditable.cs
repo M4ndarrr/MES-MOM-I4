@@ -18,6 +18,7 @@ namespace WPF.Modules.SystemModule.Entity
 {
     public class EntityFullEditable : ValidatableBindableBase
     {
+
         private string _NAME_ENT;
 
         [Required]
@@ -36,6 +37,7 @@ namespace WPF.Modules.SystemModule.Entity
         }
 
         private bool? _VALID;
+       // private bool? _test;
 
         public bool? VALID
         {

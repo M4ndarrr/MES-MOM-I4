@@ -1,11 +1,13 @@
-﻿namespace MES_2.Modules.Interfaces
+﻿using System;
+
+namespace MES_2.Modules.Interfaces
 {
     /// <summary>
     /// Interaface pro moduly 
     /// </summary>
     public interface IModule
     {
-        string Id { get; set; }
+        Guid Id { get; set; }
         void Configure();
         void Run();
         void Stop();

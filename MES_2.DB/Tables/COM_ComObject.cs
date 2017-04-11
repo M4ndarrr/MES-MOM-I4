@@ -13,13 +13,16 @@
 // ==================================
 
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MES_2.DB.Tables
 {
-    public class ComObjectTable
+    public class COM_ComObject
     {
-        public string ID { get; set; }
-        public string IDPLC { get; set; }
+
+        [Key]
+        public Guid ID_COM { get; set; }
+        public Guid ID_PLC { get; set; }
         public int Status { get; set; }
         public int ReadWrite { get; set; }
         public int AreaMemory { get; set; }
@@ -29,7 +32,10 @@ namespace MES_2.DB.Tables
         public int Period { get; set; }
         public string P_Created { get; set; }
         public string P_Modified { get; set; }
-        public Nullable<System.DateTime> TimeCreated { get; set; }
-        public Nullable<System.DateTime> TimeModified { get; set; }
+        public System.DateTime TimeCreated { get; set; }
+        public System.DateTime TimeModified { get; set; }
+
+        public virtual PLC_PLCConnector PLC_PLCConnector { get; set; }
+
     }
 }

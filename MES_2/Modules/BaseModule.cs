@@ -31,8 +31,8 @@ namespace MES_2.Modules
         //public Guid Id { get; set; }
         public BaseModuleEState EModuleState { get; set; }
 
-        public string Id { get; set; } = Guid.NewGuid().ToString();
-            
+        public Guid Id { get; set; } = Guid.NewGuid();
+
         public void Configure()
         {
         }

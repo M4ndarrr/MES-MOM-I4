@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using MES_2.Utils;
 
 namespace WPF
 {
@@ -10,6 +11,7 @@ namespace WPF
         public App()
         {
            this.InitializeComponent();
+            AutoMapperConfig.RegisterMappings();
         }
     }
 }

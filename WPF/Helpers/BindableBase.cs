@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using WPF.Annotations;
 
 namespace WPF.Helpers
 {
@@ -11,17 +12,15 @@ namespace WPF.Helpers
             if (object.Equals(member, val)) return;
 
             member = val;
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            OnPropertyChanged(propertyName);
         }
 
-        internal void RaisePropertyChanged(string prop)
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string p_propertyName = null)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p_propertyName));
         }
-
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
     }
 }

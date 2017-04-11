@@ -27,9 +27,9 @@ namespace MES_2.DB.Database
         public virtual DbSet<STA_StateList> STA_StateList { get; set; }
         public virtual DbSet<TRA_TranslationState> TRA_TranslationState { get; set; }
         //public virtual DbSet<TRA_TranslationStateList> TRA_TranslationStateList { get; set; }
-        public virtual DbSet<ComObjectTable> ComObjecTable { get; set; }
-        public virtual DbSet<PLCTable> PLCTable { get; set; }
-        public virtual DbSet<ResultTable> ResultTable { get; set; }
+        public virtual DbSet<COM_ComObject> ComObjecTable { get; set; }
+        public virtual DbSet<PLC_PLCConnector> PLC_PLCConnectorable { get; set; }
+        public virtual DbSet<RES_ResultTable> RES_ResultTable { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

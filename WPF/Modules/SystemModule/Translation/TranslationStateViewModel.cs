@@ -9,13 +9,12 @@
 //  Version               :
 //  Revision History : 2017-03-29
 //  Change History: 
-// 
 // ==================================
-
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using MES_2.Modules.SystemModule.Translation;
 using WPF.Helpers;
 using WPF.Modules.Base;
@@ -24,14 +23,14 @@ namespace WPF.Modules.SystemModule.Translation
 {
     public class TranslationStateViewModel : ViewModelBase
     {
-        private TranslationModel _repo = new TranslationModel();
-        private List<MES_2.Modules.SystemModule.Translation.Translation> _allTranslation;
+        private TranslationRepository _repo = new TranslationRepository();
+        private List<TranslationModel> _allTranslation;
 
-        public TranslationStateViewModel(string p_entityName)
+        public TranslationStateViewModel(int p_entiti)
         {
-            if (p_entityName != null)
+            if (p_entiti != 0)
             {
-                _allTranslation = _repo.RetrieveByEntityName(p_entityName).ToList();
+                _allTranslation = _repo.RetrieveByEntityId(p_entiti).ToList();
             }
             else
             {
@@ -39,24 +38,28 @@ namespace WPF.Modules.SystemModule.Translation
             }
 
             AddTranslationCommand = new RelayCommand(OnAddTranslation);
-            EditTranslationCommand = new RelayCommand<MES_2.Modules.SystemModule.Translation.Translation>(OnEditTranslation);
+            EditTranslationCommand =
+                new RelayCommand<TranslationModel>(OnEditTranslation);
 
-            Translations = new ObservableCollection<MES_2.Modules.SystemModule.Translation.Translation>(_allTranslation);
-
+            Translations =
+                new ObservableCollection<TranslationModel>(_allTranslation);
         }
 
-        private ObservableCollection<MES_2.Modules.SystemModule.Translation.Translation> _translations;
-        public ObservableCollection<MES_2.Modules.SystemModule.Translation.Translation> Translations
+        private ObservableCollection<TranslationModel> _translations;
+
+        public ObservableCollection<TranslationModel> Translations
         {
             get { return _translations; }
             set { SetProperty(ref _translations, value); }
         }
 
         public RelayCommand AddTranslationCommand { get; private set; }
-        public RelayCommand<MES_2.Modules.SystemModule.Translation.Translation> EditTranslationCommand { get; private set; }
+
+        public RelayCommand<TranslationModel> EditTranslationCommand { get; private set; }
 
 
-        public event Action<MES_2.Modules.SystemModule.Translation.Translation> AddEditTranslationRequested = delegate { };
+        public event Action<TranslationModel> AddEditTranslationRequested =
+            delegate { };
 
 
         private void OnAddTranslation()
@@ -64,12 +67,9 @@ namespace WPF.Modules.SystemModule.Translation
             AddEditTranslationRequested(null);
         }
 
-        private void OnEditTranslation(MES_2.Modules.SystemModule.Translation.Translation p_translation)
+        private void OnEditTranslation(TranslationModel p_translation)
         {
             AddEditTranslationRequested(p_translation);
         }
-
-
-
     }
 }

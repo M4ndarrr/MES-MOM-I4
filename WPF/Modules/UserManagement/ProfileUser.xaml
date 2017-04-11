@@ -71,18 +71,93 @@
                             Text="{Binding UserInformation.Last_Name}" />
                 </Grid>
 
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                            Grid.Column="0"
+                            FontFamily="{StaticResource LatoThin}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            Foreground="Black"
+                            Text="Company" />
+                    <TextBlock
+                            Grid.Column="1"
+                            FontFamily="{StaticResource LatoThin}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            Foreground="Black"
+                            Text="{Binding UserInformation.Company}" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                            Grid.Column="0"
+                            FontFamily="{StaticResource LatoThin}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            Foreground="Black"
+                            Text="Email" />
+                    <TextBlock
+                            Grid.Column="1"
+                            FontFamily="{StaticResource LatoThin}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            Foreground="Black"
+                            Text="{Binding UserInformation.Email}" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                            Grid.Column="0"
+                            FontFamily="{StaticResource LatoThin}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            Foreground="Black"
+                            Text="Phone" />
+                    <TextBlock
+                            Grid.Column="1"
+                            FontFamily="{StaticResource LatoThin}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            Foreground="Black"
+                            Text="{Binding UserInformation.Phone}" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                            Grid.Column="0"
+                            FontFamily="{StaticResource LatoThin}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            Foreground="Black"
+                            Text="Mobile" />
+                    <TextBlock
+                            Grid.Column="1"
+                            FontFamily="{StaticResource LatoThin}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            Foreground="Black"
+                            Text="{Binding UserInformation.Mobile}" />
+                </Grid>
+
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
                     <telerik:RadButton Grid.Column="0" Command="{Binding OnEditCommand}"  Content="Edit" Margin="2 5 2 5"/>
-
-
-
-
                 </Grid>
             </StackPanel>
         </ScrollViewer>

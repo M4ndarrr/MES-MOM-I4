@@ -10,9 +10,9 @@
 //  Revision History : 2017-02-20
 //  Change History: 
 // ==================================
-
 using System.Collections.Generic;
 using System.Linq;
+using MES_2.DB.Database;
 using MES_2.Modules.Interfaces;
 
 namespace MES_2.Modules.ComModule
@@ -55,24 +55,22 @@ namespace MES_2.Modules.ComModule
             ComObjectList.Add(objTemp);
 
 
-/*            using (var db = new TestDatabaseEntities())
-                                    {
-                                        db.PLCTable.Add(new ComObjecTable()
-                                        {
-                                            ID = objTemp.Id,
-                                            Status = (int)objTemp.EModuleState,
-                                            AreaMemory = objTemp.ObjectConfigure.AreaOfMemory,
-                                            StartOffSet = objTemp.ObjectConfigure.StartOffset,
-                                            Period = objTemp.ObjectConfigure.PeriodOfCheck,
-                                            ReadWrite = objTemp.ObjectConfigure.ERW,
-                                            DBnumber = objTemp.ObjectConfigure.DbNumber,
-                                            WorldLen = objTemp.ObjectConfigure.WorldLen,
-                                            IDPLC = 
-                        
-                        
-                                        });
-                                        db.SaveChanges();
-                                    }*/
+//            using (var db = new MES_DATABASE())
+//            {
+//                db.PLCTable.Add(new ComObjecTable()
+//                {
+//                    ID = objTemp.Id,
+//                    Status = (int) objTemp.EModuleState,
+//                    AreaMemory = objTemp.ObjectConfigure.AreaOfMemory,
+//                    StartOffSet = objTemp.ObjectConfigure.StartOffset,
+//                    Period = objTemp.ObjectConfigure.PeriodOfCheck,
+//                    ReadWrite = objTemp.ObjectConfigure.ERW,
+//                    DBnumber = objTemp.ObjectConfigure.DbNumber,
+//                    WorldLen = objTemp.ObjectConfigure.WorldLen,
+//                    IDPLC =
+//                });
+//                db.SaveChanges();
+//            }
 
             return objTemp;
         }

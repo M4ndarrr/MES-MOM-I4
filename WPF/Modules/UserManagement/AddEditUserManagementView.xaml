@@ -13,10 +13,48 @@
     <UserControl.Resources>
         <valueConventers:NegatableBooleanToVisiblityConverter x:Key="VisConverter" />
         <valueConventers:NegatableBooleanToVisiblityConverter x:Key="NegVisConverter" />
+
+        <DataTemplate x:Key="ComboBoxTranslationTemplate">
+            <Grid Margin="0,3">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel  Orientation="Horizontal">
+                    <TextBlock Text="TO: " />
+                    <TextBlock Text="{Binding ID_STA_PICA_TO}" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Text="Description: " />
+                    <TextBlock Foreground="#003366" Text="{Binding Description}" />
+
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ComboBoxTranslationSimpleTemplate">
+            <Grid Margin="0,3">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel  Orientation="Horizontal">
+                    <TextBlock Text="TO: " />
+                    <TextBlock Text="{Binding ID_STA_PICA_TO}" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Text="Description: " />
+                    <TextBlock Foreground="#003366" Text="{Binding Description}" />
+
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
     </UserControl.Resources>
 
 
-    <Grid Margin="0,20,0,0" Background="{StaticResource BackgroundVeryLightBrush}">
+    <Grid x:Name="MainGrid"
+        Margin="0,20,0,0" Background="{StaticResource BackgroundVeryLightBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
@@ -207,6 +245,46 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Text="{Binding Mobile, ValidatesOnNotifyDataErrors=True}" />
+
+                        <Label
+                            Grid.Row="8"
+                            Grid.Column="0"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="State:" />
+
+                        <TextBox
+                            Grid.Row="8"
+                            Grid.Column="1"
+                            Width="120"
+                            Height="23"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            IsReadOnly="True"
+                            Text="{Binding ElementName=MainGrid, Path=DataContext.State.Purpous}" />
+
+                        <Label
+                            Grid.Row="9"
+                            Grid.Column="0"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="Translation:" />
+
+                        <telerik:RadComboBox
+                            Grid.Row="9"
+                            Grid.Column="1"
+                            Width="120"
+                            Height="40"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            ItemTemplate="{StaticResource ComboBoxTranslationTemplate}"
+                            ItemsSource="{Binding ElementName=MainGrid, Path=DataContext.TranslationAll}"
+                            SelectedItem="{Binding ElementName=MainGrid, Path=DataContext.Translation}"
+                            SelectionBoxTemplate="{StaticResource ComboBoxTranslationSimpleTemplate}" />
                     </Grid>
                     <Grid Grid.Row="1">
 

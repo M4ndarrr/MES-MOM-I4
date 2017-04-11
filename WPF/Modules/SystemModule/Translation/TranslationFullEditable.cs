@@ -27,6 +27,14 @@ namespace WPF.Modules.SystemModule.Translation
             set { SetProperty(ref _NAME_ENT, value); }
         }
 
+        private int _ID_ENT;
+        [Required]
+        public int ID_ENT
+        {
+            get { return _ID_ENT; }
+            set { SetProperty(ref _ID_ENT, value); }
+        }
+
         private int _ID_STA_FROM;
         [Required]
         public int ID_STA_FROM

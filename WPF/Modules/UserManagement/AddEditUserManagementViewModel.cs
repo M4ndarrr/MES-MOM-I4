@@ -13,6 +13,10 @@
 // ==================================
 
 using System;
+using System.Collections.ObjectModel;
+using System.Windows.Forms;
+using MES_2.Modules.SystemModule.State;
+using MES_2.Modules.SystemModule.Translation;
 using MES_2.Modules.UserManagement;
 using WPF.Helpers;
 using WPF.Modules.Base;
@@ -46,12 +50,55 @@ namespace WPF.Modules.UserManagement
 
         private UserFull _edditingUser;
 
+        private ObservableCollection<TranslationModel> _translationall = new ObservableCollection<TranslationModel>();
+
+        public ObservableCollection<TranslationModel> TranslationAll
+        {
+            get { return _translationall; }
+            set
+            {
+                SetProperty(ref _translationall, value);
+
+            }
+        }
+        private TranslationModel _translation;
+
+        public TranslationModel Translation
+        {
+            get { return _translation; }
+            set
+            {
+                SetProperty(ref _translation, value);
+            }
+        }
+
+        private StateModel _state;
+
+        public StateModel State
+        {
+            get { return _state; }
+            set
+            {
+                SetProperty(ref _state, value);
+            }
+        }
+
         public void SetUser(UserFull p_user)
         {
             if (p_user == null)
             {
                 isEditMode = false;
-                p_user = new UserFull();
+                p_user = new UserFull(); // novyuživatel == vychozí start stav
+            }
+
+            else
+            {
+                State = new StateModel();
+                State = StatesRepository.Instance.Retrieve(p_user.ID_STA);
+                Translation = new TranslationModel();
+                TranslationAll = new ObservableCollection<TranslationModel>(TranslationRepository.Instance.GetPossibleTranslations(1, p_user.ID_STA));
+                //nahraji se přechody
+
             }
 
             _edditingUser = p_user;
@@ -100,6 +147,11 @@ namespace WPF.Modules.UserManagement
             target.Mobile = source.Mobile;
             target.LOGIN = source.LOGIN;
             target.PASSWORD = source.PASSWORD;
+
+            if (Translation.ID_STA_PICA_TO != 0)
+            {
+                target.ID_STA = Translation.ID_STA_PICA_TO;
+            }
         }
 
         private bool CanSave()

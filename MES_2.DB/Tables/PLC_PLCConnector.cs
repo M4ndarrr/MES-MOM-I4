@@ -13,12 +13,20 @@
 // ==================================
 
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MES_2.DB.Tables
 {
-    public class PLCTable
+    public class PLC_PLCConnector
     {
-        public string ID { get; set; }
+        /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+        public PLC_PLCConnector()
+        {
+            this.COM_ComObject = new HashSet<COM_ComObject>();
+        }
+        [Key]
+        public Guid ID_PLC { get; set; }
         public int Status { get; set; }
         public string IP { get; set; }
         public string Port { get; set; }
@@ -26,7 +34,9 @@ namespace MES_2.DB.Tables
         public int Rack { get; set; }
         public string P_Created { get; set; }
         public string P_Modified { get; set; }
-        public Nullable<System.DateTime> TimeCreated { get; set; }
-        public Nullable<System.DateTime> TimeModified { get; set; }
+        public System.DateTime TimeCreated { get; set; }
+        public System.DateTime TimeModified { get; set; }
+
+        public virtual ICollection<COM_ComObject> COM_ComObject { get; set; }
     }
 }

@@ -13,10 +13,87 @@
     <UserControl.Resources>
         <valueConventers:NegatableBooleanToVisiblityConverter x:Key="VisConverter" />
         <valueConventers:NegatableBooleanToVisiblityConverter x:Key="NegVisConverter" />
+
+
+        <DataTemplate x:Key="ComboBoxEntityTemplate">
+            <Grid Margin="0,3">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="ID: " />
+                    <TextBlock Text="{Binding ID_ENT}" />
+                </StackPanel>
+                <TextBlock Text="{Binding ID_ENT}" />
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Text="Entity: " />
+                    <TextBlock Foreground="#003366" Text="{Binding NAME_ENT}" />
+
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ComboBoxEntitySimpleTemplate">
+            <Grid Margin="0,3">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="ID: " />
+                    <TextBlock Text="{Binding ID_ENT}" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Text="Entity: " />
+                    <TextBlock Foreground="#003366" Text="{Binding NAME_ENT}" />
+
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ComboBoxStateTemplate">
+            <Grid Margin="0,3">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="ID: " />
+                    <TextBlock Text="{Binding ID_STA}" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Text="Purpous: " />
+                    <TextBlock Foreground="#003366" Text="{Binding Purpous}" />
+
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ComboBoxStateSimpleTemplate">
+            <Grid Margin="0,3">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="ID: " />
+                    <TextBlock Text="{Binding ID_STA}" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Text="Purpous: " />
+                    <TextBlock Foreground="#003366" Text="{Binding Purpous}" />
+
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
     </UserControl.Resources>
 
 
-    <Grid Margin="0,20,0,0" Background="{StaticResource BackgroundVeryLightBrush}">
+    <Grid
+        x:Name="MainGrid"
+        Margin="0,20,0,0"
+        Background="{StaticResource BackgroundVeryLightBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
@@ -27,15 +104,15 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Background="{StaticResource ForegroundLightBrush}">
-                
-                <Grid Background="{StaticResource WordVeryDarkBrush}" Margin="0 5 0 15">
+
+                <Grid Margin="0,5,0,15" Background="{StaticResource WordVeryDarkBrush}">
                     <TextBlock
-                            Grid.Column="0"
-                            FontFamily="{StaticResource LatoBold}"
-                            FontSize="{StaticResource FontSizeRegular}"
-                            Foreground="{StaticResource ForegroundLightBrush}"
-                            Text="Add/Edit profile" 
-                            Padding="5 10 5 10"/>
+                        Grid.Column="0"
+                        Padding="5,10,5,10"
+                        FontFamily="{StaticResource LatoBold}"
+                        FontSize="{StaticResource FontSizeRegular}"
+                        Foreground="{StaticResource ForegroundLightBrush}"
+                        Text="Add/Edit Translation" />
 
                 </Grid>
 
@@ -69,24 +146,36 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-<!--                        <Label-->
-<!--                            Grid.Row="0"-->
-<!--                            Grid.Column="0"-->
-<!--                            Margin="3"-->
-<!--                            HorizontalAlignment="Left"-->
-<!--                            VerticalAlignment="Center"-->
-<!--                            Content="Login:" />-->
-<!--                        <TextBox-->
-<!--                            Grid.Row="0"-->
-<!--                            Grid.Column="1"-->
-<!--                            Width="120"-->
-<!--                            Height="23"-->
-<!--                            Margin="3"-->
-<!--                            HorizontalAlignment="Left"-->
-<!--                            VerticalAlignment="Center"-->
-<!--                            Text="{Binding LOGIN, ValidatesOnNotifyDataErrors=True}" />-->
-
-
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="Entita:" />
+                        <telerik:RadComboBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Width="120"
+                            Height="40"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            ItemTemplate="{StaticResource ComboBoxEntityTemplate}"
+                            ItemsSource="{Binding ElementName=MainGrid, Path=DataContext.EntityAll}"
+                            SelectedItem="{Binding ElementName=MainGrid, Path=DataContext.Entity}"
+                            SelectionBoxTemplate="{StaticResource ComboBoxEntitySimpleTemplate}" />
+                        <TextBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Width="120"
+                            Height="40"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            IsReadOnly="True"
+                            Text="{Binding ElementName=MainGrid, Path=DataContext.Entity.NAME_ENT}"
+                            Visibility="{Binding ElementName=MainGrid, Path=DataContext.isEditMode, Converter={StaticResource VisConverter}}" />
 
                         <Label
                             Grid.Row="1"
@@ -94,18 +183,20 @@
                             Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Content="From State: "/>
-                            
-                        <TextBox
+                            Content="From State: " />
+
+                        <telerik:RadComboBox
                             Grid.Row="1"
                             Grid.Column="1"
                             Width="120"
-                            Height="23"
+                            Height="40"
                             Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Text="{Binding PASSWORD, ValidatesOnNotifyDataErrors=True}" />
-
+                            ItemTemplate="{StaticResource ComboBoxStateTemplate}"
+                            ItemsSource="{Binding ElementName=MainGrid, Path=DataContext.StateFromAll}"
+                            SelectedItem="{Binding ElementName=MainGrid, Path=DataContext.StateFrom, Mode=TwoWay}"
+                            SelectionBoxTemplate="{StaticResource ComboBoxStateSimpleTemplate}" />
 
                         <Label
                             Grid.Row="2"
@@ -114,15 +205,18 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Content="To State: " />
-                        <TextBox
+                        <telerik:RadComboBox
                             Grid.Row="2"
                             Grid.Column="1"
                             Width="120"
-                            Height="23"
+                            Height="40"
                             Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Text="{Binding First_Name, ValidatesOnNotifyDataErrors=True}" />
+                            ItemTemplate="{StaticResource ComboBoxStateTemplate}"
+                            ItemsSource="{Binding ElementName=MainGrid, Path=DataContext.StateToAll}"
+                            SelectedItem="{Binding ElementName=MainGrid, Path=DataContext.StateTo, Mode=TwoWay}"
+                            SelectionBoxTemplate="{StaticResource ComboBoxStateSimpleTemplate}" />
                         <Label
                             Grid.Row="3"
                             Grid.Column="0"
@@ -138,69 +232,72 @@
                             Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Text="{Binding Last_Name, ValidatesOnNotifyDataErrors=True}" />
+                            Text="{Binding Description, ValidatesOnNotifyDataErrors=True}" />
 
                         <Label
                             Grid.Row="4"
-                            Grid.Column="0"
-                            Margin="3"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Content="Valid:" />
-                        <TextBox
-                            Grid.Row="4"
-                            Grid.Column="1"
-                            Width="120"
-                            Height="23"
-                            Margin="3"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Text="{Binding Company, ValidatesOnNotifyDataErrors=True}" />
-
-                        <Label
-                            Grid.Row="5"
                             Grid.Column="0"
                             Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Content="Block:" />
-                        <TextBox
-                            Grid.Row="5"
+                        <CheckBox
+                            Grid.Row="4"
                             Grid.Column="1"
-                            Width="120"
+                            Width="23"
                             Height="23"
                             Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Text="{Binding Email, ValidatesOnNotifyDataErrors=True}" />
-                    </Grid>
-                    <Grid Grid.Row="1">
+                            IsChecked="{Binding L_BLOCK, ValidatesOnNotifyDataErrors=True}" />
+
+                        <Label
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="Valid:" />
+                        <CheckBox
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            Width="23"
+                            Height="23"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            IsChecked="{Binding L_VALID, ValidatesOnNotifyDataErrors=True}" />
 
                         <Button
+                            Grid.Row="6"
                             Width="75"
-                            Margin="25,5,0,0"
+                            Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            Command="{Binding SaveCommand}"
+                            Command="{Binding ElementName=MainGrid, Path=DataContext.SaveCommand}"
                             Content="Add"
-                            Visibility="{Binding isEditMode}" />
+                            Visibility="{Binding ElementName=MainGrid, Path=DataContext.isEditMode}" />
                         <Button
+                            Grid.Row="6"
                             Width="75"
-                            Margin="25,5,0,0"
+                            Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            Command="{Binding SaveCommand}"
+                            Command="{Binding ElementName=MainGrid, Path=DataContext.SaveCommand}"
                             Content="Save"
-                            Visibility="{Binding isEditMode, Converter={StaticResource VisConverter}}" />
-                        
+                            Visibility="{Binding ElementName=MainGrid, Path=DataContext.isEditMode, Converter={StaticResource VisConverter}}" />
+
                         <Button
+                            Grid.Row="6"
+                            Grid.Column="1"
                             Width="75"
-                            Margin="150,5,0,0"
-                            HorizontalAlignment="Left"
+                            Margin="3"
+                            HorizontalAlignment="Right"
                             VerticalAlignment="Top"
-                            Command="{Binding CancelCommand}"
+                            Command="{Binding ElementName=MainGrid, Path=DataContext.CancelCommand}"
                             Content="Cancel" />
                     </Grid>
+                    <Grid Grid.Row="1" />
 
                 </Grid>
             </StackPanel>

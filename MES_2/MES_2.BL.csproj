@@ -51,6 +51,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -72,16 +76,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LoadPLCs.cs" />
     <Compile Include="Modules\Authetication\Authentication.cs" />
-    <Compile Include="Modules\SystemModule\Entity\EntitiesModel.cs" />
-    <Compile Include="Modules\SystemModule\Entity\Entity.cs" />
+    <Compile Include="Modules\SystemModule\Entity\EntitiesRepository.cs" />
+    <Compile Include="Modules\SystemModule\Entity\EntityModel.cs" />
     <Compile Include="Modules\SystemModule\Entity\MapperEntity.cs" />
-    <Compile Include="Modules\SystemModule\State\State.cs" />
+    <Compile Include="Modules\SystemModule\State\StateModel.cs" />
     <Compile Include="Modules\SystemModule\State\MapperState.cs" />
-    <Compile Include="Modules\SystemModule\State\StatesModel.cs" />
-    <Compile Include="Modules\SystemModule\Translation\Translation.cs" />
-    <Compile Include="Modules\SystemModule\Translation\MapperTranslation.cs" />
+    <Compile Include="Modules\SystemModule\State\StatesRepository.cs" />
     <Compile Include="Modules\SystemModule\Translation\TranslationModel.cs" />
+    <Compile Include="Modules\SystemModule\Translation\MapperTranslation.cs" />
+    <Compile Include="Modules\SystemModule\Translation\TranslationRepository.cs" />
     <Compile Include="Modules\UserManagement\MapperUser.cs" />
     <Compile Include="Modules\BaseModule.cs" />
     <Compile Include="Modules\ComModule\ComObject.cs" />
@@ -102,6 +107,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Src\Sharp7.cs" />
+    <Compile Include="Utils\AutoMapperConfig.cs" />
     <Compile Include="Utils\StateChangedEventArgs.cs" />
     <Compile Include="Utils\Utils.cs" />
   </ItemGroup>

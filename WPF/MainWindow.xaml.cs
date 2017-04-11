@@ -1,4 +1,5 @@
-﻿using WPF.ViewModel;
+﻿using MahApps.Metro.Controls;
+using WPF.ViewModel;
 
 namespace WPF
 {

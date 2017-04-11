@@ -17,6 +17,7 @@
     xmlns:viewModel="clr-namespace:WPF.ViewModel"
     xmlns:wpf="clr-namespace:WPF"
     xmlns:translation="clr-namespace:WPF.Modules.SystemModule.Translation"
+    xmlns:plc="clr-namespace:WPF.Modules.PLCConnectorModule"
     Title="MES/MOM Industry 4.0 #JanTichy2017"
     Width="1280"
     Height="820"
@@ -189,6 +190,15 @@
             <translation:AddEditTranslationView />
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type plc:PLCConnectorViewModel}">
+            <plc:PLCConnectorView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type plc:AddEditPLCConnectorViewModel}">
+            <plc:AddEditPLCConnectorView />
+        </DataTemplate>
+        
+        
         <helpers:LinqToXml x:Key="dsEntity" />
         <HierarchicalDataTemplate x:Key="Entity" ItemsSource="{Binding Items}">
             <Button Margin="5,4,5,6" Content="{Binding Name}" />
@@ -250,8 +260,8 @@
                 <telerik:RadPanelBarItem Header="Modules">
                     <Button
                         Command="{Binding NavCommand}"
-                        CommandParameter="CommucationView"
-                        Content="Communication"
+                        CommandParameter="PLCConnectorView"
+                        Content="PLC Connector"
                         Style="{StaticResource MenuButton}" />
                     <Button
                         Command="{Binding NavCommand}"

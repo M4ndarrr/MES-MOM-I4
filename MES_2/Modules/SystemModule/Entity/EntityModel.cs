@@ -15,16 +15,19 @@
 using System.Collections.Generic;
 using MES_2.DB.Tables;
 
-namespace MES_2.Modules.SystemModule.Translation
+namespace MES_2.Modules.SystemModule.Entity
 {
-    public class Translation
+    public class EntityModel
     {
-        public int ID_TRA { get; set; }
+        public int ID_ENT { get; set; }
         public string NAME_ENT { get; set; }
-        public int ID_STA_PICA_FROM { get; set; }
-        public int ID_STA_PICA_TO { get; set; }
-        public string Description { get; set; }
-        public bool? L_BLOCK { get; set; }
-        public bool? L_VALID { get; set; }
+        public int? State { get; set; }
+        public bool? VALID { get; set; }
+    }
+    public class EntityDetailModel : EntityModel
+    {
+        public virtual ICollection<STA_StateList> STA_StateList { get; set; }
+        public virtual ICollection<TRA_TranslationState> TRA_TranslationState { get; set; }
     }
 }
+

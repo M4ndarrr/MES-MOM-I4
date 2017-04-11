@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using MES_2.Modules.PLCConnectorModule;
 using MES_2.Modules.SystemModule.Entity;
 using MES_2.Modules.SystemModule.State;
 using MES_2.Modules.SystemModule.Translation;
@@ -7,6 +8,7 @@ using MES_2.Modules.UserManagement;
 using WPF.Helpers;
 using WPF.Modules.Base;
 using WPF.Modules.Historian;
+using WPF.Modules.PLCConnectorModule;
 using WPF.Modules.SystemModule.Authentication;
 using WPF.Modules.SystemModule.Entity;
 using WPF.Modules.SystemModule.Login;
@@ -101,11 +103,15 @@ namespace WPF
                     NavToEntity();
                     break;
                 case "StatesEntitiesView":
-                    NavToState(null);
+                    NavToState(0);
                     break;
                 case "TranslationView":
-                    NavToTranslation(null);
+                    NavToTranslation(0);
                     break;
+                case "PLCConnectorView":
+                    NavToPLCConnectorModule();
+                    break;
+
                 default:
                     break;
             }
@@ -155,6 +161,29 @@ namespace WPF
             CurrentPageName = "Historian";
         }
 
+        private void NavToPLCConnectorModule()
+        {
+            // jeste zjistit jestli na to ma uzivatel prava
+            PLCConnectorViewModel Temp = new PLCConnectorViewModel();
+            Temp.AddEditPLCRequested += NavToAddEditPLCConnectorModule;
+//            Temp.ComObjectRequested += NavToState;
+            CurrentPage = Temp;
+            CurrentPageName = "PLC Connector Module";
+            CurrentPage.IsRightsMode = true; //volani permission modulu
+
+        }
+
+        private void NavToAddEditPLCConnectorModule(PLCConnectorModuleConfigure p_obj)
+        {
+            // jeste zjistit jestli na to ma uzivatel prava
+            AddEditPLCConnectorViewModel Temp = new AddEditPLCConnectorViewModel(p_obj);
+            Temp.Done += NavToPLCConnectorModule;
+            CurrentPage = Temp;
+            CurrentPageName = "Add/Edit PLC Connector Module";
+            CurrentPage.IsRightsMode = true; //volani permission modulu
+
+        }
+
         private void NavToEntity()
         {
             // jeste zjistit jestli na to ma uzivatel prava
@@ -167,7 +196,7 @@ namespace WPF
 
         }
 
-        private void NavToAddEditEntity(Entity p_entity)
+        private void NavToAddEditEntity(EntityModel p_entity)
         {
             // jeste zjistit jestli na to ma uzivatel prava
             AddEditEntitiesViewModel Temp = new AddEditEntitiesViewModel(p_entity);
@@ -177,10 +206,10 @@ namespace WPF
             CurrentPage.IsRightsMode = true; //volani permission modulu
         }
 
-        private void NavToState(string p_entityName) // musi vstupovat string ne objekt
+        private void NavToState(int p_entitid) // musi vstupovat string ne objekt
         {
             // jeste zjistit jestli na to ma uzivatel prava
-            StateEntitiesViewModel Temp = new StateEntitiesViewModel(p_entityName);
+            StateEntitiesViewModel Temp = new StateEntitiesViewModel(p_entitid);
             Temp.AddEditStateRequested += NavToAddEditState;
             Temp.TranslationRequested += NavToTranslation;
             CurrentPage = Temp;
@@ -188,7 +217,7 @@ namespace WPF
             CurrentPage.IsRightsMode = true; //volani permission modulu
         }
 
-        private void NavToAddEditState(State p_state)
+        private void NavToAddEditState(StateModel p_state)
         {
             AddEditStateViewModel Temp = new AddEditStateViewModel(p_state);
             Temp.Done += NavToState;
@@ -198,17 +227,17 @@ namespace WPF
         }
 
 
-        private void NavToTranslation(string p_entityName) // ID stavu bude vstupovat ze ktereho chci vyjít
+        private void NavToTranslation(int p_entitid) // ID stavu bude vstupovat ze ktereho chci vyjít
         {
             // jeste zjistit jestli na to ma uzivatel prava
-            TranslationStateViewModel Temp = new TranslationStateViewModel(p_entityName);
+            TranslationStateViewModel Temp = new TranslationStateViewModel(p_entitid);
             Temp.AddEditTranslationRequested += NavToAddEditTranslation;
             CurrentPage = Temp;
             CurrentPageName = "States";
             CurrentPage.IsRightsMode = true; //volani permission modulu
         }
 
-        private void NavToAddEditTranslation(Translation p_translation)
+        private void NavToAddEditTranslation(TranslationModel p_translation)
         {
             AddEditTranslationViewModel Temp = new AddEditTranslationViewModel(p_translation);
             Temp.Done += NavToTranslation;

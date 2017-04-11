@@ -16,7 +16,10 @@
     </UserControl.Resources>
 
 
-    <Grid Margin="0,20,0,0" Background="{StaticResource BackgroundVeryLightBrush}">
+    <Grid
+        x:Name="MainGrid"
+        Margin="0,20,0,0"
+        Background="{StaticResource BackgroundVeryLightBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
@@ -35,7 +38,7 @@
                         FontFamily="{StaticResource LatoBold}"
                         FontSize="{StaticResource FontSizeRegular}"
                         Foreground="{StaticResource ForegroundLightBrush}"
-                        Text="Add/Edit profile" />
+                        Text="Add/Edit Entity" />
 
                 </Grid>
 
@@ -86,24 +89,23 @@
                             Text="{Binding NAME_ENT, ValidatesOnNotifyDataErrors=True}" />
 
 
-
-                        <Label
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            Margin="3"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Content="State: " />
-
-                        <TextBox
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Width="120"
-                            Height="23"
-                            Margin="3"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Text="{Binding State, ValidatesOnNotifyDataErrors=True}" />
+                        <!--  <Label  -->
+                        <!--  Grid.Row="1"  -->
+                        <!--  Grid.Column="0"  -->
+                        <!--  Margin="3"  -->
+                        <!--  HorizontalAlignment="Left"  -->
+                        <!--  VerticalAlignment="Center"  -->
+                        <!--  Content="State: " />  -->
+                        <!--    -->
+                        <!--  <TextBox  -->
+                        <!--  Grid.Row="1"  -->
+                        <!--  Grid.Column="1"  -->
+                        <!--  Width="120"  -->
+                        <!--  Height="23"  -->
+                        <!--  Margin="3"  -->
+                        <!--  HorizontalAlignment="Left"  -->
+                        <!--  VerticalAlignment="Center"  -->
+                        <!--  Text="{Binding State, ValidatesOnNotifyDataErrors=True}" />  -->
 
 
                         <Label
@@ -117,41 +119,42 @@
                             Grid.Row="2"
                             Grid.Column="1"
                             Width="23"
-                            Height="23"
+                            Height="40"
                             Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             IsChecked="{Binding VALID, ValidatesOnNotifyDataErrors=True}" />
 
-                    </Grid>
-                    <Grid Grid.Row="1">
 
                         <Button
+                            Grid.Row="3"
                             Width="75"
-                            Margin="25,5,0,0"
+                            Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            Command="{Binding SaveCommand}"
+                            Command="{Binding ElementName=MainGrid, Path=DataContext.SaveCommand}"
                             Content="Add"
-                            Visibility="{Binding isEditMode}" />
+                            Visibility="{Binding ElementName=MainGrid, Path=DataContext.isEditMode}" />
                         <Button
+                            Grid.Row="3"
                             Width="75"
-                            Margin="25,5,0,0"
+                            Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            Command="{Binding SaveCommand}"
+                            Command="{Binding ElementName=MainGrid, Path=DataContext.SaveCommand}"
                             Content="Save"
-                            Visibility="{Binding isEditMode, Converter={StaticResource VisConverter}}" />
+                            Visibility="{Binding ElementName=MainGrid, Path=DataContext.isEditMode, Converter={StaticResource VisConverter}}" />
 
                         <Button
+                            Grid.Row="3"
+                            Grid.Column="1"
                             Width="75"
-                            Margin="150,5,0,0"
-                            HorizontalAlignment="Left"
+                            Margin="3"
+                            HorizontalAlignment="Right"
                             VerticalAlignment="Top"
-                            Command="{Binding CancelCommand}"
+                            Command="{Binding ElementName=MainGrid, Path=DataContext.CancelCommand}"
                             Content="Cancel" />
                     </Grid>
-
                 </Grid>
             </StackPanel>
         </ScrollViewer>

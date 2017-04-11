@@ -55,9 +55,11 @@
 
                     <telerik:RadGridView
                         Grid.Row="1"
+                        Margin="5"
                         AutoGenerateColumns="False"
                         CanUserDeleteRows="False"
                         GroupRenderMode="Flat"
+                        IsReadOnly="True"
                         ItemsSource="{Binding Entities}">
 
                         <telerik:RadGridView.Columns>

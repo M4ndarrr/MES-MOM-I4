@@ -12,36 +12,38 @@ namespace WPF.Modules.SystemModule.Entity
 {
     class EntitiesViewModel : ViewModelBase
     {
-        private EntitiesModel _repo = new EntitiesModel();
-        private List<MES_2.Modules.SystemModule.Entity.Entity> _allEntities;
+        private EntitiesRepository _repo = new EntitiesRepository();
+        private List<EntityModel> _allEntities;
 
         public EntitiesViewModel()
         {
             AddEntityCommand = new RelayCommand(OnAddEntity);
-            EditEntityCommand = new RelayCommand<MES_2.Modules.SystemModule.Entity.Entity>(OnEditEntity);
-            StatesEntityCommand = new RelayCommand<MES_2.Modules.SystemModule.Entity.Entity>(OnStatesEntity);
-            TranslationEntityCommand = new RelayCommand<MES_2.Modules.SystemModule.Entity.Entity>(OnTranslationEntity);
+            EditEntityCommand = new RelayCommand<EntityModel>(OnEditEntity);
+            StatesEntityCommand = new RelayCommand<EntityModel>(OnStatesEntity);
+            TranslationEntityCommand =
+                new RelayCommand<EntityModel>(OnTranslationEntity);
 
-            _allEntities = _repo.Retrive().ToList();
-            Entities = new ObservableCollection<MES_2.Modules.SystemModule.Entity.Entity>(_allEntities);
-
+            _allEntities = _repo.Retrieve().ToList();
+            Entities = new ObservableCollection<EntityModel>(_allEntities);
         }
 
-        private ObservableCollection<MES_2.Modules.SystemModule.Entity.Entity> _entities;
-        public ObservableCollection<MES_2.Modules.SystemModule.Entity.Entity> Entities
+        private ObservableCollection<EntityModel> _entities;
+
+        public ObservableCollection<EntityModel> Entities
         {
             get { return _entities; }
             set { SetProperty(ref _entities, value); }
         }
 
-        public RelayCommand<MES_2.Modules.SystemModule.Entity.Entity> EditEntityCommand { get; private set; }
+        public RelayCommand<EntityModel> EditEntityCommand { get; private set; }
         public RelayCommand AddEntityCommand { get; private set; }
-        public RelayCommand<MES_2.Modules.SystemModule.Entity.Entity> StatesEntityCommand { get; private set; }
-        public RelayCommand<MES_2.Modules.SystemModule.Entity.Entity> TranslationEntityCommand { get; private set; }
+        public RelayCommand<EntityModel> StatesEntityCommand { get; private set; }
 
-        public event Action<MES_2.Modules.SystemModule.Entity.Entity> AddEditEntityRequested = delegate { };
-        public event Action<string> StatesEntityRequested = delegate { };
-        public event Action<string> TranslationEntityRequested = delegate { };
+        public RelayCommand<EntityModel> TranslationEntityCommand { get; private set; }
+
+        public event Action<EntityModel> AddEditEntityRequested = delegate { };
+        public event Action<int> StatesEntityRequested = delegate { };
+        public event Action<int> TranslationEntityRequested = delegate { };
 
 
         private void OnAddEntity()
@@ -49,31 +51,19 @@ namespace WPF.Modules.SystemModule.Entity
             AddEditEntityRequested(null);
         }
 
-        private void OnEditEntity(MES_2.Modules.SystemModule.Entity.Entity p_entity)
+        private void OnEditEntity(EntityModel p_entity)
         {
             AddEditEntityRequested(p_entity);
         }
 
-        private void OnStatesEntity(MES_2.Modules.SystemModule.Entity.Entity p_entity)
+        private void OnStatesEntity(EntityModel p_entity)
         {
-            StatesEntityRequested(p_entity.NAME_ENT);
+            StatesEntityRequested(p_entity.ID_ENT);
         }
 
-        private void OnTranslationEntity(MES_2.Modules.SystemModule.Entity.Entity p_entity)
+        private void OnTranslationEntity(EntityModel p_entity)
         {
-            TranslationEntityRequested(p_entity.NAME_ENT);
+            TranslationEntityRequested(p_entity.ID_ENT);
         }
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

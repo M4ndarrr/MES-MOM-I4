@@ -32,7 +32,8 @@ namespace MES_2.DB.Tables
         [Key]
         public int ID_STA { get; set; }
 
-        public string NAME_ENT { get; set; }
+        public int ID_ENT { get; set; }
+       // public string NAME_ENT { get; set; }
         
         public string Purpous { get; set; }
         public bool? L_START_STATE { get; set; }
@@ -41,9 +42,7 @@ namespace MES_2.DB.Tables
         public string Comments { get; set; }
 
         public virtual ENT_Entity ENT_Entity { get; set; }
-        //[InverseProperty("STATE_FROM")]
         public virtual ICollection<TRA_TranslationState> TRA_FROM { get; set; }
-       // [InverseProperty("STATE_TO")]
         public virtual ICollection<TRA_TranslationState> TRA_TO { get; set; }
     }
 }

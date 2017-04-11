@@ -20,7 +20,11 @@
     <Grid Margin="0,20,0,0" Background="{StaticResource BackgroundVeryLightBrush}">
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
 
-            <StackPanel>
+            <StackPanel
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="{StaticResource ForegroundLightBrush}">
                 <!--  Login header  -->
                 <Grid Margin="5,10" Background="{StaticResource ForegroundVeryDarkBrush}">
                     <TextBlock
@@ -46,12 +50,13 @@
                             Margin="5,5"
                             HorizontalAlignment="Left"
                             Command="{Binding AddStateCommand}"
-                            Content="Add Entity" />
+                            Content="Add State" />
                     </Grid>
 
 
                     <telerik:RadGridView
                         Grid.Row="1"
+                        Margin="5"
                         AutoGenerateColumns="False"
                         CanUserDeleteRows="False"
                         GroupRenderMode="Flat"
@@ -59,8 +64,7 @@
 
                         <telerik:RadGridView.Columns>
                             <telerik:GridViewDataColumn DataMemberBinding="{Binding ID_STA}" />
-                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Name_Entity}" />
-                            <telerik:GridViewDataColumn DataMemberBinding="{Binding State}" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding ID_ENT}" />
                             <telerik:GridViewDataColumn DataMemberBinding="{Binding Purpous}" />
                             <telerik:GridViewDataColumn DataMemberBinding="{Binding L_START_STATE}" />
                             <telerik:GridViewDataColumn DataMemberBinding="{Binding L_END_STATE}" />
@@ -88,19 +92,15 @@
                                                 Grid.Column="2"
                                                 Command="{Binding DataContext.TranslationCommand, RelativeSource={RelativeSource AncestorType={x:Type telerik:RadGridView}}}"
                                                 CommandParameter="{Binding}"
-                                                Content="States" />
+                                                Content="Translations" />
                                         </Grid>
                                     </DataTemplate>
                                 </telerik:GridViewColumn.CellTemplate>
                             </telerik:GridViewColumn>
                         </telerik:RadGridView.Columns>
                     </telerik:RadGridView>
-
-
-
                 </Grid>
             </StackPanel>
         </ScrollViewer>
     </Grid>
 </UserControl>
-

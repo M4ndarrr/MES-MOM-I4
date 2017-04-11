@@ -46,12 +46,13 @@
                             Margin="5,5"
                             HorizontalAlignment="Left"
                             Command="{Binding AddTranslationCommand}"
-                            Content="Add Entity" />
+                            Content="Add Translation" />
                     </Grid>
 
 
                     <telerik:RadGridView
                         Grid.Row="1"
+                        IsReadOnly="True"
                         AutoGenerateColumns="False"
                         CanUserDeleteRows="False"
                         GroupRenderMode="Flat"
@@ -59,9 +60,9 @@
 
                         <telerik:RadGridView.Columns>
                             <telerik:GridViewDataColumn DataMemberBinding="{Binding ID_TRA}" />
-                            <telerik:GridViewDataColumn DataMemberBinding="{Binding NAME_ENT}" />
-                            <telerik:GridViewDataColumn DataMemberBinding="{Binding ID_STA_FROM}" />
-                            <telerik:GridViewDataColumn DataMemberBinding="{Binding ID_STA_TO}" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding ID_ENT}" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding ID_STA_PICA_FROM}" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding ID_STA_PICA_TO}" />
                             <telerik:GridViewDataColumn DataMemberBinding="{Binding Description}" />
                             <telerik:GridViewDataColumn DataMemberBinding="{Binding L_BLOCK}" />
                             <telerik:GridViewDataColumn DataMemberBinding="{Binding L_VALID}" />

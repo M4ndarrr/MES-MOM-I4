@@ -20,12 +20,24 @@ namespace WPF.Modules.SystemModule.State
 {
     public class StateFullEditable : ValidatableBindableBase
     {
+
+
+        //choose from combo box or 
+        private int _ID_ENT;
+        [Required]
+        public int ID_ENT
+        {
+            get { return _ID_ENT; }
+            set { SetProperty(ref _ID_ENT, value);  } // pri zmene tohoto se musi aktualizovat 
+        }
+
+
         private string _NAME_ENT;
         [Required]
         public string NAME_ENT
         {
             get { return _NAME_ENT; }
-            set { SetProperty(ref _NAME_ENT, value); }
+            set { SetProperty(ref _NAME_ENT, value); } // pri zmene tohoto se musi aktualizovat 
         }
 
         private string _Purpous;

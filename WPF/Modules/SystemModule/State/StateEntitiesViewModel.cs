@@ -12,14 +12,14 @@ namespace WPF.Modules.SystemModule.State
     class StateEntitiesViewModel : ViewModelBase
     {
         private string EntityName { get; set; }
-        private StatesModel _repo = new StatesModel();
-        private List<MES_2.Modules.SystemModule.State.State> _allStates;
+        private StatesRepository _repo = new StatesRepository();
+        private List<StateModel> _allStates;
 
-        public StateEntitiesViewModel(string p_entityName)
+        public StateEntitiesViewModel(int p_entityId)
         {
-            if (p_entityName != null)
+            if (p_entityId != 0)
             {
-                _allStates = _repo.RetrieveByEntityName(p_entityName).ToList();
+                _allStates = _repo.RetrieveByEntityId(p_entityId).ToList();
             }
             else
             {
@@ -27,39 +27,40 @@ namespace WPF.Modules.SystemModule.State
             }
 
             AddStateCommand = new RelayCommand(OnAddState);
-            EditStateCommand = new RelayCommand<MES_2.Modules.SystemModule.State.State>(OnEditState);
-            TranslationCommand = new RelayCommand<MES_2.Modules.SystemModule.State.State>(OnTranslation);
-            
-            States = new ObservableCollection<MES_2.Modules.SystemModule.State.State>(_allStates);
+            EditStateCommand = new RelayCommand<StateModel>(OnEditState);
+            TranslationCommand = new RelayCommand<StateModel>(OnTranslation);
 
+            States = new ObservableCollection<StateModel>(_allStates);
         }
 
-        private ObservableCollection<MES_2.Modules.SystemModule.State.State> _states;
-        public ObservableCollection<MES_2.Modules.SystemModule.State.State> States
+        private ObservableCollection<StateModel> _states;
+
+        public ObservableCollection<StateModel> States
         {
             get { return _states; }
             set { SetProperty(ref _states, value); }
         }
-        public RelayCommand<MES_2.Modules.SystemModule.State.State> TranslationCommand { get; private set; }
-        public RelayCommand<MES_2.Modules.SystemModule.State.State> EditStateCommand { get; private set; }
+
+        public RelayCommand<StateModel> TranslationCommand { get; private set; }
+        public RelayCommand<StateModel> EditStateCommand { get; private set; }
         public RelayCommand AddStateCommand { get; private set; }
 
-        public event Action<MES_2.Modules.SystemModule.State.State> AddEditStateRequested = delegate { };
-        public event Action<string> TranslationRequested = delegate { };
+        public event Action<StateModel> AddEditStateRequested = delegate { };
+        public event Action<int> TranslationRequested = delegate { };
 
         private void OnAddState()
         {
             AddEditStateRequested(null);
         }
 
-        private void OnEditState(MES_2.Modules.SystemModule.State.State p_state)
+        private void OnEditState(StateModel p_state)
         {
             AddEditStateRequested(p_state);
         }
 
-        private void OnTranslation(MES_2.Modules.SystemModule.State.State p_state)
+        private void OnTranslation(StateModel p_state)
         {
-          TranslationRequested(p_state.NAME_ENT);
+            TranslationRequested(p_state.ID_ENT);
         }
     }
 }

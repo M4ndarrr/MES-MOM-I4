@@ -9,9 +9,7 @@
 //  Version               :
 //  Revision History : 2017-03-29
 //  Change History: 
-// 
 // ==================================
-
 using System;
 using MES_2.Modules.SystemModule.Entity;
 using MES_2.Modules.UserManagement;
@@ -23,15 +21,15 @@ namespace WPF.Modules.SystemModule.Entity
 {
     public class AddEditEntitiesViewModel : ViewModelBase
     {
-
         private bool _isEditMode = true;
+
         public bool isEditMode
         {
             get { return _isEditMode; }
             set { SetProperty(ref _isEditMode, value); }
         }
 
-        public AddEditEntitiesViewModel(MES_2.Modules.SystemModule.Entity.Entity p_Entity)
+        public AddEditEntitiesViewModel(EntityModel p_Entity)
         {
             CancelCommand = new RelayCommand(OnCancel);
             SaveCommand = new RelayCommand(OnSave, CanSave);
@@ -39,20 +37,21 @@ namespace WPF.Modules.SystemModule.Entity
         }
 
         private EntityFullEditable _Entity;
+
         public EntityFullEditable Entity
         {
             get { return _Entity; }
             set { SetProperty(ref _Entity, value); }
         }
 
-        private MES_2.Modules.SystemModule.Entity.Entity _edditingEntity;
+        private EntityModel _edditingEntity;
 
-        public void SetEntity(MES_2.Modules.SystemModule.Entity.Entity p_Entity)
+        public void SetEntity(EntityModel p_Entity)
         {
             if (p_Entity == null)
             {
                 isEditMode = false;
-                p_Entity = new MES_2.Modules.SystemModule.Entity.Entity();
+                p_Entity = new MES_2.Modules.SystemModule.Entity.EntityModel();
             }
 
             _edditingEntity = p_Entity;
@@ -82,13 +81,13 @@ namespace WPF.Modules.SystemModule.Entity
         {
             UpdateCustomer(Entity, _edditingEntity);
             if (isEditMode)
-                EntitiesModel.Instance.Edit(_edditingEntity);
+                EntitiesRepository.Instance.Edit(_edditingEntity as EntityModel);
             else
-                EntitiesModel.Instance.Add(_edditingEntity);
+                EntitiesRepository.Instance.Add(_edditingEntity as EntityModel);
             Done();
         }
 
-        private void UpdateCustomer(EntityFullEditable source, MES_2.Modules.SystemModule.Entity.Entity target)
+        private void UpdateCustomer(EntityFullEditable source, EntityModel target)
         {
             target.NAME_ENT = source.NAME_ENT;
             target.State = source.State;
@@ -100,7 +99,7 @@ namespace WPF.Modules.SystemModule.Entity
             return !Entity.HasErrors;
         }
 
-        private void CopyEntity(MES_2.Modules.SystemModule.Entity.Entity source, EntityFullEditable target)
+        private void CopyEntity(EntityModel source, EntityFullEditable target)
         {
             if (isEditMode)
             {
