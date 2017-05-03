@@ -37,6 +37,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -83,6 +87,10 @@
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MoreLinq, Version=2.0.20029.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.2.3.0\lib\net35\MoreLinq.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -161,6 +169,7 @@
     </Compile>
     <Compile Include="Modules\ComModule\ComObjectViewModel.cs" />
     <Compile Include="Modules\Interfaces\IModelDialog.cs" />
+    <Compile Include="Modules\Interfaces\IView.cs" />
     <Compile Include="Modules\PLCConnectorModule\AddEditPLCConnectorView.xaml.cs">
       <DependentUpon>AddEditPLCConnectorView.xaml</DependentUpon>
     </Compile>
@@ -186,6 +195,10 @@
     <Compile Include="Modules\SystemModule\Translation\AddEditTranslationViewModel.cs" />
     <Compile Include="Modules\SystemModule\Translation\TranslationFullEditable.cs" />
     <Compile Include="Modules\SystemModule\Translation\TranslationStateViewModel.cs" />
+    <Compile Include="Modules\Tracebility\TracebilityViewModel.cs" />
+    <Compile Include="Modules\Tracebility\TracebillityView.xaml.cs">
+      <DependentUpon>TracebillityView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\UserManagement\AddEditUserManagementView.xaml.cs">
       <DependentUpon>AddEditUserManagementView.xaml</DependentUpon>
     </Compile>
@@ -286,6 +299,10 @@
     <Page Include="Modules\SystemModule\Translation\AddEditTranslationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Tracebility\TracebillityView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\UserManagement\AddEditUserManagementView.xaml">
       <SubType>Designer</SubType>
@@ -420,7 +437,6 @@
   <ItemGroup>
     <Folder Include="Images\Background\" />
     <Folder Include="Modules\Receptury\" />
-    <Folder Include="Modules\Tracebility\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Logo\icon.ico" />

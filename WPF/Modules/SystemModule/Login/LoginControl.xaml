@@ -61,6 +61,7 @@
                                     Foreground="{StaticResource WordVeryDarkBrush}"
                                     Text="Username" />
 
+                                
                                 <TextBox
                                     Grid.Column="1"
                                     Margin="5"
@@ -88,6 +89,12 @@
                                     Tag="Password"
                                     Style ="{StaticResource TextWithDownBorder}"
                                     Text="{Binding CurrentUser.Password}" />
+                                <!--                                <telerik:RadMaskedTextInput Grid.Column="1"-->
+<!--                                    Margin="5"-->
+<!--                                    TextMode="MaskedText"-->
+<!--                                    EmptyContent="Password"-->
+<!--                                    Text="{Binding CurrentUser.Password}" />-->
+                                
                             </Grid>
                             <TextBlock
                                 Grid.Column="0"

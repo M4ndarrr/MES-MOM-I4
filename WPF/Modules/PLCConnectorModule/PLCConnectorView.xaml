@@ -49,7 +49,7 @@
                             Margin="5,5"
                             HorizontalAlignment="Left"
                             Command="{Binding AddPLCCommand}"
-                            Content="Add State" />
+                            Content="Add PLC" />
                     </Grid>
 
 
@@ -63,12 +63,47 @@
 
                         <telerik:RadGridView.Columns>
                             <telerik:GridViewDataColumn DataMemberBinding="{Binding Id}" />
-                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Rack}" />
-                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Slot}" />
                             <telerik:GridViewDataColumn DataMemberBinding="{Binding IpString}" />
                             <telerik:GridViewDataColumn DataMemberBinding="{Binding PortString}" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Rack}" />
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Slot}" />
+                            <telerik:GridViewColumn Width="150">
+                                <telerik:GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <telerik:RadButton
+                                                Grid.Column="0"
+                                                Command="{Binding DataContext.RunPLCCommand, RelativeSource={RelativeSource AncestorType={x:Type telerik:RadGridView}}}"
+                                                CommandParameter="{Binding}"
+                                                Content="Start" />
 
-                            <telerik:GridViewColumn Width="90">
+                                            <Label Grid.Column="1">|</Label>
+
+                                            <telerik:RadButton
+                                                Grid.Column="2"
+                                                Command="{Binding DataContext.StopPLCCommand, RelativeSource={RelativeSource AncestorType={x:Type telerik:RadGridView}}}"
+                                                CommandParameter="{Binding}"
+                                                Content="Stop" />
+                                            <Label Grid.Column="3">|</Label>
+                                            <telerik:RadButton
+                                                Grid.Column="4"
+                                                Command="{Binding DataContext.RestartPLCCommand, RelativeSource={RelativeSource AncestorType={x:Type telerik:RadGridView}}}"
+                                                CommandParameter="{Binding}"
+                                                Content="Restart" />
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </telerik:GridViewColumn.CellTemplate>
+                            </telerik:GridViewColumn>
+
+                            <telerik:GridViewColumn Width="100">
                                 <telerik:GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <Grid>
@@ -79,7 +114,7 @@
                                             </Grid.ColumnDefinitions>
                                             <telerik:RadButton
                                                 Grid.Column="0"
-                                                Command="{Binding DataContext.EditStateCommand, RelativeSource={RelativeSource AncestorType={x:Type telerik:RadGridView}}}"
+                                                Command="{Binding DataContext.EditPLCCommand, RelativeSource={RelativeSource AncestorType={x:Type telerik:RadGridView}}}"
                                                 CommandParameter="{Binding}"
                                                 Content="Edit" />
 
@@ -87,9 +122,9 @@
 
                                             <telerik:RadButton
                                                 Grid.Column="2"
-                                                Command="{Binding DataContext.TranslationCommand, RelativeSource={RelativeSource AncestorType={x:Type telerik:RadGridView}}}"
+                                                Command="{Binding DataContext.ComObjectCommand, RelativeSource={RelativeSource AncestorType={x:Type telerik:RadGridView}}}"
                                                 CommandParameter="{Binding}"
-                                                Content="Translations" />
+                                                Content="ComObject" />
                                         </Grid>
                                     </DataTemplate>
                                 </telerik:GridViewColumn.CellTemplate>

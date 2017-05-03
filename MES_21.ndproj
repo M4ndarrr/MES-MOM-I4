@@ -1,15 +1,35 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <NDepend AppName="MES_2" Platform="DotNet">
-  <OutputDir KeepXmlFiles="False">C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\NDependOut</OutputDir>
+  <OutputDir KeepXmlFiles="False">C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\NDependOut1</OutputDir>
   <Assemblies>
     <Name>MES_2</Name>
     <Name>MES_2.Common</Name>
+    <Name>MES_2.DB</Name>
+    <Name>WPF</Name>
   </Assemblies>
-  <FrameworkAssemblies />
+  <FrameworkAssemblies>
+    <Name>mscorlib</Name>
+    <Name>System</Name>
+    <Name>System.Core</Name>
+    <Name>EntityFramework</Name>
+    <Name>System.ComponentModel.DataAnnotations</Name>
+    <Name>PresentationFramework</Name>
+    <Name>WindowsBase</Name>
+    <Name>System.Xaml</Name>
+    <Name>PresentationCore</Name>
+    <Name>GalaSoft.MvvmLight</Name>
+    <Name>Microsoft.Practices.ServiceLocation</Name>
+    <Name>System.Xml</Name>
+    <Name>System.Xml.Linq</Name>
+    <Name>GalaSoft.MvvmLight.Extras</Name>
+    <Name>Telerik.Windows.Controls.DataVisualization</Name>
+  </FrameworkAssemblies>
   <Dirs>
+    <Dir>C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2.DB\bin\Debug</Dir>
+    <Dir>C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\bin\Debug</Dir>
+    <Dir>C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\WPF\bin\Debug</Dir>
     <Dir>C:\Windows\Microsoft.NET\Framework\v4.0.30319</Dir>
     <Dir>C:\Windows\Microsoft.NET\Framework\v4.0.30319\WPF</Dir>
-    <Dir>E:\!DROPBOX_SHARE\Dropbox\Škola\Dimplomka\Vyvoj\VISUAL_S\MES_2\MES_2\bin\Debug</Dir>
   </Dirs>
   <MergeCodeGeneratedByCompiler>True</MergeCodeGeneratedByCompiler>
   <Report Kind="0" SectionsEnabled="45055" XslPath="" Flags="261120" />
@@ -59,7 +79,8 @@
   <SourceFileRebasing FromPath="" ToPath="" />
   <PathVariables />
   <RuleFiles />
-  <ProjectRules AreActive="True" /><Queries>
+  <ProjectRules AreActive="True" />
+  <Queries>
     <Group Name="Code Quality" Active="True" ShownInReport="False">
       <Query Active="True" DisplayList="True" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>Types too big - critical</Name>
 warnif count > 0 from t in JustMyCode.Types where 
@@ -8039,4 +8060,6 @@ select new { n, n.NbLinesOfCode }
 //</HowToFix>]]></Query>
       </Group>
     </Group>
-  </Queries></NDepend>
+  </Queries>
+  <WarnFilter />
+</NDepend>

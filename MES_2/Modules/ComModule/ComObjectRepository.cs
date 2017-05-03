@@ -10,8 +10,11 @@
 //  Revision History : 2017-02-20
 //  Change History: 
 // ==================================
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using MES_2.DB.Database;
 using MES_2.Modules.Interfaces;
 
@@ -46,8 +49,65 @@ namespace MES_2.Modules.ComModule
 
         public IEnumerable<ComObject> Retrieve()
         {
-            return ComObjectList.ToList();
+            return null;
         }
+
+        public ComObjectModel RetrieveModel(Guid p_id)
+        {
+            ComObjectModel Temp = new ComObjectModel();
+
+            using (var db = new MES_DATABASE())
+            {
+                Temp = db.ComObjecTable
+                    .Where(x => x.ID_COM == p_id)
+                    .Select(Mapper.Map<ComObjectModel>)
+                    .SingleOrDefault();
+            }
+            return Temp;
+        }
+
+        public IEnumerable<ComObjectModel> RetrieveModel()
+        {
+            List<ComObjectModel> Temp = new List<ComObjectModel>();
+
+            using (var db = new MES_DATABASE())
+            {
+                Temp = db.PLC_PLCConnectorable
+                    .Select(Mapper.Map<ComObjectModel>)
+                    .ToList();
+            }
+            return Temp;
+        }
+
+        public ComObjectDetailModel RetrieveDetailModel(Guid p_id)
+        {
+            ComObjectDetailModel Temp = new ComObjectDetailModel();
+
+            using (var db = new MES_DATABASE())
+            {
+                Temp = db.ComObjecTable
+                    .Where(x => x.ID_COM == p_id)
+                    .Select(Mapper.Map<ComObjectDetailModel>)
+                    .SingleOrDefault();
+            }
+            return Temp;
+        }
+
+        public IEnumerable<ComObjectDetailModel> RetrieveDetailModel()
+        {
+            List<ComObjectDetailModel> Temp = new List<ComObjectDetailModel>();
+
+            using (var db = new MES_DATABASE())
+            {
+                Temp = db.PLC_PLCConnectorable
+                    .Select(Mapper.Map<ComObjectDetailModel>)
+                    .ToList();
+            }
+            return Temp;
+        }
+
+
+
 
         public ComObject Add(ComObjectConfigure p_configure)
         {

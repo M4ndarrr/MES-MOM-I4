@@ -26,12 +26,11 @@ namespace WPF.Modules.PLCConnectorModule
     public class PLCConnectorViewModel : ViewModelBase
     {
         private string EntityName { get; set; }
-        private PlcConnectorModuleRepository _repo = new PlcConnectorModuleRepository();
         private List<PLCConnectorModuleConfigure> _allPLCConfigure = new List<PLCConnectorModuleConfigure>();
 
         public PLCConnectorViewModel()
         {
-                _allPLCConfigure = _repo.PlcConnectorModulesList
+                _allPLCConfigure = PlcConnectorModuleRepository.Instance.PlcConnectorModulesList
                     .Select(x => x.PlcModuleConfigure)
                     .ToList();
 

@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
+using MES_2.Modules.ComModule;
 using MES_2.Modules.PLCConnectorModule;
 using MES_2.Modules.SystemModule.Entity;
 using MES_2.Modules.SystemModule.State;
@@ -7,6 +9,7 @@ using MES_2.Modules.SystemModule.Translation;
 using MES_2.Modules.UserManagement;
 using WPF.Helpers;
 using WPF.Modules.Base;
+using WPF.Modules.ComModule;
 using WPF.Modules.Historian;
 using WPF.Modules.PLCConnectorModule;
 using WPF.Modules.SystemModule.Authentication;
@@ -166,7 +169,7 @@ namespace WPF
             // jeste zjistit jestli na to ma uzivatel prava
             PLCConnectorViewModel Temp = new PLCConnectorViewModel();
             Temp.AddEditPLCRequested += NavToAddEditPLCConnectorModule;
-//            Temp.ComObjectRequested += NavToState;
+            Temp.ComObjectRequested += NavToComObjectModule;
             CurrentPage = Temp;
             CurrentPageName = "PLC Connector Module";
             CurrentPage.IsRightsMode = true; //volani permission modulu
@@ -180,6 +183,27 @@ namespace WPF
             Temp.Done += NavToPLCConnectorModule;
             CurrentPage = Temp;
             CurrentPageName = "Add/Edit PLC Connector Module";
+            CurrentPage.IsRightsMode = true; //volani permission modulu
+
+        }
+        private void NavToComObjectModule(Guid p_idGuid)
+        {
+            // jeste zjistit jestli na to ma uzivatel prava
+            ComObjectViewModel Temp = new ComObjectViewModel(p_idGuid);
+            Temp.AddEditComObjectRequested += NavToAddEditComObjectModule;
+            CurrentPage = Temp;
+            CurrentPageName = "ComObject Module";
+            CurrentPage.IsRightsMode = true; //volani permission modulu
+
+        }
+
+        private void NavToAddEditComObjectModule(ComObjectConfigure p_obj)
+        {
+            // jeste zjistit jestli na to ma uzivatel prava
+            AddEditComObjectViewModel Temp = new AddEditComObjectViewModel(p_obj);
+            Temp.Done += NavToComObjectModule;
+            CurrentPage = Temp;
+            CurrentPageName = "Add/Edit ComObject Module";
             CurrentPage.IsRightsMode = true; //volani permission modulu
 
         }

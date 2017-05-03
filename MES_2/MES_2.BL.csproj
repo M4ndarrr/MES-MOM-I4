@@ -78,6 +78,9 @@
   <ItemGroup>
     <Compile Include="LoadPLCs.cs" />
     <Compile Include="Modules\Authetication\Authentication.cs" />
+    <Compile Include="Modules\ComModule\ComObjectModel.cs" />
+    <Compile Include="Modules\ComModule\ReceivedResultRepository.cs" />
+    <Compile Include="Modules\PLCConnectorModule\PLCConnectorModel.cs" />
     <Compile Include="Modules\SystemModule\Entity\EntitiesRepository.cs" />
     <Compile Include="Modules\SystemModule\Entity\EntityModel.cs" />
     <Compile Include="Modules\SystemModule\Entity\MapperEntity.cs" />

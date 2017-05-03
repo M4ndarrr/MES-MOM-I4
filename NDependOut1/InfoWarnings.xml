@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<InfoWarnings>
+  <Info>Begin full analysis with NDepend v6.0.1.8585</Info>
+  <Info>No Baseline for Comparison loaded.</Info>
+  <Info>Concurrent mode</Info>
+  <Info>.NET Assemblies loaded from {C:\Windows\Microsoft.NET\Framework\v4.0.30319} 
+   mscorlib.dll   v4.0.0.0
+   System.dll   v4.0.0.0
+   System.Core.dll   v4.0.0.0
+   System.ComponentModel.DataAnnotations.dll   v4.0.0.0
+   System.Xaml.dll   v4.0.0.0
+   System.Xml.dll   v4.0.0.0
+   System.Xml.Linq.dll   v4.0.0.0</Info>
+  <Info>.NET Assemblies loaded from {C:\Windows\Microsoft.NET\Framework\v4.0.30319\WPF} 
+   PresentationFramework.dll   v4.0.0.0
+   WindowsBase.dll   v4.0.0.0
+   PresentationCore.dll   v4.0.0.0</Info>
+  <Info>.NET Assemblies loaded from {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2.DB\bin\Debug} 
+   MES_2.Common.dll   v1.0.0.0
+   MES_2.DB.dll   v1.0.0.0
+   MES_2.exe   v1.0.0.0
+   EntityFramework.dll   v6.0.0.0</Info>
+  <Warning>No application or third party assembly found in directory {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\bin\Debug}</Warning>
+  <Info>.NET Assemblies loaded from {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\WPF\bin\Debug} 
+   WPF.exe   v1.0.0.0
+   GalaSoft.MvvmLight.dll   v5.3.0.19026
+   Microsoft.Practices.ServiceLocation.dll   v1.3.0.0
+   GalaSoft.MvvmLight.Extras.dll   v5.3.0.19032
+   Telerik.Windows.Controls.DataVisualization.dll   v2016.3.1024.45</Info>
+  <Warning>Assembly {AutoMapper} is referenced by {WPF} but is not found.</Warning>
+  <Warning>Assembly Set Corrupted: The analyzed version of the assembly {MES_2} is out-dated.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Src\Sharp7.cs} (last modified 29. 3. 2017 1:47:24) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Utils\StateChangedEventArgs.cs} (last modified 29. 3. 2017 1:47:24) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Utils\Utils.cs} (last modified 5. 4. 2017 13:34:44) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\BaseModule.cs} (last modified 5. 4. 2017 13:34:44) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\UserManagement\UserRepository.cs} (last modified 4. 4. 2017 0:15:39) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Program.cs} (last modified 2. 5. 2017 22:22:39) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\UserManagement\UserFull.cs} (last modified 4. 4. 2017 14:58:18) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\LoadPLCs.cs} (last modified 5. 4. 2017 11:02:25) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\Authetication\Authentication.cs} (last modified 4. 4. 2017 0:15:39) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\ComModule\ComObjectModel.cs} (last modified 16. 4. 2017 20:51:35) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\ComModule\ReceivedResultRepository.cs} (last modified 17. 4. 2017 15:25:50) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\PLCConnectorModule\PLCConnectorModel.cs} (last modified 15. 4. 2017 23:22:48) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\SystemModule\Entity\EntitiesRepository.cs} (last modified 10. 4. 2017 21:13:42) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\SystemModule\Entity\EntityModel.cs} (last modified 4. 4. 2017 14:58:18) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\SystemModule\Entity\MapperEntity.cs} (last modified 4. 4. 2017 17:35:53) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\SystemModule\State\StateModel.cs} (last modified 4. 4. 2017 15:47:16) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\SystemModule\State\MapperState.cs} (last modified 10. 4. 2017 2:42:42) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\SystemModule\State\StatesRepository.cs} (last modified 5. 4. 2017 14:46:45) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\SystemModule\Translation\TranslationModel.cs} (last modified 4. 4. 2017 14:58:18) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\SystemModule\Translation\MapperTranslation.cs} (last modified 4. 4. 2017 14:58:18) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\SystemModule\Translation\TranslationRepository.cs} (last modified 10. 4. 2017 13:37:26) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\UserManagement\MapperUser.cs} (last modified 4. 4. 2017 1:46:50) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\ComModule\ComObject.cs} (last modified 17. 4. 2017 13:53:32) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\ComModule\ComObjectConfigure.cs} (last modified 5. 4. 2017 13:34:44) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\ComModule\ComObjectRepository.cs} (last modified 17. 4. 2017 13:53:32) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\PLCConnectorModule\PLCConnectorModule.cs} (last modified 17. 4. 2017 13:53:32) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\PLCConnectorModule\PLCConnectorModuleConfigure.cs} (last modified 5. 4. 2017 13:34:44) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\PLCConnectorModule\PLCConnectorModuleRepository.cs} (last modified 17. 4. 2017 13:53:32) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\ComModule\ReceivedResult.cs} (last modified 17. 4. 2017 15:08:28) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\Interfaces\IModule.cs} (last modified 5. 4. 2017 13:34:44) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\Interfaces\IRepository.cs} (last modified 29. 3. 2017 2:44:46) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\Repository.cs} (last modified 29. 3. 2017 1:47:24) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\UserManagement\ProfileModel.cs} (last modified 4. 4. 2017 0:15:39) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\UserManagement\User.cs} (last modified 29. 3. 2017 1:36:59) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\UserManagement\UserManagementModel.cs} (last modified 4. 4. 2017 0:15:39) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Utils\AutoMapperConfig.cs} (last modified 17. 4. 2017 14:58:41) and the PDB file of the assembly {MES_2} (last modified 28. 3. 2017 10:27:32) are not in-sync.</Warning>
+  <Info>157 source files parsed ; 18 source files not found ; 36 source files not in-sync with PDB</Info>
+  <Info>0 code rule has been extracted from code.</Info>
+  <Info>No dependency cycle detected in assemblies referencement graph.</Info>
+  <Info>Do merge code generated by compiler into application code.</Info>
+  <Warning>The source directory {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\SQLRepository} referenced by the PDB file of the assembly {MES_2} can't be found.</Warning>
+  <Warning>The source directory {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Modules\ComModules} referenced by the PDB file of the assembly {MES_2} can't be found.</Warning>
+  <Warning>The source directory {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Mappers} referenced by the PDB file of the assembly {MES_2} can't be found.</Warning>
+  <Warning>The source directory {C:\Users\Honza\Documents\Skola\MES_2\MES-MOM-I4\MES_2\Database} referenced by the PDB file of the assembly {MES_2} can't be found.</Warning>
+  <Info>Log trend metrics values.</Info>
+  <Info>NDepend analysis done. Duration: 00:08</Info>
+</InfoWarnings>

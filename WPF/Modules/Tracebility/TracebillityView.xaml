@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="WPF.Modules.Historian.HistorianPage"
+﻿<UserControl x:Class="WPF.Modules.Tracebility.TracebillityView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -104,31 +104,42 @@
                 VerticalAlignment="Top"
                 Background="{StaticResource ForegroundLightBrush}">
                 <!--  Login header  -->
-                <Grid Margin="5,10" Background="{StaticResource ForegroundVeryDarkBrush}">
+                <Grid Background="{StaticResource WordVeryDarkBrush}" Margin="0 5 0 15">
                     <TextBlock
-                        Padding="5,10"
-                        FontFamily="{StaticResource LatoRegular}"
-                        FontSize="{StaticResource FontSizeLarge}"
-                        Foreground="{StaticResource ForegroundLightBrush}"
-                        Text="Historian" />
+                            Grid.Column="0"
+                            FontFamily="{StaticResource LatoBold}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            Foreground="{StaticResource ForegroundLightBrush}"
+                            Text="Tracebility" 
+                            Padding="5 10 5 10"/>
+
                 </Grid>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
+                    <Grid
+                        Margin="10,10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
                         <Label
                             Grid.Row="0"
@@ -136,20 +147,18 @@
                             Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Content="Choose PLC: " />
-
-                        <telerik:RadComboBox
+                            Content="SN product:" />
+                        <TextBox
                             Grid.Row="0"
                             Grid.Column="1"
                             Width="120"
-                            Height="40"
+                            Height="23"
                             Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            ItemTemplate="{StaticResource ComboBoxPLCTemplate}"
-                            ItemsSource="{Binding ElementName=MainGrid, Path=DataContext.PLCConnectors}"
-                            SelectedItem="{Binding ElementName=MainGrid, Path=DataContext.PLCConnector}"
-                            SelectionBoxTemplate="{StaticResource ComboBoxPLCSimpleTemplate}" />
+                            Text="{Binding SerialNumbers, ValidatesOnNotifyDataErrors=True}" />
+
+
 
                         <Label
                             Grid.Row="1"
@@ -157,73 +166,46 @@
                             Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Content="Choose ComObject: " />
+                            Content="Port: "/>
 
-                        <telerik:RadComboBox
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Width="120"
-                            Height="40"
-                            Margin="3"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            ItemTemplate="{StaticResource ComboBoxComObjTemplate}"
-                            ItemsSource="{Binding ElementName=MainGrid, Path=DataContext.ComObjects}"
-                            SelectedItem="{Binding ElementName=MainGrid, Path=DataContext.ComObject}"
-                            SelectionBoxTemplate="{StaticResource ComboBoxComObjSimpleTemplate}" />
+                        <Image />
 
+                        <Label
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Margin="3"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Content="Rack: " />
+                        <TextBox
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Width="120"
+                                Height="23"
+                                Margin="3"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding Rack, ValidatesOnNotifyDataErrors=True}" />
+
+                        <Label
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                Margin="3"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Content="Slot:" />
+                        <TextBox
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Width="120"
+                                Height="23"
+                                Margin="3"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding Slot, ValidatesOnNotifyDataErrors=True}" />
                     </Grid>
-                    <Grid Grid.Row="1">
-                        <!---->
-                        <!-- PeriodStart="1-Jan-2017" PeriodEnd="1-Mar-2017"-->
-                        <!--                                            VisiblePeriodStart="11-Jan-2016" VisiblePeriodEnd="15-Mar-2017"-->
-                        <!--                                            SelectionStart="1-Jan-2017" SelectionEnd="17-Jan-2017">-->
-                        <telerik:RadTimeBar Height="200" Width="1000" VerticalAlignment="Top" Margin="6"
-                                            PeriodStart="{Binding PeriodStart, Mode=TwoWay}"
-                                            PeriodEnd="{Binding PeriodEnd, Mode=TwoWay}"
-                                            VisiblePeriodStart="{Binding VisiblePeriodStart, Mode=TwoWay}"
-                                            VisiblePeriodEnd="{Binding VisiblePeriodEnd, Mode=TwoWay}"
-                                            SelectionStart="{Binding SelectionStart, Mode=TwoWay}"
-                                            SelectionEnd="{Binding SelectionEnd, Mode=TwoWay}">
-                            <telerik:RadTimeBar.Intervals>
-                                <telerik:YearInterval />
-                                <telerik:MonthInterval />
-                                <telerik:WeekInterval />
-                                <telerik:DayInterval />
-                                <telerik:HourInterval />
-                            </telerik:RadTimeBar.Intervals>
-
-                            <Grid x:Name="TimeBarGridInterval">
-                                <telerik:RadAreaSparkline
-                                    ItemsSource="{Binding ElementName=MainGrid, Path=DataContext.ReceivedResults}"
-                                    XValuePath="PLCStamp"
-                                    YValuePath="ResultData" />
-                            </Grid>
-                        </telerik:RadTimeBar>
-
-                    </Grid>
-                    <Grid Grid.Row="2" >
-                        <telerik:RadCartesianChart DataContext="{Binding ReceivedResultsDetail}" Height="200" Width="1000">
-                            <telerik:RadCartesianChart.HorizontalAxis>
-                                <telerik:CategoricalAxis ShowLabels="False" />
-                            </telerik:RadCartesianChart.HorizontalAxis>
-                            <telerik:RadCartesianChart.VerticalAxis>
-                                <telerik:LinearAxis />
-                            </telerik:RadCartesianChart.VerticalAxis>
-
-                            <telerik:RadCartesianChart.Series>
-
-                                <telerik:LineSeries CategoryBinding="PLCStamp"
-                                                    ValueBinding="ResultData" ItemsSource="{Binding}"
-                                                    />
-                            </telerik:RadCartesianChart.Series>
-                        </telerik:RadCartesianChart>
-
-
-                    </Grid>
-
-
                 </Grid>
+
             </StackPanel>
         </ScrollViewer>
     </Grid>

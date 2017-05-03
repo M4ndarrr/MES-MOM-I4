@@ -110,6 +110,7 @@ namespace MES_2.Modules.PLCConnectorModule
             error = objClient.ConnectTo(PlcModuleConfigure.IpString, PlcModuleConfigure.Rack, PlcModuleConfigure.Slot);
             if (error != 0)
             {
+                Console.WriteLine("KOMUNIKACE ERROR");
                 // objClient = null;
                 LoggingService.Log(this, "asd");
                 Stop();
@@ -181,7 +182,11 @@ namespace MES_2.Modules.PLCConnectorModule
                     ReadWrite = instance.ObjectConfigure.ERW,
                     DBnumber = instance.ObjectConfigure.DbNumber,
                     WorldLen = instance.ObjectConfigure.WorldLen,
-                    ID_PLC = Id
+                    ID_PLC = Id,
+                    P_Created = "Honza",
+                    P_Modified = "Honza",
+                    TimeCreated = DateTime.Now,
+                    TimeModified = DateTime.Now,
                 });
                 db.SaveChanges();
             }
@@ -204,14 +209,14 @@ namespace MES_2.Modules.PLCConnectorModule
                 if (temp != null)
                 {
                     // zasilni dat databazy 
-                    Console.WriteLine(temp.Data);
-                    databaze.ListReceivedResult.Add(new RES_ResultTable()
-                        {
-                            ResultData = temp.Data,
-                            ID_COM = temp.IdComObj,
-                            PLCStamp = temp.TimeStamp
-                        }
-                    );
+                    Console.WriteLine(temp.ResultData);
+//                    databaze.ListReceivedResult.Add(new RES_ResultTable()
+//                        {
+//                            ResultData = temp.Data,
+//                            ID_COM = temp.IdComObj,
+//                            PLCStamp = temp.TimeStamp
+//                        }
+//                    );
                 }
             }
         }

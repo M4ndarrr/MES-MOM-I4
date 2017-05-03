@@ -12,21 +12,32 @@
 // ==================================
 
 using System;
+using MES_2.DB.Tables;
 
 namespace MES_2.Modules.ComModule
 {
     public class ReceivedResult
     {
-        public int Data { get; set; }
-        public int ErrorNumber { get; set; }
-        public DateTime TimeStamp { get; set; } = DateTime.Now;
-        public Guid IdComObj { get; set; }
+
+        public int ID_RES { get; set; }
+
+        public DateTime PLCStamp { get; set; } = DateTime.Now;
+        public Guid ID_COM { get; set; }
+        public int ResultData { get; set; }
+
+        public int ErrorNumber { get; set; } = 0;
 
         /// <summary>Returns a string that represents the current object.</summary>
         /// <returns>A string that represents the current object.</returns>
-        public override string ToString()
-        {
-            return TimeStamp.ToString() + " - " + ErrorNumber.ToString() + " - " + Data.ToString();
-        }
+//        public override string ToString()
+//        {
+//            return PLCStamp.ToString() + " - " + ErrorNumber.ToString() + " - " + PLCStamp.ToString();
+//        }
     }
+
+    public class ReceivedResultDetail : ReceivedResult
+    {
+        public virtual COM_ComObject COM_Object { get; set; }
+    }
+
 }

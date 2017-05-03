@@ -33,23 +33,20 @@
                             FontFamily="{StaticResource LatoBold}"
                             FontSize="{StaticResource FontSizeRegular}"
                             Foreground="{StaticResource ForegroundLightBrush}"
-                            Text="Add/Edit profile" 
+                            Text="Add/Edit PLC" 
                             Padding="5 10 5 10"/>
 
                 </Grid>
-
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-
-
                     <Grid
                         Margin="10,10,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
-                        DataContext="{Binding State}">
+                        DataContext="{Binding PLC}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
@@ -73,7 +70,7 @@
                             Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Content="Entita:" />
+                            Content="IP:" />
                         <TextBox
                             Grid.Row="0"
                             Grid.Column="1"
@@ -82,7 +79,7 @@
                             Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Text="{Binding ID_ENT, ValidatesOnNotifyDataErrors=True}" />
+                            Text="{Binding IpString, ValidatesOnNotifyDataErrors=True}" />
 
 
 
@@ -92,7 +89,7 @@
                             Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Content="Purpous: "/>
+                            Content="Port: "/>
 
                         <TextBox
                             Grid.Row="1"
@@ -102,109 +99,41 @@
                             Margin="3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Text="{Binding Purpous, ValidatesOnNotifyDataErrors=True}" />
+                            Text="{Binding PortString, ValidatesOnNotifyDataErrors=True}" />
 
-
-                        <!--                        <Label-->
-                        <!--                            Grid.Row="2"-->
-                        <!--                            Grid.Column="0"-->
-                        <!--                            Margin="3"-->
-                        <!--                            HorizontalAlignment="Left"-->
-                        <!--                            VerticalAlignment="Center"-->
-                        <!--                            Content="First Name: " />-->
-                        <!--                        <TextBox-->
-                        <!--                            Grid.Row="2"-->
-                        <!--                            Grid.Column="1"-->
-                        <!--                            Width="120"-->
-                        <!--                            Height="23"-->
-                        <!--                            Margin="3"-->
-                        <!--                            HorizontalAlignment="Left"-->
-                        <!--                            VerticalAlignment="Center"-->
-                        <!--                            Text="{Binding First_Name, ValidatesOnNotifyDataErrors=True}" />-->
-                        <!--                        <Label-->
-                        <!--                            Grid.Row="3"-->
-                        <!--                            Grid.Column="0"-->
-                        <!--                            Margin="3"-->
-                        <!--                            HorizontalAlignment="Left"-->
-                        <!--                            VerticalAlignment="Center"-->
-                        <!--                            Content="Last Name:" />-->
-                        <!--                        <TextBox-->
-                        <!--                            Grid.Row="3"-->
-                        <!--                            Grid.Column="1"-->
-                        <!--                            Width="120"-->
-                        <!--                            Height="23"-->
-                        <!--                            Margin="3"-->
-                        <!--                            HorizontalAlignment="Left"-->
-                        <!--                            VerticalAlignment="Center"-->
-                        <!--                            Text="{Binding Last_Name, ValidatesOnNotifyDataErrors=True}" />-->
-                        <!---->
-<!--                        <Label-->
-                        <!--                            Grid.Row="4"-->
-                        <!--                            Grid.Column="0"-->
-                        <!--                            Margin="3"-->
-                        <!--                            HorizontalAlignment="Left"-->
-                        <!--                            VerticalAlignment="Center"-->
-                        <!--                            Content="Company:" />-->
-                        <!--                        <TextBox-->
-                        <!--                            Grid.Row="4"-->
-                        <!--                            Grid.Column="1"-->
-                        <!--                            Width="120"-->
-                        <!--                            Height="23"-->
-                        <!--                            Margin="3"-->
-                        <!--                            HorizontalAlignment="Left"-->
-                        <!--                            VerticalAlignment="Center"-->
-                        <!--                            Text="{Binding Company, ValidatesOnNotifyDataErrors=True}" />-->
-                        <!---->
-<!--                        <Label-->
-                        <!--                            Grid.Row="5"-->
-                        <!--                            Grid.Column="0"-->
-                        <!--                            Margin="3"-->
-                        <!--                            HorizontalAlignment="Left"-->
-                        <!--                            VerticalAlignment="Center"-->
-                        <!--                            Content="Email:" />-->
-                        <!--                        <TextBox-->
-                        <!--                            Grid.Row="5"-->
-                        <!--                            Grid.Column="1"-->
-                        <!--                            Width="120"-->
-                        <!--                            Height="23"-->
-                        <!--                            Margin="3"-->
-                        <!--                            HorizontalAlignment="Left"-->
-                        <!--                            VerticalAlignment="Center"-->
-                        <!--                            Text="{Binding Email, ValidatesOnNotifyDataErrors=True}" />-->
-                        <!---->
-<!--                        <Label-->
-                        <!--                            Grid.Row="6"-->
-                        <!--                            Grid.Column="0"-->
-                        <!--                            Margin="3"-->
-                        <!--                            HorizontalAlignment="Left"-->
-                        <!--                            VerticalAlignment="Center"-->
-                        <!--                            Content="Phone:" />-->
-                        <!--                        <TextBox-->
-                        <!--                            Grid.Row="6"-->
-                        <!--                            Grid.Column="1"-->
-                        <!--                            Width="120"-->
-                        <!--                            Height="23"-->
-                        <!--                            Margin="3"-->
-                        <!--                            HorizontalAlignment="Left"-->
-                        <!--                            VerticalAlignment="Center"-->
-                        <!--                            Text="{Binding Phone, ValidatesOnNotifyDataErrors=True}" />-->
-                        <!---->
-<!--                        <Label-->
-                        <!--                            Grid.Row="7"-->
-                        <!--                            Grid.Column="0"-->
-                        <!--                            Margin="3"-->
-                        <!--                            HorizontalAlignment="Left"-->
-                        <!--                            VerticalAlignment="Center"-->
-                        <!--                            Content="Mobile:" />-->
-                        <!--                        <TextBox-->
-                        <!--                            Grid.Row="7"-->
-                        <!--                            Grid.Column="1"-->
-                        <!--                            Width="120"-->
-                        <!--                            Height="23"-->
-                        <!--                            Margin="3"-->
-                        <!--                            HorizontalAlignment="Left"-->
-                        <!--                            VerticalAlignment="Center"-->
-                        <!--                            Text="{Binding Mobile, ValidatesOnNotifyDataErrors=True}" />-->
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Margin="3"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Content="Rack: " />
+                            <TextBox
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Width="120"
+                                Height="23"
+                                Margin="3"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding Rack, ValidatesOnNotifyDataErrors=True}" />
+                            
+                            <Label
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                Margin="3"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Content="Slot:" />
+                        <TextBox
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Width="120"
+                                Height="23"
+                                Margin="3"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding Slot, ValidatesOnNotifyDataErrors=True}" />
                     </Grid>
                     <Grid Grid.Row="1">
 

@@ -1,4 +1,6 @@
 ﻿using System.Windows.Controls;
+using Telerik.Windows.Controls;
+using WPF.Modules.Interfaces;
 
 namespace WPF.Modules.Historian
 {
@@ -10,6 +12,8 @@ namespace WPF.Modules.Historian
         public HistorianPage()
         {
             InitializeComponent();
+       
+
         }
     }
 }

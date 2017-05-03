@@ -115,8 +115,8 @@ namespace MES_2.Modules.ComModule
                 if (Result.ErrorNumber == 0)
                 {
                     NextRequestAt = NextRequestAt.AddMilliseconds(ObjectConfigure.PeriodOfCheck);
-                    Result.Data = GetValueOfTypeFromPlc();
-                    Result.IdComObj = Id;
+                    Result.ResultData = GetValueOfTypeFromPlc();
+                    Result.ID_COM = Id;
                     return Result;
                 }
 
